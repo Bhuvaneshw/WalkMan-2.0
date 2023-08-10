@@ -1,16 +1,17 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-
+import SearchBar from "./components/Searchbar";
+import { Box } from "@chakra-ui/react";
+import Banner from "./layouts/Banner";
 function App() {
   const [data, setData] = useState("");
-  useEffect(() => {
-    (async () => {
-      const res = await fetch("http://127.0.0.1:3000/");
-      const data = await res.text();
-      setData(data);
-    })();
-  }, []);
-  return <>{data}</>;
+  return <>{
+    <Box>
+      <SearchBar></SearchBar>
+      <Banner></Banner>
+    </Box>
+
+  }</>;
 }
 
 export default App;
