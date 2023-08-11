@@ -1,17 +1,15 @@
-import { useEffect, useState } from "react";
-import "./App.css";
-import SearchBar from "./components/Searchbar";
-import { Box } from "@chakra-ui/react";
-import Banner from "./layouts/Banner";
-function App() {
-  const [data, setData] = useState("");
-  return <>{
-    <Box>
-      <SearchBar></SearchBar>
-      <Banner></Banner>
-    </Box>
+import {Box} from "@chakra-ui/react";
+import TestUiComponent from "./test.jsx";
 
-  }</>;
+function App() {
+    return <>{
+        <Box>
+            {/*<SearchBar></SearchBar>*/}
+            {/*<Banner></Banner>*/}
+            <TestUiComponent/>
+        </Box>
+    }
+    </>;
 }
 
 export default App;

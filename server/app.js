@@ -15,6 +15,6 @@ app.use(router);
 app.get("/", (req, res) => res.send("Hello World!"));
 
 //binding to port and host and starting server
-app.listen(port, "", () =>
+app.listen(port, "localhost", () =>
   console.log(`Example app listening on port ${port}!`)
 );
