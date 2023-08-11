@@ -1,8 +1,8 @@
 import {Image} from "@chakra-ui/react";
 
-export default function Img({src, radius = "10px"}) {
+export default function Icon({src, radius = "10px", className}) {
     return <>
-        <Image src={src} style={{
+        <Image src={src} className={className} style={{
             borderRadius: radius
         }}
         ></Image>

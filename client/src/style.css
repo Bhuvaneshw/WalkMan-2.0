@@ -1,0 +1,84 @@
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: #0076d217;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #0076d2;
+}
+
+.title {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.title-margin {
+    margin: 15px;
+}
+
+.ResponsiveHStack {
+    flex-direction: row;
+}
+
+.ResponsiveHStack .Card {
+    width: 45%;
+}
+
+.big-icon {
+    min-height: 100px;
+}
+
+.small-icon {
+    max-width: 100px;
+    min-height: 90px;
+}
+
+.ResponsiveHStack .artist {
+    width: 35%;
+}
+
+.ResponsiveHStack .player {
+    width: 15%;
+}
+
+@media only screen and (max-width: 650px) {
+
+    .title {
+        font-weight: bold;
+        font-size: 16px;
+    }
+
+    .title-margin {
+        margin: 8px;
+    }
+
+    .ResponsiveHStack {
+        flex-direction: column;
+    }
+
+    .ResponsiveHStack .Card {
+        width: 90%;
+    }
+
+    .big-icon {
+        min-height: 80px;
+    }
+
+    .small-icon {
+        max-width: 80px;
+        min-height: 70px;
+    }
+
+    .artist, .player {
+        width: 100%;
+    }
+}

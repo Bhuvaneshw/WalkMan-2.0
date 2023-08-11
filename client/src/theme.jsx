@@ -3,11 +3,16 @@ import {extendTheme} from '@chakra-ui/react'
 const AppTheme = extendTheme({
     styles: {
         global: {
+
             body: {
                 bg: '#EEF2FD',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center'
+            },
+
+            '#root': {
+                width: '100%'
             },
 
             ".color-black70": {
@@ -42,54 +47,16 @@ const AppTheme = extendTheme({
                 color: '#5F04A719',
             },
 
-            ".title": {
-                fontWeight: 'bold',
-                fontSize: 'x-large'
+            '.flex': {
+                display: 'flex',
+                flexDirection: 'column'
+            },
+
+            '.fill': {
+                flex: '1'
             }
         },
     },
-    // components: {
-    //     Button: {
-    //         // 1. We can update the base styles
-    //         baseStyle: {
-    //             fontWeight: 'bold', // Normally, it is "semibold"
-    //         },
-    //         // 2. We can add a new button size or extend existing
-    //         sizes: {
-    //             xl: {
-    //                 h: '56px',
-    //                 fontSize: 'lg',
-    //                 px: '32px',
-    //             },
-    //         },
-    //         // 3. We can add a new visual variant
-    //         black: {
-    //             color: '#19282b'
-    //         },
-    //
-    //         variants: {
-    //             'with-shadow': {
-    //                 bg: 'red.400',
-    //                 boxShadow: '0 0 20px 20px #efdfde',
-    //             },
-    //             // 4. We can override existing variants
-    //             solid: (props) => ({
-    //                 bg: props.colorMode === 'dark' ? 'red.300' : 'red.500',
-    //             }),
-    //             // 5. We can add responsive variants
-    //             sm: {
-    //                 bg: 'teal.500',
-    //                 fontSize: 'md',
-    //             },
-    //         },
-    //         // 6. We can overwrite defaultProps
-    //         defaultProps: {
-    //             size: 'lg', // default is md
-    //             variant: 'sm', // default is solid
-    //             colorScheme: 'green', // default is gray
-    //         },
-    //     },
-    // },
 })
 
 export default AppTheme
