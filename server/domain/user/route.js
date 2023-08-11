@@ -3,6 +3,7 @@ import { registerUser, verifyUser } from "./controller.js";
 const router = express.Router();
 
 router.post("/login", async (req, res) => {
+  console.log(req.body);
   try {
     const { msg, token } = await verifyUser(req.body);
     res.status(200).json({ msg, token });

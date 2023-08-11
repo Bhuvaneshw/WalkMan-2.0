@@ -2,7 +2,8 @@ import generateToken from "../../utils/generateToken.js";
 import User from "./modal.js";
 
 export async function verifyUser({ email, pass }) {
-  const user = await User.find({ email });
+  const user = await User.findOne({ email });
+  console.log(email, user);
   if (user.length === 0) {
     throw new Error("email not registered signup");
   }
