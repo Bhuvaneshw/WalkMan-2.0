@@ -9,8 +9,8 @@ import Signup from "./layouts/Signup.jsx";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <ChakraProvider theme={AppTheme}>
-      {/* <App/> */}
-      <Login></Login>
+       <App/>
+      {/*<Login></Login>*/}
       {/* <Signup></Signup> */}
     </ChakraProvider>
   </React.StrictMode>

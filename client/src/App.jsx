@@ -15,6 +15,7 @@ import Content from "./components/Root.jsx";
 import Searchbar from "./components/Searchbar.jsx";
 import Profile from "./components/Profile.jsx";
 import {toMinutesText} from "./components/util.js";
+import NavItem from "./components/NavItem.jsx";
 
 function App() {
     let a = []
@@ -38,7 +39,7 @@ function App() {
 
     function Artist() {
         return <Card flex='1' height='350px' overflow='hidden' className='artist'>
-            <Title variant='black70 title-margin'>Artists</Title>
+            <Title variant='black70 title-margin'>Top Songs</Title>
             <Stack height='100%' scrollable>
                 {a.map((value) => {
                     return <BorderedCard className="flex" key={value} height='100%' width='auto' pad='4px'>
@@ -72,7 +73,7 @@ function App() {
 
     function TopSongs() {
         return <Card flex='1'>
-            <Title variant='black70 title-margin'>Top Songs</Title>
+            <Title variant='black70 title-margin'>Artist</Title>
             <HStack scrollable>
                 {a.map((value) => {
                     return <BorderedCard className="flex" key={value}>
@@ -146,20 +147,39 @@ function App() {
         </Card>;
     }
 
-    return <>
-        <Header/>
-        <Content>
-            <ResponsiveHStack width='100%'>
-                <TopSongs/>
-                <Artist/>
-            </ResponsiveHStack>
+    function SideBar() {
+        return <Stack className='navbar'>
+            <HStack pad='20px' alignItems='center'>
+                <Icon src='/icon.svg' size='50px'/>
+                <Gab width='20px'/>
+                <Title variant='primary'>Walkman</Title>
+            </HStack>
+            <Gab height='40px'/>
+            <Title mar='0 0 0 10px'>Menu</Title>
+            <NavItem title='Home' activated/>
+            <NavItem title='Search'/>
+        </Stack>;
+    }
 
-            <ResponsiveHStack width='100%'>
-                <Genre/>
-                <Player/>
-            </ResponsiveHStack>
-        </Content>
-    </>;
+    return <HStack width='100%' height='100%'>
+        <Stack className='fill navpar'>
+            <SideBar/>
+        </Stack>
+        <Stack width='83%' className='fill'>
+            <Header/>
+            <Content>
+                <ResponsiveHStack width='100%'>
+                    <TopSongs/>
+                    <Artist/>
+                </ResponsiveHStack>
+
+                <ResponsiveHStack width='100%'>
+                    <Genre/>
+                    <Player/>
+                </ResponsiveHStack>
+            </Content>
+        </Stack>
+    </HStack>;
 }
 
 export default App;
