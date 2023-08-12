@@ -1,5 +1,5 @@
 import generateToken from "../../utils/generateToken.js";
-import User from "./modal.js";
+import User from "./model.js";
 
 export async function verifyUser({ email, pass }) {
   const user = await User.findOne({ email });
