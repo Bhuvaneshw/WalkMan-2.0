@@ -1,6 +1,20 @@
 import {extendTheme} from '@chakra-ui/react'
 
 const AppTheme = extendTheme({
+    colors: {
+        primary: {
+            50: '#5F04A7',
+            100: '#5F04A7',
+            200: '#5F04A7',
+            300: '#5F04A7',
+            400: '#5F04A7',
+            500: '#5F04A7',
+            600: '#5F04A7',
+            700: '#5F04A7',
+            800: '#5F04A7',
+            900: '#5F04A7',
+        },
+    },
     styles: {
         global: {
 

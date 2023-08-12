@@ -25,6 +25,11 @@
     margin: 15px;
 }
 
+.content {
+    display: flex;
+    flex-direction: column;
+}
+
 .ResponsiveHStack {
     flex-direction: row;
 }
@@ -50,6 +55,18 @@
     width: 15%;
 }
 
+.playBtn {
+    box-shadow: 0 0 50px #5F04A7a6;
+}
+
+.moveTopOnHover:hover {
+    transform: translateY(-3px);
+}
+
+.lightOnHover:hover {
+    opacity: 0.8;
+}
+
 @media only screen and (max-width: 650px) {
 
     .title {
@@ -61,8 +78,8 @@
         margin: 8px;
     }
 
-    .ResponsiveHStack {
-        flex-direction: column;
+    .ResponsiveHStack, .content {
+        flex-direction: column-reverse;
     }
 
     .ResponsiveHStack .Card {

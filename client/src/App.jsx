@@ -11,25 +11,36 @@ import Stack from "./components/Stack.jsx";
 import Text from "./components/Text.jsx";
 import Fab from "./components/Fab.jsx";
 import {useState} from "react";
-
-function toMinutesText(sec) {
-    let m = Math.trunc(sec / 60);
-    let s = sec - m * 60;
-    return `${m}:${s}`;
-}
+import Content from "./components/Root.jsx";
+import Searchbar from "./components/Searchbar.jsx";
+import Profile from "./components/Profile.jsx";
+import {toMinutesText} from "./components/util.js";
 
 function App() {
     let a = []
     let i = 15, j = 0;
     while (j++ < i) a.push(j);
 
+    let [playbackTime, setPlaybackTime] = useState(90)
     let totalTime = 296;
 
-    function artist() {
+    function Header() {
+        return <HStack height='70px' justifyContent='space-between' alignItems='center'>
+            <Title mar='0 0 0 20px'>Home</Title>
+            <Searchbar/>
+            <Profile name='Bhuvanesh'/>
+        </HStack>;
+    }
+
+    function syncSongSeconds(second) {
+        //TODO: Sync song with second
+    }
+
+    function Artist() {
         return <Card flex='1' height='350px' overflow='hidden' className='artist'>
             <Title variant='black70 title-margin'>Artists</Title>
             <Stack height='100%' scrollable>
-                {a.map((value, index, array) => {
+                {a.map((value) => {
                     return <BorderedCard className="flex" key={value} height='100%' width='auto' pad='4px'>
                         <HStack justifyContent='space-between' alignItems='center' width='100%'>
                             <Icon src="/music.png" className="fill small-icon"/>
@@ -39,13 +50,14 @@ function App() {
                                 <Text>Top #{value}</Text>
                             </Stack>
                             <Gab width='10px'/>
-                            <Img src={value % 2 === 0 ? "/liked.svg" : "/like.svg"} style={{
+                            <Img className='moveTopOnHover lightOnHover'
+                                 src={value % 2 === 0 ? "/liked.svg" : "/like.svg"} style={{
                                 width: "25px",
                                 height: "25px",
                             }}/>
                             <Text>123</Text>
                             <Gab width='30px'/>
-                            <Img src="/play-primary.svg" style={{
+                            <Img className='moveTopOnHover lightOnHover' src="/play-primary.svg" style={{
                                 width: "23px",
                                 height: "23px",
                             }}/>
@@ -58,11 +70,11 @@ function App() {
         </Card>;
     }
 
-    function topSongs() {
+    function TopSongs() {
         return <Card flex='1'>
             <Title variant='black70 title-margin'>Top Songs</Title>
             <HStack scrollable>
-                {a.map((value, index, array) => {
+                {a.map((value) => {
                     return <BorderedCard className="flex" key={value}>
                         <Icon src="/music.png" className="fill big-icon"/>
                         <Gab height="10px"/>
@@ -80,11 +92,11 @@ function App() {
         </Card>;
     }
 
-    function genre() {
+    function Genre() {
         return <Card flex='2'>
             <Title variant='black70 title-margin'>Genre</Title>
             <HStack scrollable>
-                {a.map((value, index, array) => {
+                {a.map((value) => {
                     return <BorderedCard className="flex" key={value}>
                         <Icon src="/music.png" className="fill big-icon"/>
                         <Gab height="10px"/>
@@ -102,7 +114,7 @@ function App() {
         </Card>;
     }
 
-    function player() {
+    function Player() {
         return <Card flex='1' className='flex player' pad='10px'>
             <Icon src="/music.png" className="fill" radius='18px'/>
             <Gab height="10px"/>
@@ -110,7 +122,8 @@ function App() {
                 <Title>Believer</Title>
                 <Text>Top #1</Text>
                 <Box style={{padding: '10px 30px', width: '100%'}}>
-                    <Slider defaultValue={90} max={totalTime} onChange={update}>
+                    <Slider defaultValue={90} max={totalTime} onChange={setPlaybackTime} colorScheme='primary'
+                            onChangeEnd={syncSongSeconds}>
                         <SliderTrack>
                             <SliderFilledTrack/>
                         </SliderTrack>
@@ -122,39 +135,30 @@ function App() {
                     </HStack>
                     <Gab height='20px'/>
                     <HStack justifyContent='space-between' width='100%'>
-                        <Fab/>
-                        <Fab/>
-                        <Fab/>
-                        <Fab/>
-                        <Fab/>
+                        <Icon src='/previous.svg' className='moveTopOnHover lightOnHover'/>
+                        <Icon src='/seek-back.svg' className='moveTopOnHover lightOnHover'/>
+                        <Fab className='playBtn' size='50px'/>
+                        <Icon src='/seek-forward.svg' className='moveTopOnHover lightOnHover'/>
+                        <Icon src='/next.svg' className='moveTopOnHover lightOnHover'/>
                     </HStack>
                 </Box>
             </Stack>
         </Card>;
     }
 
-    let [playbackTime, setPlaybackTime] = useState(90)
-
-    function update(e) {
-        setPlaybackTime(e)
-    }
-
     return <>
-        <ResponsiveHStack width='100%'>
+        <Header/>
+        <Content>
+            <ResponsiveHStack width='100%'>
+                <TopSongs/>
+                <Artist/>
+            </ResponsiveHStack>
 
-            {topSongs()}
-
-            {artist()}
-
-        </ResponsiveHStack>
-
-        <ResponsiveHStack width='100%'>
-
-            {genre()}
-
-            {player()}
-
-        </ResponsiveHStack>
+            <ResponsiveHStack width='100%'>
+                <Genre/>
+                <Player/>
+            </ResponsiveHStack>
+        </Content>
     </>;
 }
 
