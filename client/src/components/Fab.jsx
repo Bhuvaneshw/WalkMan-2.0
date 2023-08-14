@@ -5,6 +5,7 @@ export default function Fab({size = '40px', src = "/play.svg", className}) {
         borderRadius: '50%',
         background: '#5F04A7',
         width: size,
+        minWidth: size,
         height: size,
         display: 'flex',
         justifyContent: 'center',

@@ -1,6 +1,7 @@
 export default function BorderedCard({
                                          width = 'min-content',
                                          height = 'min-content',
+                                         maxW,
                                          pad = "15px",
                                          mar = "15px",
                                          bg = "bg-color-white",
@@ -11,6 +12,7 @@ export default function BorderedCard({
                                      }) {
     return <div className={"card " + bg + " " + className} style={{
         width: width,
+        maxWidth: maxW,
         height: height,
         padding: pad,
         margin: mar,

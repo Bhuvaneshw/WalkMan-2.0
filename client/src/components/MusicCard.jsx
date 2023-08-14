@@ -8,12 +8,12 @@ import Text from "./Text";
 import Fab from "./Fab";
 export default function MusicCard({ title, artist }) {
   return (
-    <BorderedCard className="flex">
+    <BorderedCard className="flex fill" height width maxW='max-content'>
       <Icon src="/music.png" className="fill big-icon" />
       <Gab height="10px" />
       <HStack justifyContent="space-between" alignItems="center">
         <Stack>
-          <Title>{title}</Title>
+          <Title minW='60%'>{title}</Title>
           <Text>{artist}</Text>
         </Stack>
         <Gab width="10px" />

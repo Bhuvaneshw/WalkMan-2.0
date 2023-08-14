@@ -14,7 +14,7 @@ export default function Search() {
 
   return (
     <Content>
-      <ResponsiveHStack>
+      <ResponsiveHStack wrap='wrap' alignItems='stretch'>
         {searchRes.map((music) => {
           return (
             <MusicCard

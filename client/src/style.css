@@ -28,6 +28,7 @@
 .content {
     display: flex;
     flex-direction: column;
+    width: fit-content;
 }
 
 .ResponsiveHStack {
@@ -79,6 +80,15 @@
 .navpar {
     width: 17%;
     min-width: max-content;
+}
+
+.abs {
+    position: absolute;
+}
+
+.botRight {
+    bottom: 0;
+    right: 0;
 }
 
 @media only screen and (max-width: 990px) {
