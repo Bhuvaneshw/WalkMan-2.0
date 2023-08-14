@@ -76,6 +76,17 @@
     background: #FBFCFE;
 }
 
+.navpar {
+    width: 17%;
+    min-width: max-content;
+}
+
+@media only screen and (max-width: 990px) {
+    .navpar {
+        display: none !important;
+    }
+}
+
 @media only screen and (max-width: 650px) {
 
     .title {

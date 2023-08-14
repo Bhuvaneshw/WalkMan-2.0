@@ -8,7 +8,7 @@ import Gab from "./Gap.jsx";
 import Stack from "./Stack.jsx";
 import Text from "./Text.jsx";
 export default function Artist() {
-  const a = [1, 1, 1, 1, 1, 1];
+  const a = [1, 11, 12, 13, 14, 15];
   return (
     <Card flex="1" height="350px" overflow="hidden" className="artist">
       <Title variant="black70 title-margin">Top Songs</Title>

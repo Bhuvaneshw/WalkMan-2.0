@@ -23,7 +23,7 @@ function App() {
 
   return (
     <HStack width="100%" height="100%">
-      <Stack className="fill navpar">
+      <Stack className="navpar" width='17%'>
         <SideBar />
       </Stack>
       <Stack width="83%" className="fill">

@@ -5,7 +5,7 @@ import Icon from "./Icon.jsx";
 function SelectedLine() {
     return <div style={{
         width: '4px',
-        height: '80%',
+        height: '3vh',
         background: '#5F04A7',
         borderTopLeftRadius: '5px',
         borderBottomLeftRadius: '5px',
