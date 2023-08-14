@@ -1,30 +1,31 @@
-import { useState, useContext, useEffect } from "react";
-import ResponsiveHStack from "../components/ResponsiveHStack";
-import Content from "../components/Root.jsx";
+import {useContext, useEffect, useState} from "react";
+import Content from "../components/Content.jsx";
 import searchContext from "../searchContext";
 import MusicCard from "../components/MusicCard";
-export default function Search() {
-  const [searchRes, setSearchRes] = useState([]);
-  const { searchQuery, setSearchQuery } = useContext(searchContext);
-  useEffect(() => {
-    fetch("http://localhost:3000/song/" + searchQuery)
-      .then((res) => res.json())
-      .then((res) => setSearchRes(res));
-  }, [searchQuery]);
+import HStack from "../components/HStack.jsx";
 
-  return (
-    <Content>
-      <ResponsiveHStack wrap='wrap' alignItems='stretch'>
-        {searchRes.map((music) => {
-          return (
-            <MusicCard
-              key={music._id}
-              title={music.title}
-              artist={music.artist}
-            ></MusicCard>
-          );
-        })}
-      </ResponsiveHStack>
-    </Content>
-  );
+export default function Search() {
+    const [searchRes, setSearchRes] = useState([]);
+    const {searchQuery, setSearchQuery} = useContext(searchContext);
+    useEffect(() => {
+        fetch("http://localhost:3000/song/" + searchQuery)
+            .then((res) => res.json())
+            .then((res) => setSearchRes(res));
+    }, [searchQuery]);
+
+    return (
+        <Content>
+            <HStack wrap='wrap' alignItems='stretch'>
+                {searchRes.map((music) => {
+                    return (
+                        <MusicCard
+                            key={music._id}
+                            title={music.title}
+                            artist={music.artist}
+                        ></MusicCard>
+                    );
+                })}
+            </HStack>
+        </Content>
+    );
 }

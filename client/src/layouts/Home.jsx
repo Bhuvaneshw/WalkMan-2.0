@@ -1,4 +1,4 @@
-import Content from "../components/Root.jsx";
+import Content from "../components/Content.jsx";
 import ResponsiveHStack from "../components/ResponsiveHStack";
 import Artist from "../components/TopSongs.jsx";
 import Genre from "../components/Genre";

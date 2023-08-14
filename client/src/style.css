@@ -28,7 +28,6 @@
 .content {
     display: flex;
     flex-direction: column;
-    width: fit-content;
 }
 
 .ResponsiveHStack {
@@ -91,13 +90,28 @@
     right: 0;
 }
 
+.responseFill {
+    width: calc(25% - 30px);
+}
+
 @media only screen and (max-width: 990px) {
     .navpar {
         display: none !important;
     }
 }
 
+@media only screen and (max-width: 850px) {
+
+    .responseFill {
+        width: calc(33% - 30px);
+    }
+}
+
 @media only screen and (max-width: 650px) {
+
+    .responseFill {
+        width: calc(50% - 30px);
+    }
 
     .title {
         font-weight: bold;
@@ -128,4 +142,12 @@
     .artist, .player {
         width: 100%;
     }
+
+    @media only screen and (max-width: 390px) {
+
+        .responseFill {
+            width: calc(100% - 30px);
+        }
+    }
+
 }

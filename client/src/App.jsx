@@ -5,37 +5,38 @@ import Stack from "./components/Stack.jsx";
 import Searchbar from "./components/Searchbar.jsx";
 import Profile from "./components/Profile.jsx";
 import SideBar from "./components/Sidebar";
-import Home from "./layouts/Home";
-import { Outlet } from "react-router-dom";
+import {Outlet, useLocation} from "react-router-dom";
 import searchContext from "./searchContext";
-import { useState } from "react";
+import {useState} from "react";
+import {getRouteName} from "./components/util.js";
+
 function App() {
-  const [searchQuery, setSearchQuery] = useState("");
-  return (
-    <searchContext.Provider
-      value={{ searchQuery: searchQuery, setSearchQuery: setSearchQuery }}
-    >
-      <HStack width="100%" height="100%">
-        <Stack className="navpar" width="17%">
-          <SideBar />
-        </Stack>
-        <Stack width="83%" className="fill">
-          <Header />
-          <Outlet></Outlet>
-        </Stack>
-      </HStack>
-    </searchContext.Provider>
-  );
+    const [searchQuery, setSearchQuery] = useState("");
+    return (
+        <searchContext.Provider
+            value={{searchQuery: searchQuery, setSearchQuery: setSearchQuery}}
+        >
+            <HStack width="100%" height="100%">
+                <Stack className="navpar" width="17%">
+                    <SideBar/>
+                </Stack>
+                <Stack width="83%" className="fill">
+                    <Header/>
+                    <Outlet></Outlet>
+                </Stack>
+            </HStack>
+        </searchContext.Provider>
+    );
 }
 
 function Header() {
-  return (
-    <HStack height="70px" justifyContent="space-between" alignItems="center">
-      <Title mar="0 0 0 20px">Home</Title>
-      <Searchbar />
-      <Profile name="Bhuvanesh" />
-    </HStack>
-  );
+    return (
+        <HStack height="70px" justifyContent="space-between" alignItems="center">
+            <Title mar="0 0 0 20px">{getRouteName(useLocation())}</Title>
+            <Searchbar/>
+            <Profile name="Bhuvanesh"/>
+        </HStack>
+    );
 }
 
 export default App;

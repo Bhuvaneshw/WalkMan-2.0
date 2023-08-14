@@ -5,4 +5,14 @@ function toMinutesText(sec) {
     return `${m}:${s}`;
 }
 
-export {toMinutesText};
+function getRouteName(location) {
+    switch (location.pathname) {
+        case '/search':
+            return 'Search'
+
+        default:
+            return 'Home'
+    }
+}
+
+export {toMinutesText, getRouteName};
