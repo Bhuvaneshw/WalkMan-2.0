@@ -11,28 +11,28 @@ import { useState } from "react";
 import { getRouteName } from "./components/util.js";
 
 function App() {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [searchRes, setSearchRes] = useState([]);
-  return (
-    <searchContext.Provider
-      value={{
-        searchQuery: searchQuery,
-        setSearchQuery: setSearchQuery,
-        searchRes: searchRes,
-        setSearchRes: setSearchRes,
-      }}
-    >
-      <HStack width="100%" height="100%">
-        <Stack className="navpar" width="17%">
-          <SideBar />
-        </Stack>
-        <Stack width="83%" className="fill">
-          <Header />
-          <Outlet></Outlet>
-        </Stack>
-      </HStack>
-    </searchContext.Provider>
-  );
+    const [searchQuery, setSearchQuery] = useState("");
+    const [searchRes, setSearchRes] = useState([]);
+    return (
+        <searchContext.Provider
+            value={{
+                searchQuery: searchQuery,
+                setSearchQuery: setSearchQuery,
+                searchRes: searchRes,
+                setSearchRes: setSearchRes,
+            }}
+        >
+            <HStack width="100%" height="100%">
+                <Stack className="navpar">
+                    <SideBar location={useLocation()}/>
+                </Stack>
+                <Stack width="83%" className="fill">
+                    <Header/>
+                    <Outlet></Outlet>
+                </Stack>
+            </HStack>
+        </searchContext.Provider>
+    );
 }
 
 function Header() {
