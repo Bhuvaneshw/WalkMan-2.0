@@ -5,8 +5,8 @@ import Gab from "./Gap.jsx";
 import Icon from "./Icon.jsx";
 import Text from "./Text.jsx";
 
-export default function Profile({name}) {
-    return <HStack alignItems='center' >
+export default function Profile({name, className}) {
+    return <HStack alignItems='center' className={className}>
         <Icon src='/music.png' radius='10px' size='50px'/>
         <Gab width='10px'/>
         <Stack>

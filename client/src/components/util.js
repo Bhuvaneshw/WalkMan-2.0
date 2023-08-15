@@ -15,9 +15,13 @@ function getRouteName(location) {
     }
 }
 
-class Navigation {
-    static HOME = {name: "Home", route: '/'}
-    static SEARCH = {name: 'Search', route: '/search'}
+const Navigation = {
+    HOME: {
+        name: "Home", route: '/', icon: '/home.svg', iconPrimary: '/home-primary.svg'
+    },
+    SEARCH: {
+        name: 'Search', route: '/search', icon: '/search.svg', iconPrimary: '/search-primary.svg'
+    }
 }
 
 function searchSong(e, searchQuery, setSearchRes) {
@@ -28,4 +32,69 @@ function searchSong(e, searchQuery, setSearchRes) {
     }
 }
 
-export {toMinutesText, getRouteName, Navigation, searchSong};
+class Music extends Audio {
+
+    constructor(src) {
+        super(src);
+        this.addEventListener('durationchange', () => {
+            this.onLoad(Math.round(this.currentTime), Math.round(this.duration))
+        })
+
+        this.addEventListener('timeupdate', () => {
+            this.onUpdateTime(Math.round(this.currentTime))
+        })
+
+        this.addEventListener('ended', () => {
+            this.onEnd()
+        })
+
+        this.addEventListener('play', () => {
+            this.onPlay()
+        })
+
+        this.addEventListener('pause', () => {
+            this.onPause()
+        })
+    }
+
+    setSrc(src) {
+        let isPlaying = !this.paused;
+        this.pause();
+        this.src = src;
+        this.load();
+        if (isPlaying)
+            this.play();
+        return this
+    }
+
+    onPlay = () => {
+    }
+    onPause = () => {
+    }
+    onEnd = () => {
+    }
+    onUpdateTime = () => {
+    }
+    onLoad = () => {
+    }
+}
+
+let music;
+
+function getMusic() {
+    if (music == null)
+        music = new Music('temp1.mp3')
+    return music;
+}
+
+function getRandomArbitrary(min, max) {
+    return Math.trunc(Math.random() * (max - min) + min);
+}
+
+function getRandMusic() {
+    let src = `temp${getRandomArbitrary(1,4)}.mp3`;
+    console.log(`Playing ${src}`)
+    return src
+}
+
+export {toMinutesText, getRouteName, Navigation, searchSong, getMusic, getRandMusic};

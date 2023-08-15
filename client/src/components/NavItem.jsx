@@ -1,7 +1,7 @@
 import HStack from "./HStack.jsx";
 import Text from "./Text.jsx";
 import Icon from "./Icon.jsx";
-import {getRouteName} from "./util.js";
+import {NavLink} from "react-router-dom";
 
 function SelectedLine() {
     return <div style={{
@@ -13,19 +13,25 @@ function SelectedLine() {
     }}/>;
 }
 
-export default function NavItem({title, location}) {
-    const activated = title === getRouteName(location);
-    if (activated) return <HStack justifyContent='space-between' alignItems='center' pad='5px 0 5px 10px'>
-        <HStack pad='0 0 0 10px' alignItems='center'>
-            <Icon src='/home-primary.svg' size='30px'/>
-            <Text pad='10px' variant='primary'>{title}</Text>
-        </HStack>
-        <SelectedLine/>
-    </HStack>
-    return <HStack justifyContent='space-between' alignItems='center' pad='5px 0 5px 10px'>
-        <HStack pad='0 0 0 10px' alignItems='center'>
-            <Icon src='/home.svg' size='30px'/>
-            <Text pad='10px'>{title}</Text>
-        </HStack>
-    </HStack>
+export default function NavItem({nav}) {
+    return <NavLink
+        to={nav.route}>
+        {({isActive}) => (
+            isActive ?
+                <HStack justifyContent='space-between' alignItems='center' pad='5px 0 5px 10px'>
+                    <HStack pad='0 0 0 10px' alignItems='center'>
+                        <Icon src={nav.iconPrimary} size='30px'/>
+                        <Text pad='10px' variant='primary'>{nav.name}</Text>
+                    </HStack>
+                    <SelectedLine/>
+                </HStack>
+                :
+                <HStack justifyContent='space-between' alignItems='center' pad='5px 0 5px 10px'>
+                    <HStack pad='0 0 0 10px' alignItems='center'>
+                        <Icon src={nav.icon} size='30px'/>
+                        <Text pad='10px'>{nav.name}</Text>
+                    </HStack>
+                </HStack>
+        )}
+    </NavLink>
 }

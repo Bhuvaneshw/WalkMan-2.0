@@ -1,4 +1,4 @@
-export default function Stack({scrollable, width, height, className, justifyContent, alignItems, children}) {
+export default function Stack({scrollable, width, height, className, justifyContent, alignItems, onClick, children}) {
     let overFlow = scrollable ? 'auto' : 'none';
     return <div className={className} style={{
         display: 'flex',
@@ -8,5 +8,5 @@ export default function Stack({scrollable, width, height, className, justifyCont
         height: height,
         width: width,
         overflowY: overFlow,
-    }}>{children}</div>
+    }} onClick={onClick}>{children}</div>
 }

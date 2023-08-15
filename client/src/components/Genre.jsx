@@ -7,6 +7,7 @@ import Gab from "./Gap.jsx";
 import Stack from "./Stack.jsx";
 import Text from "./Text.jsx";
 import Fab from "./Fab.jsx";
+import {getMusic, getRandMusic} from "./util.js";
 
 export default function Genre() {
     const a = [1, 11, 12, 13, 14, 15];
@@ -25,7 +26,9 @@ export default function Genre() {
                                     <Text>Believer{value}</Text>
                                 </Stack>
                                 <Gab width="10px"/>
-                                <Fab/>
+                                <Fab onClick={() => {
+                                    getMusic().setSrc(getRandMusic()).play();
+                                }}/>
                             </HStack>
                         </BorderedCard>
                     );
