@@ -41,6 +41,15 @@ export default function Player() {
             setIsPlaying(false)
     }
 
+    audio.intimatePlay = () => {
+        audio.play()
+            .then(() => setIsPlaying(true))
+            .catch(error => {
+                setIsPlaying(false)
+                return toast(error);
+            })
+    }
+
     function setAudioTime(s) {
         audio.currentTime = s
     }
@@ -60,12 +69,7 @@ export default function Player() {
             audio.pause()
             setIsPlaying(false)
         } else {
-            audio.play()
-                .then(() => setIsPlaying(true))
-                .catch(error => {
-                    setIsPlaying(false)
-                    return toast(error);
-                })
+            audio.intimatePlay()
         }
     }
 
@@ -77,11 +81,11 @@ export default function Player() {
         audio.currentTime += 10
     }
 
-    function moveBack(){
+    function moveBack() {
         audio.setSrc('temp1.mp3')
     }
 
-    function moveNext(){
+    function moveNext() {
         audio.setSrc('temp2.mp3')
     }
 

@@ -63,7 +63,7 @@ class Music extends Audio {
         this.src = src;
         this.load();
         if (isPlaying)
-            this.play();
+            this.intimatePlay();
         return this
     }
 
@@ -76,6 +76,8 @@ class Music extends Audio {
     onUpdateTime = () => {
     }
     onLoad = () => {
+    }
+    intimatePlay = () => {
     }
 }
 
@@ -92,7 +94,7 @@ function getRandomArbitrary(min, max) {
 }
 
 function getRandMusic() {
-    let src = `temp${getRandomArbitrary(1,4)}.mp3`;
+    let src = `temp${getRandomArbitrary(1, 4)}.mp3`;
     console.log(`Playing ${src}`)
     return src
 }
