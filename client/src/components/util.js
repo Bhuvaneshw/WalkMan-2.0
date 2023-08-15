@@ -17,7 +17,7 @@ function getRouteName(location) {
 
 function searchSong(e, searchQuery, setSearchRes) {
   if (e.code === "Enter") {
-    fetch("http://localhost:3000/song/" + searchQuery)
+    fetch("http://localhost:3000/song?q=" + searchQuery)
       .then((res) => res.json())
       .then((res) => setSearchRes(res));
   }
