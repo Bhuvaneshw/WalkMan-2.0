@@ -9,6 +9,8 @@ import Text from "./Text.jsx";
 import Fab from "./Fab.jsx";
 import {useState} from "react";
 import {getMusic, getRandMusic, toMinutesText} from "./util.js";
+import {useNavigate} from "react-router-dom";
+import {motion} from "framer-motion";
 
 function ProgressBar({audio}) {
     const [currentTime, setCurrentTime] = useState(Math.round(audio.currentTime))
@@ -35,6 +37,7 @@ function ProgressBar({audio}) {
                 setAudioTime(e)
             }}
             colorScheme="primary"
+            focusThumbOnChange={false}
             onChangeEnd={() => {
             }}>
             <SliderTrack>
@@ -49,7 +52,7 @@ function ProgressBar({audio}) {
     </Stack>;
 }
 
-export default function Player() {
+export default function AudioPlayerSmall() {
     let audio = getMusic();
     window.audio = audio;
     const toaster = useToast()
@@ -113,9 +116,15 @@ export default function Player() {
         audio.setSrc(getRandMusic())
     }
 
+    const navigate = useNavigate();
     return (
         <Card flex="1" className="flex player" pad="10px">
-            <Icon src="/music.png" className="fill" radius="18px"/>
+            <motion.div
+                className="fill"
+                whileHover={{scale: 1.05}}
+                whileTap={{scale: 0.9}}>
+                <Icon src="/music.png" radius="18px" onClick={() => navigate('/player')}/>
+            </motion.div>
             <Gab height="10px"/>
             <Stack justifyContent="center" alignItems="center">
                 <Title>Believer</Title>

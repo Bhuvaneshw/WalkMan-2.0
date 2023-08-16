@@ -125,6 +125,14 @@
     text-wrap: nowrap;
 }
 
+.audioSeekWidth{
+    width: 70%;
+}
+
+.audioBtnWidth{
+    width: 60%;
+}
+
 @media only screen and (max-width: 990px) {
     .navpar {
         display: none !important;
@@ -186,6 +194,16 @@
     .searchBar {
         flex: 1;
     }
+
+
+    .audioSeekWidth{
+        width: 100%;
+    }
+
+    .audioBtnWidth{
+        width: 100%;
+    }
+
 }
 
 @media only screen and (max-width: 390px) {

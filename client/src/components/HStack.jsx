@@ -8,6 +8,7 @@ export default function HStack({
                                    scrollable,
                                    className,
                                    flex,
+                                   mar,
                                    children
                                }) {
     let overFlow = scrollable ? 'auto' : 'none';
@@ -20,6 +21,7 @@ export default function HStack({
         alignItems: alignItems,
         padding: pad,
         overflowX: overFlow,
+        margin: mar,
         flex: flex,
     }}>{children}</div>
 }

@@ -2,8 +2,9 @@ import Content from "../components/Content.jsx";
 import ResponsiveHStack from "../components/ResponsiveHStack";
 import Artist from "../components/TopSongs.jsx";
 import Genre from "../components/Genre";
-import Player from "../components/Player";
+import AudioPlayerSmall from "../components/AudioPlayerSmall.jsx";
 import TopSongs from "../components/Artist.jsx";
+
 export default function Home() {
   return (
     <Content>
@@ -14,7 +15,7 @@ export default function Home() {
 
       <ResponsiveHStack width="100%">
         <Genre />
-        <Player />
+        <AudioPlayerSmall />
       </ResponsiveHStack>
     </Content>
   );

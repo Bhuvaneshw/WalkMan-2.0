@@ -1,6 +1,6 @@
 import {Image} from "@chakra-ui/react";
 
-export default function Icon({src, radius = "10px", size, mar, onClick, className}) {
+export default function Icon({src, radius = "10px", size, mar, onClick, className, style}) {
     return (
         <>
             <Image
@@ -8,6 +8,7 @@ export default function Icon({src, radius = "10px", size, mar, onClick, classNam
                 className={className}
                 onClick={onClick}
                 style={{
+                    ...style,
                     margin: mar,
                     borderRadius: radius,
                     width: size,

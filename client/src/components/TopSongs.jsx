@@ -62,7 +62,7 @@ export default function Artist() {
                         </BorderedCard>
                     );
                 })}
-                <BorderedCard className="flex" height="80%" width="auto"/>
+                <BorderedCard className="flex" height="80%" width="auto" opacity={0}/>
             </Stack>
         </Card>
     );

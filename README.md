@@ -1,5 +1,5 @@
 # WalkMan-2.0
-Music Player
+Music AudioPlayerSmall
 
 
 ## License
