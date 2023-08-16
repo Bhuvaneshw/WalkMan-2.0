@@ -94,7 +94,7 @@ function getRandomArbitrary(min, max) {
 }
 
 function getRandMusic() {
-    let src = `temp${getRandomArbitrary(1, 4)}.mp3`;
+    let src = `temp${getRandomArbitrary(1, 5)}.mp3`;
     console.log(`Playing ${src}`)
     return src
 }

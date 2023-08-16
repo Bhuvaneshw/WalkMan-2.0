@@ -8,24 +8,52 @@ import Stack from "./Stack.jsx";
 import Text from "./Text.jsx";
 import Fab from "./Fab.jsx";
 import {useState} from "react";
-import {getMusic, toMinutesText} from "./util.js";
+import {getMusic, getRandMusic, toMinutesText} from "./util.js";
+
+function ProgressBar({audio}) {
+    const [currentTime, setCurrentTime] = useState(Math.round(audio.currentTime))
+    const [totalTime, setTotalTime] = useState(Math.round(!isNaN(audio.duration) ? audio.duration : 0))
+
+    audio.onUpdateTime = (currentTime) => {
+        setCurrentTime(currentTime)
+    }
+    audio.onLoad = (currentTime, duration) => {
+        setCurrentTime(currentTime)
+        setTotalTime(duration)
+    }
+
+    function setAudioTime(s) {
+        audio.currentTime = s
+    }
+
+    return <Stack>
+        <Slider
+            defaultValue={currentTime}
+            value={currentTime}
+            max={totalTime}
+            onChange={(e) => {
+                setAudioTime(e)
+            }}
+            colorScheme="primary"
+            onChangeEnd={() => {
+            }}>
+            <SliderTrack>
+                <SliderFilledTrack/>
+            </SliderTrack>
+            <SliderThumb/>
+        </Slider>
+        <HStack justifyContent="space-between" width="100%">
+            <Text>{toMinutesText(currentTime)}</Text>
+            <Text>{toMinutesText(totalTime)}</Text>
+        </HStack>
+    </Stack>;
+}
 
 export default function Player() {
     let audio = getMusic();
     window.audio = audio;
     const toaster = useToast()
     const [isPlaying, setIsPlaying] = useState(!audio.paused)
-    const [currentTime, setCurrentTime] = useState(Math.round(audio.currentTime))
-    const [totalTime, setTotalTime] = useState(Math.round(!isNaN(audio.duration) ? audio.duration : 0))
-
-    audio.onLoad = (currentTime, duration) => {
-        setCurrentTime(currentTime)
-        setTotalTime(duration)
-    }
-
-    audio.onUpdateTime = (currentTime) => {
-        setCurrentTime(currentTime)
-    }
 
     audio.onEnd = () => {
         setIsPlaying(false)
@@ -43,15 +71,11 @@ export default function Player() {
 
     audio.intimatePlay = () => {
         audio.play()
-            .then(() => setIsPlaying(true))
+            .then(() => audio.onPlay())
             .catch(error => {
-                setIsPlaying(false)
+                audio.onPause();
                 return toast(error);
             })
-    }
-
-    function setAudioTime(s) {
-        audio.currentTime = s
     }
 
     function toast(msg, status = 'error') {
@@ -82,11 +106,11 @@ export default function Player() {
     }
 
     function moveBack() {
-        audio.setSrc('temp1.mp3')
+        audio.setSrc(getRandMusic())
     }
 
     function moveNext() {
-        audio.setSrc('temp2.mp3')
+        audio.setSrc(getRandMusic())
     }
 
     return (
@@ -97,25 +121,7 @@ export default function Player() {
                 <Title>Believer</Title>
                 <Text>Top #1</Text>
                 <Box style={{padding: "10px 30px", width: "100%"}}>
-                    <Slider
-                        defaultValue={currentTime}
-                        value={currentTime}
-                        max={totalTime}
-                        onChange={(e) => {
-                            setAudioTime(e)
-                        }}
-                        colorScheme="primary"
-                        onChangeEnd={() => {
-                        }}>
-                        <SliderTrack>
-                            <SliderFilledTrack/>
-                        </SliderTrack>
-                        <SliderThumb/>
-                    </Slider>
-                    <HStack justifyContent="space-between" width="100%">
-                        <Text>{toMinutesText(currentTime)}</Text>
-                        <Text>{toMinutesText(totalTime)}</Text>
-                    </HStack>
+                    <ProgressBar audio={audio}/>
                     <Gab height="20px"/>
                     <HStack justifyContent="space-between" width="100%">
                         <Icon src="/previous.svg" className="moveTopOnHover lightOnHover" onClick={moveBack}/>
