@@ -1,11 +1,12 @@
 export default function Stack({
                                   scrollable,
                                   width,
+                                  mWidth,
                                   height,
                                   className,
                                   justifyContent,
                                   alignItems,
-                                  mar,
+                                  mar, pad,
                                   onClick,
                                   children
                               }) {
@@ -17,7 +18,9 @@ export default function Stack({
         alignItems: alignItems,
         height: height,
         width: width,
+        minWidth: mWidth,
         margin: mar,
+        padding: pad,
         overflowY: overFlow,
     }} onClick={onClick}>{children}</div>
 }

@@ -1,3 +1,7 @@
+* {
+    box-sizing: border-box !important;
+}
+
 ::-webkit-scrollbar {
     width: 6px;
     height: 6px;
@@ -18,7 +22,7 @@
 
 .title {
     font-weight: bold;
-    font-size: 20px;
+    font-size: 16px;
 }
 
 .title-margin {
@@ -121,19 +125,23 @@
     box-shadow: 0 0 100px 80px #1fece5, 0 0 100px 120px #8ffffb;
 }
 
-.noWrap{
-    text-wrap: nowrap;
+.noWrap {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: inherit;
+    width: 150px;
 }
 
-.audioSeekWidth{
+.audioSeekWidth {
     width: 70%;
 }
 
-.audioBtnWidth{
+.audioBtnWidth {
     width: 60%;
 }
 
-@media only screen and (max-width: 990px) {
+@media only screen and (max-width: 1024px) {
     .navpar {
         display: none !important;
     }
@@ -163,7 +171,7 @@
 
     .title {
         font-weight: bold;
-        font-size: 16px;
+        font-size: 14px;
     }
 
     .title-margin {
@@ -196,11 +204,11 @@
     }
 
 
-    .audioSeekWidth{
+    .audioSeekWidth {
         width: 100%;
     }
 
-    .audioBtnWidth{
+    .audioBtnWidth {
         width: 100%;
     }
 

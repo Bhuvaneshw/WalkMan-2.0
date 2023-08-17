@@ -5,36 +5,40 @@ import BorderedCard from "./BorderedCard.jsx";
 import Icon from "./Icon.jsx";
 import Gab from "./Gap.jsx";
 import Stack from "./Stack.jsx";
-import Text from "./Text.jsx";
 import Fab from "./Fab.jsx";
-import { getMusic, getRandMusic } from "./util.js";
+import {getMusic, getRandMusic} from "./util.js";
+import SongCardSkeleton from "./skeleton/SongCardSkeleton.jsx";
 
-export default function Genre({ data = [] }) {
-  const a = [1, 11, 12, 13, 14, 15];
-  return (
-    <Card flex="2">
-      <Title variant="black70 title-margin">Genre</Title>
-      <HStack scrollable>
-        {data.map((value) => {
-          return (
-            <BorderedCard className="flex" key={value}>
-              <Icon src="/music.png" className="fill big-icon" />
-              <Gab height="10px" />
-              <HStack justifyContent="space-between" alignItems="center">
-                <Stack>
-                  <Title>{value}</Title>
-                </Stack>
-                <Gab width="10px" />
-                <Fab
-                  onClick={() => {
-                    getMusic().setSrc(getRandMusic()).play();
-                  }}
-                />
-              </HStack>
-            </BorderedCard>
-          );
-        })}
-      </HStack>
-    </Card>
-  );
+export default function Genre({data = []}) {
+    let loading = data.length < 1;
+    return (
+        <Card flex="4">
+            <Title variant="black70 title-margin">Genre</Title>
+            <HStack scrollable height={'100%'}>
+                <SongCardSkeleton loading={loading}/>
+                <SongCardSkeleton loading={loading}/>
+                <SongCardSkeleton loading={loading}/>
+                <SongCardSkeleton loading={loading}/>
+                {data.map((value) => {
+                return (
+                    <BorderedCard className="flex" key={value}>
+                        <Icon src="/music.png" className="big-icon"/>
+                        <Gab height="10px"/>
+                        <HStack justifyContent="space-between" alignItems="center">
+                            <Stack>
+                                <Title className='noWrap'>{value}</Title>
+                            </Stack>
+                            <Gab width="10px"/>
+                            <Fab
+                                onClick={() => {
+                                    getMusic().setSrc(getRandMusic()).play();
+                                }}
+                            />
+                        </HStack>
+                    </BorderedCard>
+                );
+            })}
+            </HStack>
+        </Card>
+    );
 }
