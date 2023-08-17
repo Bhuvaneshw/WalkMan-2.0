@@ -1,9 +1,14 @@
 import express from "express";
-import { getSongInfo } from "./controller.js";
+import { getSongInfo, getUserHomeInfo } from "./controller.js";
 const router = express.Router();
 
-router.get("/:query", async (req, res) => {
-  const songs = await getSongInfo(req.params.query);
+router.get("/home", async (req, res) => {
+  const userHomeInfo = await getUserHomeInfo();
+  res.json(userHomeInfo);
+});
+
+router.get("/", async (req, res) => {
+  const songs = await getSongInfo(req.query.q);
   res.json(songs);
 });
 

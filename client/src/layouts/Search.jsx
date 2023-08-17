@@ -1,9 +1,8 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import Content from "../components/Content.jsx";
 import searchContext from "../searchContext";
 import MusicCard from "../components/MusicCard";
 import HStack from "../components/HStack.jsx";
-
 export default function Search() {
   const { searchRes } = useContext(searchContext);
   useEffect(() => {}, []);

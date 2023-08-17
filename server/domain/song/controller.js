@@ -17,3 +17,10 @@ export async function getSongInfo(query) {
   console.log(songData);
   return songData;
 }
+
+export async function getUserHomeInfo(token) {
+  const genere = await Song.find().distinct("genere");
+  const artist = await Song.find().distinct("artist");
+  const songs = await Song.find().limit(7);
+  return { genere, artist, songs };
+}

@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import searchContext from "../searchContext";
 import { searchSong } from "./util";
+
 const SearchBar = () => {
   const navigate = useNavigate();
   const { searchQuery, setSearchQuery, setSearchRes } =
@@ -12,9 +13,10 @@ const SearchBar = () => {
     <InputGroup
       borderRadius="300px"
       style={{
-        width: "40%",
+        minWidth: "40%",
         background: "#FBFCFE",
       }}
+      className="searchBar"
       colorScheme="primary"
     >
       <InputRightElement pointerEvents="none">

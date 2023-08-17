@@ -7,17 +7,20 @@ import Icon from "./Icon.jsx";
 import Gab from "./Gap.jsx";
 import Stack from "./Stack.jsx";
 import Text from "./Text.jsx";
-export default function Artist() {
+import { getMusic, getRandMusic } from "./util.js";
+
+export default function TopSongs({ data }) {
   const a = [1, 11, 12, 13, 14, 15];
+  console.log(data);
   return (
     <Card flex="1" height="350px" overflow="hidden" className="artist">
       <Title variant="black70 title-margin">Top Songs</Title>
       <Stack height="100%" scrollable>
-        {a.map((value) => {
+        {data.map(({ artist, title }) => {
           return (
             <BorderedCard
               className="flex"
-              key={value}
+              key={artist}
               height="100%"
               width="auto"
               pad="4px"
@@ -30,13 +33,13 @@ export default function Artist() {
                 <Icon src="/music.png" className="fill small-icon" />
                 <Gab width="20px" />
                 <Stack className="fill">
-                  <Title>Believer</Title>
-                  <Text>Top #{value}</Text>
+                  <Title>{title}</Title>
+                  <Text>{artist}</Text>
                 </Stack>
                 <Gab width="10px" />
                 <Img
                   className="moveTopOnHover lightOnHover"
-                  src={value % 2 === 0 ? "/liked.svg" : "/like.svg"}
+                  src={"/liked.svg"}
                   style={{
                     width: "25px",
                     height: "25px",
@@ -50,6 +53,9 @@ export default function Artist() {
                   style={{
                     width: "23px",
                     height: "23px",
+                  }}
+                  onClick={() => {
+                    getMusic().setSrc(getRandMusic()).play();
                   }}
                 />
                 <Gab width="30px" />
