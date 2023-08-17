@@ -9,7 +9,7 @@ import Text from "./Text.jsx";
 import Fab from "./Fab.jsx";
 import { getMusic, getRandMusic } from "./util.js";
 
-export default function Genre({ data }) {
+export default function Genre({ data = [] }) {
   const a = [1, 11, 12, 13, 14, 15];
   return (
     <Card flex="2">

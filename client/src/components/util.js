@@ -9,7 +9,16 @@ function getRouteName(location) {
   switch (location.pathname) {
     case Navigation.SEARCH.route:
       return Navigation.SEARCH.name;
-
+    case Navigation.PLAYER.route:
+      return Navigation.PLAYER.name;
+    case Navigation.PLAYLIST.route:
+      return Navigation.PLAYLIST.name;
+    case Navigation.TOP_SONGS.route:
+      return Navigation.TOP_SONGS.name;
+    case Navigation.ARTISTS.route:
+      return Navigation.ARTISTS.name;
+    case Navigation.GENRE.route:
+      return Navigation.GENRE.name;
     default:
       return Navigation.HOME.name;
   }
@@ -27,6 +36,36 @@ const Navigation = {
     route: "/search",
     icon: "/search.svg",
     iconPrimary: "/search-primary.svg",
+  },
+  PLAYER: {
+    name: "Player",
+    route: "/player",
+    icon: "/play-black.svg",
+    iconPrimary: "/play-primary.svg",
+  },
+  PLAYLIST: {
+    name: "Playlist",
+    route: "/playlist",
+    icon: "/playlist.svg",
+    iconPrimary: "/playlist-primary.svg",
+  },
+  TOP_SONGS: {
+    name: "Top Songs",
+    route: "/topsongs",
+    icon: "/top-songs.svg",
+    iconPrimary: "/top-songs-primary.svg",
+  },
+  ARTISTS: {
+    name: "Artists",
+    route: "/artists",
+    icon: "/artist.svg",
+    iconPrimary: "/artist-primary.svg",
+  },
+  GENRE: {
+    name: "Genre",
+    route: "/genre",
+    icon: "/genre.svg",
+    iconPrimary: "/genre-primary.svg",
   },
 };
 
@@ -96,7 +135,7 @@ function getRandomArbitrary(min, max) {
 }
 
 function getRandMusic() {
-  let src = `temp${getRandomArbitrary(1, 4)}.mp3`;
+  let src = `temp${getRandomArbitrary(1, 5)}.mp3`;
   console.log(`Playing ${src}`);
   return src;
 }

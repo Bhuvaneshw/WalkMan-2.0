@@ -106,6 +106,33 @@
     flex: 0;
 }
 
+.absCenter {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.circleBlurBg {
+    width: 1px;
+    height: 1px;
+    border-radius: 50%;
+    opacity: 0.2;
+    box-shadow: 0 0 100px 80px #1fece5, 0 0 100px 120px #8ffffb;
+}
+
+.noWrap{
+    text-wrap: nowrap;
+}
+
+.audioSeekWidth{
+    width: 70%;
+}
+
+.audioBtnWidth{
+    width: 60%;
+}
+
 @media only screen and (max-width: 990px) {
     .navpar {
         display: none !important;
@@ -167,6 +194,16 @@
     .searchBar {
         flex: 1;
     }
+
+
+    .audioSeekWidth{
+        width: 100%;
+    }
+
+    .audioBtnWidth{
+        width: 100%;
+    }
+
 }
 
 @media only screen and (max-width: 390px) {
