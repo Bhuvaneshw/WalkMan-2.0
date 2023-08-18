@@ -10,7 +10,7 @@ import Card from "./Card.jsx";
 import Title from "./Title.jsx";
 import HStack from "./HStack.jsx";
 import Icon from "./Icon.jsx";
-import Gab from "./Gap.jsx";
+import Gap from "./Gap.jsx";
 import Stack from "./Stack.jsx";
 import Text from "./Text.jsx";
 import Fab from "./Fab.jsx";
@@ -133,13 +133,13 @@ export default function AudioPlayerBig() {
       mar={"auto"}
     >
       <Icon src="/music.png" className="fill" radius="18px" />
-      <Gab height="10px" />
+      <Gap height="10px" />
       <Stack justifyContent="center" alignItems="center">
         <Title>Believer</Title>
         <Text>Top #1</Text>
         <Box style={{ padding: "10px 30px", width: "100%" }}>
           <ProgressBar audio={audio} />
-          <Gab height="20px" />
+          <Gap height="20px" />
           <HStack
             justifyContent="space-between"
             mar="auto"

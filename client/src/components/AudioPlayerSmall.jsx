@@ -3,7 +3,7 @@ import Card from "./Card.jsx";
 import Title from "./Title.jsx";
 import HStack from "./HStack.jsx";
 import Icon from "./Icon.jsx";
-import Gab from "./Gap.jsx";
+import Gap from "./Gap.jsx";
 import Stack from "./Stack.jsx";
 import Text from "./Text.jsx";
 import Fab from "./Fab.jsx";
@@ -125,13 +125,13 @@ export default function AudioPlayerSmall() {
                 whileTap={{scale: 0.9}}>
                 <Icon src="/music.png" radius="18px" onClick={() => navigate('/player')} width={'100%'}/>
             </motion.div>
-            <Gab height="10px"/>
+            <Gap height="10px"/>
             <Stack justifyContent="center" alignItems="center">
                 <Title>Believer</Title>
                 <Text>Top #1</Text>
                 <Box style={{padding: "10px 30px", width: "100%"}}>
                     <ProgressBar audio={audio}/>
-                    <Gab height="20px"/>
+                    <Gap height="20px"/>
                     <HStack justifyContent="space-between" width="100%">
                         <Icon src="/previous.svg" className="moveTopOnHover lightOnHover" onClick={moveBack}/>
                         <Icon

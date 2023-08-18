@@ -1,4 +1,4 @@
-export default function Gab({width, height}) {
+export default function Gap({width, height}) {
     return <div style={{
         width: width,
         height: height,

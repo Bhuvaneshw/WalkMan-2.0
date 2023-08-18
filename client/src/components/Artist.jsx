@@ -3,7 +3,7 @@ import Title from "./Title.jsx";
 import HStack from "./HStack.jsx";
 import BorderedCard from "./BorderedCard.jsx";
 import Icon from "./Icon.jsx";
-import Gab from "./Gap.jsx";
+import Gap from "./Gap.jsx";
 import Stack from "./Stack.jsx";
 import Fab from "./Fab.jsx";
 import {getMusic, getRandMusic} from "./util.js";
@@ -23,12 +23,12 @@ export default function Artist({data}) {
                     return (
                         <BorderedCard className="flex" key={value}>
                             <Icon src="/music.png" className="big-icon"/>
-                            <Gab height="10px"/>
+                            <Gap height="10px"/>
                             <HStack justifyContent="space-between" alignItems="center">
                                 <Stack>
                                     <Title className='noWrap'>{value}</Title>
                                 </Stack>
-                                <Gab width="10px"/>
+                                <Gap width="10px"/>
                                 <Fab
                                     onClick={() => {
                                         getMusic().setSrc(getRandMusic()).play();

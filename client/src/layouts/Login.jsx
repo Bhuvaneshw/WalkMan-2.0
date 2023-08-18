@@ -12,7 +12,7 @@ import {
 import { useState } from "react";
 import Title from "../components/Title.jsx";
 import HStack from "../components/HStack.jsx";
-import Gab from "../components/Gap.jsx";
+import Gap from "../components/Gap.jsx";
 import Icon from "../components/Icon.jsx";
 
 // <Lottie animationData={bg1} style={{width: "480px", flex: "1"}}/>
@@ -271,7 +271,7 @@ export default function Login() {
                 }}
               />
             </FormControl>
-            <Gab />
+            <Gap />
             <FormControl id="password">
               {/*<FormLabel>Password</FormLabel>*/}
               <Input
