@@ -3,7 +3,7 @@ import Stack from "../Stack.jsx";
 import HStack from "../HStack.jsx";
 
 export default function SongCardSkeleton({loading = true}) {
-    return loading ? <Stack mWidth={'200px'} pad={'15px'}>
+    return loading ? <Stack mWidth={'200px'} pad={'15px'} className={'fill'}>
         <Skeleton style={{
             margin: '4px',
             borderRadius: '10px',

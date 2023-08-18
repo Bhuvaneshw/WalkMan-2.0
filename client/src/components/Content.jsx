@@ -1,3 +1,3 @@
-export default function Content({height, children}) {
-    return <div className='content' style={{height: height}}>{children}</div>
+export default function Content({height, children, style}) {
+    return <div className='content' style={{height: height, ...style,}}>{children}</div>
 }

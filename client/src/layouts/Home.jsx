@@ -11,7 +11,7 @@ export default function Home() {
     const [data, setData] = useState({songs: [], artist: [], genre: []});
     useEffect(() => {
         (async () => {
-            const res = await fetch("http://localhost:3000/song/home");
+            const res = await fetch("http://192.168.147.112:3000/song/home");
             setData(await res.json());
         })();
         console.log("hi");

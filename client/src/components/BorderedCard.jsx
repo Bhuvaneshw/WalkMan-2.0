@@ -15,7 +15,7 @@ export default function BorderedCard({
                                      }) {
     return <motion.div
         whileHover={{scale: 1.1}}
-        whileTap={{scale: 0.9}}
+        // whileTap={{scale: 0.9}}
         className={bg + " " + className} style={{
         width: width,
         maxWidth: maxW,
