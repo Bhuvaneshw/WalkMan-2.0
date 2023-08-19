@@ -12,15 +12,15 @@ function search(e, searchQuery, setSearchRes) {
 
 const SearchBar = () => {
     const navigate = useNavigate();
-    const {searchQuery, setSearchQuery, setSearchRes} =
-        useContext(searchContext);
     const location = useLocation()
-    if (location.search.toString().includes('?q=')) {
-        let query = location.search.substring(location.search.indexOf('?q=') + 3);
-        useEffect(() => {
+    const {searchQuery, setSearchQuery, setSearchRes} = useContext(searchContext);
+    useEffect(() => {
+        if (location.search.toString().includes('?q=')) {
+            let query = location.search.substring(location.search.indexOf('?q=') + 3);
             search({code: 'Enter'}, query, setSearchRes)
-        }, [])
-    }
+        }
+    }, [])
+
     return (
         <InputGroup
             borderRadius="300px"

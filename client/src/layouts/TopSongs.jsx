@@ -3,6 +3,7 @@ import MusicCard from "../components/MusicCard";
 import HStack from "../components/HStack.jsx";
 import {useEffect, useState} from "react";
 import SongCardSkeleton from "../components/skeleton/SongCardSkeleton.jsx";
+import {getMusic, setRandAudio} from "../components/util.js";
 
 export default function TopSongs() {
     const [data, setData] = useState([]);
@@ -13,7 +14,7 @@ export default function TopSongs() {
             setData(await res.json());
         })();
     }, []);
-    console.log(data)
+    // console.log(data)
     return (
         <Content>
             <HStack wrap="wrap" alignItems="stretch">
@@ -27,6 +28,10 @@ export default function TopSongs() {
                             key={music._id}
                             title={music.title}
                             artist={music.artist}
+                            onClick={() => {
+                                setRandAudio(getMusic())
+                                getMusic().play()
+                            }}
                         ></MusicCard>
                     );
                 })}

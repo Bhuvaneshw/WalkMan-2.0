@@ -1,17 +1,19 @@
 import {Skeleton} from "@chakra-ui/react";
 import Stack from "../Stack.jsx";
+import BorderedCard from "../BorderedCard.jsx";
 
 export default function ArtistCardSkeleton({loading = true}) {
-    return loading ? <Stack mWidth={'200px'} pad={'15px'} className={'fill'}>
-        <Skeleton style={{
-            margin: '4px',
-            borderRadius: '10px',
-            height: '170px',
-        }}/>
-        <Stack width={'70%'}>
+    return loading ? <BorderedCard className={'fill'}>
+        <Stack mWidth={'200px'}>
+            <Skeleton style={{
+                marginBottom: '4px',
+                borderRadius: '10px',
+                height: '170px',
+            }}/>
             <Skeleton height='20px' style={{
-                margin: '4px',
+                margin: 'auto',
+                width: '70%',
             }}/>
         </Stack>
-    </Stack> : <></>
+    </BorderedCard> : <></>
 }

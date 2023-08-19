@@ -1,81 +1,102 @@
 function toMinutesText(sec) {
-  let m = Math.trunc(sec / 60);
-  let s = sec - m * 60;
-  if (s < 10) s = "0" + s;
-  return `${m}:${s}`;
+    let m = Math.trunc(sec / 60);
+    let s = sec - m * 60;
+    if (s < 10) s = "0" + s;
+    return `${m}:${s}`;
 }
 
 function getRouteName(location) {
-  switch (location.pathname) {
-    case Navigation.SEARCH.route:
-      return Navigation.SEARCH.name;
-    case Navigation.PLAYER.route:
-      return Navigation.PLAYER.name;
-    case Navigation.PLAYLIST.route:
-      return Navigation.PLAYLIST.name;
-    case Navigation.TOP_SONGS.route:
-      return Navigation.TOP_SONGS.name;
-    case Navigation.ARTISTS.route:
-      return Navigation.ARTISTS.name;
-    case Navigation.GENRE.route:
-      return Navigation.GENRE.name;
-    default:
-      return Navigation.HOME.name;
-  }
+    switch (location.pathname) {
+        case Navigation.SEARCH.route:
+            return Navigation.SEARCH.name;
+        case Navigation.PLAYER.route:
+            return Navigation.PLAYER.name;
+        case Navigation.PLAYLIST.route:
+            return Navigation.PLAYLIST.name;
+        case Navigation.TOP_SONGS.route:
+            return Navigation.TOP_SONGS.name;
+        case Navigation.ARTISTS.route:
+            return Navigation.ARTISTS.name;
+        case Navigation.GENRE.route:
+            return Navigation.GENRE.name;
+        default:
+            return Navigation.HOME.name;
+    }
 }
 
 const Navigation = {
-  HOME: {
-    name: "Home",
-    route: "/",
-    icon: "/home.svg",
-    iconPrimary: "/home-primary.svg",
-  },
-  SEARCH: {
-    name: "Search",
-    route: "/search",
-    icon: "/search.svg",
-    iconPrimary: "/search-primary.svg",
-  },
-  PLAYER: {
-    name: "Player",
-    route: "/player",
-    icon: "/play-black.svg",
-    iconPrimary: "/play-primary.svg",
-  },
-  PLAYLIST: {
-    name: "Playlist",
-    route: "/playlist",
-    icon: "/playlist.svg",
-    iconPrimary: "/playlist-primary.svg",
-  },
-  TOP_SONGS: {
-    name: "Top Songs",
-    route: "/topsongs",
-    icon: "/top-songs.svg",
-    iconPrimary: "/top-songs-primary.svg",
-  },
-  ARTISTS: {
-    name: "Artists",
-    route: "/artists",
-    icon: "/artist.svg",
-    iconPrimary: "/artist-primary.svg",
-  },
-  GENRE: {
-    name: "Genre",
-    route: "/genre",
-    icon: "/genre.svg",
-    iconPrimary: "/genre-primary.svg",
-  },
+    HOME: {
+        name: "Home",
+        route: "/",
+        icon: "/home.svg",
+        iconPrimary: "/home-primary.svg",
+    },
+    SEARCH: {
+        name: "Search",
+        route: "/search",
+        icon: "/search.svg",
+        iconPrimary: "/search-primary.svg",
+    },
+    PLAYER: {
+        name: "Player",
+        route: "/player",
+        icon: "/play-black.svg",
+        iconPrimary: "/play-primary.svg",
+    },
+    PLAYLIST: {
+        name: "Playlist",
+        route: "/playlist",
+        icon: "/playlist.svg",
+        iconPrimary: "/playlist-primary.svg",
+    },
+    TOP_SONGS: {
+        name: "Top Songs",
+        route: "/topsongs",
+        icon: "/top-songs.svg",
+        iconPrimary: "/top-songs-primary.svg",
+    },
+    ARTISTS: {
+        name: "Artists",
+        route: "/artists",
+        icon: "/artist.svg",
+        iconPrimary: "/artist-primary.svg",
+    },
+    GENRE: {
+        name: "Genre",
+        route: "/genre",
+        icon: "/genre.svg",
+        iconPrimary: "/genre-primary.svg",
+    },
 };
 
 function searchSong(e, searchQuery, setSearchRes) {
-  if (e.code === "Enter") {
-    console.log("search? "+searchQuery)
-    fetch("http://localhost:3000/song?q=" + searchQuery)
-      .then((res) => res.json())
-      .then((res) => setSearchRes(res));
-  }
+    if (e.code === "Enter") {
+        // console.log("search? " + searchQuery)
+        fetch("http://localhost:3000/song?q=" + searchQuery)
+            .then((res) => res.json())
+            .then((res) => setSearchRes(res));
+    }
+}
+
+function downloadSong(url) {
+    const link = document.createElement('a');
+    link.href = url;
+    let fileName = '';
+    try {
+        fileName = new URL(url).pathname.split('/').pop();
+    } catch (e) {
+        console.error(e);
+    }
+    link.setAttribute('download', fileName);
+    document.getElementsByTagName("body")[0].appendChild(link);
+    if (document.createEvent) {
+        const event = document.createEvent("MouseEvents");
+        event.initEvent("click", true, true);
+        link.dispatchEvent(event);
+    } else if (link.click) {
+        link.click();
+    }
+    link.parentNode.removeChild(link);
 }
 
 // class Socket {
@@ -83,69 +104,82 @@ function searchSong(e, searchQuery, setSearchRes) {
 // }
 
 class Music extends Audio {
-  constructor(src) {
-    super(src);
-    this.addEventListener("durationchange", () => {
-      this.onLoad(Math.round(this.currentTime), Math.round(this.duration));
-    });
+    constructor(src, name) {
+        super(src);
+        this.name = name;
+        this.addEventListener("durationchange", () => {
+            this.onLoad(Math.round(this.currentTime), Math.round(this.duration));
+        });
 
-    this.addEventListener("timeupdate", () => {
-      this.onUpdateTime(Math.round(this.currentTime));
-    });
+        this.addEventListener("timeupdate", () => {
+            this.onUpdateTime(Math.round(this.currentTime));
+        });
 
-    this.addEventListener("ended", () => {
-      this.onEnd();
-    });
+        this.addEventListener("ended", () => {
+            this.onEnd();
+        });
 
-    this.addEventListener("play", () => {
-      this.onPlay();
-    });
+        this.addEventListener("play", () => {
+            this.onPlay();
+        });
 
-    this.addEventListener("pause", () => {
-      this.onPause();
-    });
-  }
+        this.addEventListener("pause", () => {
+            this.onPause();
+        });
+    }
 
-  setSrc(src) {
-    let isPlaying = !this.paused;
-    this.pause();
-    this.src = src;
-    this.load();
-    if (isPlaying) this.intimatePlay();
-    return this;
-  }
+    setSrc(src, name) {
+        this.name = name;
+        let isPlaying = !this.paused;
+        this.pause();
+        this.src = src;
+        this.load();
+        if (isPlaying) this.intimatePlay();
+        return this;
+    }
 
-  onPlay = () => {};
-  onPause = () => {};
-  onEnd = () => {};
-  onUpdateTime = () => {};
-  onLoad = () => {};
-  intimatePlay = () => {};
+    onPlay = () => {
+    };
+    onPause = () => {
+    };
+    onEnd = () => {
+    };
+    onUpdateTime = () => {
+    };
+    onLoad = () => {
+    };
+    intimatePlay = () => {
+    };
 }
 
 let music;
 
 function getMusic() {
-  if (music == null)
-    music = new Music(`temp${Math.ceil(Math.random() * 3)}.mp3`);
-  return music;
+    if (music == null) {
+        let number = Math.ceil(Math.random() * 3);
+        music = new Music(`temp${number}.mp3`, 'Song ' + number);
+    }
+    return music;
 }
 
-function getRandomArbitrary(min, max) {
-  return Math.trunc(Math.random() * (max - min) + min);
+function getRandomArbitrary(min = 1, max = 5) {
+    return Math.trunc(Math.random() * (max - min) + min);
 }
 
-function getRandMusic() {
-  let src = `temp${getRandomArbitrary(1, 5)}.mp3`;
-  console.log(`Playing ${src}`);
-  return src;
+function setRandAudio(audio) {
+    let i = getRandomArbitrary();
+    let name = `Temp ${i}`;
+    audio.setSrc(`temp${i}.mp3`, name);
+    console.log(`Playing ${name}`);
+    return name;
 }
 
 export {
-  toMinutesText,
-  getRouteName,
-  Navigation,
-  searchSong,
-  getMusic,
-  getRandMusic,
+    toMinutesText,
+    getRouteName,
+    Navigation,
+    searchSong,
+    getMusic,
+    setRandAudio,
+    downloadSong,
 };

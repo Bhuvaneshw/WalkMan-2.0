@@ -14,9 +14,9 @@ export default function Home() {
             const res = await fetch("http://localhost:3000/song/home");
             setData(await res.json());
         })();
-        console.log("hi");
+        // console.log("hi");
     }, []);
-    console.log(data);
+    // console.log(data);
     return (
         <Content>
             <ResponsiveHStack width="100%">

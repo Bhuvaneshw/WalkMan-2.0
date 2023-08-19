@@ -6,13 +6,13 @@ import Icon from "./Icon.jsx";
 import Gap from "./Gap.jsx";
 import Stack from "./Stack.jsx";
 import Text from "./Text.jsx";
-import {getMusic, getRandMusic} from "./util.js";
+import {getMusic, setRandAudio} from "./util.js";
 import Fab from "./Fab.jsx";
 import SongCardSkeleton from "./skeleton/SongCardSkeleton.jsx";
 
 export default function TopSongs({data}) {
-    let loading = data.length<1;
-    console.log('top song data', data, 'loading: ',loading);
+    let loading = data.length < 1;
+    // console.log('top song data', data, 'loading: ', loading);
     return (
         <Card flex="1" height="350px" overflow="hidden">
             <Title variant="black70 title-margin">Top Songs</Title>
@@ -34,7 +34,8 @@ export default function TopSongs({data}) {
                                 <Gap width="10px"/>
                                 <Fab
                                     onClick={() => {
-                                        getMusic().setSrc(getRandMusic()).play();
+                                        setRandAudio(getMusic())
+                                        getMusic().play();
                                     }}
                                 />
                             </HStack>

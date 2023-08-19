@@ -6,8 +6,8 @@ import Icon from "./Icon.jsx";
 import Gap from "./Gap.jsx";
 import Stack from "./Stack.jsx";
 import Fab from "./Fab.jsx";
-import {getMusic, getRandMusic} from "./util.js";
-import SongCardSkeleton from "./skeleton/SongCardSkeleton.jsx";
+import {getMusic, setRandAudio} from "./util.js";
+import ArtistCardSkeleton from "./skeleton/ArtistCardSkeleton.jsx";
 
 export default function Artist({data}) {
     let loading = data.length < 1;
@@ -15,10 +15,10 @@ export default function Artist({data}) {
         <Card flex="1">
             <Title variant="black70 title-margin">Artist</Title>
             <HStack scrollable>
-                <SongCardSkeleton loading={loading}/>
-                <SongCardSkeleton loading={loading}/>
-                <SongCardSkeleton loading={loading}/>
-                <SongCardSkeleton loading={loading}/>
+                <ArtistCardSkeleton loading={loading}/>
+                <ArtistCardSkeleton loading={loading}/>
+                <ArtistCardSkeleton loading={loading}/>
+                <ArtistCardSkeleton loading={loading}/>
                 {data.map((value) => {
                     return (
                         <BorderedCard className="flex" key={value}>
@@ -31,7 +31,8 @@ export default function Artist({data}) {
                                 <Gap width="10px"/>
                                 <Fab
                                     onClick={() => {
-                                        getMusic().setSrc(getRandMusic()).play();
+                                        setRandAudio(getMusic())
+                                        getMusic().play();
                                     }}
                                 />
                             </HStack>

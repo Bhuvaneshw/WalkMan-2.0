@@ -8,7 +8,7 @@ import Stack from "./Stack.jsx";
 import Text from "./Text.jsx";
 import Fab from "./Fab.jsx";
 import {useState} from "react";
-import {getMusic, getRandMusic, toMinutesText} from "./util.js";
+import {getMusic, setRandAudio, toMinutesText} from "./util.js";
 import {useNavigate} from "react-router-dom";
 import {motion} from "framer-motion";
 
@@ -57,6 +57,7 @@ export default function AudioPlayerSmall() {
     window.audio = audio;
     const toaster = useToast()
     const [isPlaying, setIsPlaying] = useState(!audio.paused)
+    const [name, setName] = useState(audio.name);
 
     audio.onEnd = () => {
         setIsPlaying(false)
@@ -109,11 +110,11 @@ export default function AudioPlayerSmall() {
     }
 
     function moveBack() {
-        audio.setSrc(getRandMusic())
+        setName(setRandAudio(audio))
     }
 
     function moveNext() {
-        audio.setSrc(getRandMusic())
+        setName(setRandAudio(audio))
     }
 
     const navigate = useNavigate();
@@ -127,7 +128,7 @@ export default function AudioPlayerSmall() {
             </motion.div>
             <Gap height="10px"/>
             <Stack justifyContent="center" alignItems="center">
-                <Title>Believer</Title>
+                <Title>{name}</Title>
                 <Text>Top #1</Text>
                 <Box style={{padding: "10px 30px", width: "100%"}}>
                     <ProgressBar audio={audio}/>
