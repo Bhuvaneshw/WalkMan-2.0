@@ -11,7 +11,8 @@ export default function BorderedCard({
                                          shadow = "0 0 5px #00000028",
                                          opacity,
                                          className,
-                                         children
+                                         children,
+                                         onClick
                                      }) {
     return <motion.div
         whileHover={{scale: 1.1}}
@@ -25,5 +26,5 @@ export default function BorderedCard({
         borderRadius: radius,
         boxShadow: shadow,
         opacity: opacity
-    }}>{children}</motion.div>;
+    }} onClick={onClick}>{children}</motion.div>;
 }

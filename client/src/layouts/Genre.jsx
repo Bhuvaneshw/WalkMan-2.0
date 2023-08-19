@@ -4,16 +4,15 @@ import HStack from "../components/HStack.jsx";
 import {useEffect, useState} from "react";
 import SongCardSkeleton from "../components/skeleton/SongCardSkeleton.jsx";
 
-export default function TopSongs() {
+export default function Genre() {
     const [data, setData] = useState([]);
-    let loading = data.length < 1;
+    let loading = data.length<1;
     useEffect(() => {
         (async () => {
-            const res = await fetch("http://localhost:3000/song/top");
+            const res = await fetch("http://localhost:3000/song/genre");
             setData(await res.json());
         })();
     }, []);
-    console.log(data)
     return (
         <Content>
             <HStack wrap="wrap" alignItems="stretch">
@@ -22,11 +21,10 @@ export default function TopSongs() {
                 <SongCardSkeleton loading={loading}/>
                 <SongCardSkeleton loading={loading}/>
                 {data.map((music) => {
-                    return (music.title &&
+                    return (
                         <MusicCard
-                            key={music._id}
-                            title={music.title}
-                            artist={music.artist}
+                            key={music}
+                            title={music}
                         ></MusicCard>
                     );
                 })}

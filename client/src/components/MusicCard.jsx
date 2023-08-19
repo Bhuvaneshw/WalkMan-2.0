@@ -6,9 +6,9 @@ import Title from "./Title";
 import Stack from "./Stack";
 import Text from "./Text";
 import Fab from "./Fab";
-export default function MusicCard({ title, artist }) {
+export default function MusicCard({ title, artist,onClick }) {
   return (
-    <BorderedCard className="flex responseFill" height width maxW='max-content'>
+    <BorderedCard className="flex responseFill" height width maxW='max-content' onClick={onClick}>
       <Icon src="/music.png" className="big-icon" />
       <Gap height="10px" />
       <HStack justifyContent="space-between" alignItems="center" className='fill'>

@@ -71,6 +71,7 @@ const Navigation = {
 
 function searchSong(e, searchQuery, setSearchRes) {
   if (e.code === "Enter") {
+    console.log("search? "+searchQuery)
     fetch("http://localhost:3000/song?q=" + searchQuery)
       .then((res) => res.json())
       .then((res) => setSearchRes(res));

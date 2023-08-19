@@ -12,6 +12,7 @@ import Player from "./layouts/Player.jsx";
 import {AnimatePresence} from "framer-motion";
 import TopSongs from "./layouts/TopSongs.jsx";
 import Artist from "./layouts/Artist.jsx";
+import Genre from "./layouts/Genre.jsx";
 
 function Main() {
     const location = useLocation();
@@ -24,7 +25,7 @@ function Main() {
                 <Route path="/playlist"/>
                 <Route path="/topsongs" element={<TopSongs/>}/>
                 <Route path="/artists" element={<Artist/>}/>
-                <Route path="/genre"/>
+                <Route path="/genre" element={<Genre/>}/>
             </Route>
             <Route path="/login" element={<Login/>}/>
             <Route path="/signup" element={<Signup/>}/>
