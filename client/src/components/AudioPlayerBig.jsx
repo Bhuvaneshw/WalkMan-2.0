@@ -53,7 +53,7 @@ function ProgressBar({audio}) {
     </Stack>);
 }
 
-export default function AudioPlayerBig() {
+export default function AudioPlayerBig({lottieRef}) {
     let audio = getMusic();
     window.audio = audio;
     const toaster = useToast();
@@ -69,10 +69,12 @@ export default function AudioPlayerBig() {
 
     audio.onPlay = () => {
         if (!isPlaying) setIsPlaying(true);
+        lottieRef.current.play();
     };
 
     audio.onPause = () => {
         if (isPlaying) setIsPlaying(false);
+        lottieRef.current.pause();
     };
 
     audio.intimatePlay = () => {

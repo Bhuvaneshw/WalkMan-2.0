@@ -9,9 +9,12 @@ import Text from "./Text.jsx";
 import {getMusic} from "./util.js";
 import Fab from "./Fab.jsx";
 import SongCardSkeleton from "./skeleton/SongCardSkeleton.jsx";
+import {useToast} from "@chakra-ui/react";
 
 export default function TopSongs({data}) {
     let loading = data.length < 1;
+    const toast = useToast()
+
     // console.log('top song data', data, 'loading: ', loading);
     return (
         <Card flex="2" overflow="hidden">
@@ -37,7 +40,14 @@ export default function TopSongs({data}) {
                                 <Gap width="10px"/>
                                 <Fab
                                     onClick={() => {
-                                        getMusic().setSrc(url, item).play()
+                                        toast({
+                                            title: item.title,
+                                            description: 'Playing now!',
+                                            duration: 3000,
+                                            status: 'success',
+                                            position: 'top-right'
+                                        });
+                                        getMusic().setSrc(url, item).play();
                                     }}
                                 />
                             </HStack>

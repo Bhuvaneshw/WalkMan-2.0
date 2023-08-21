@@ -4,10 +4,12 @@ import HStack from "../components/HStack.jsx";
 import {useEffect, useState} from "react";
 import SongCardSkeleton from "../components/skeleton/SongCardSkeleton.jsx";
 import {getMusic} from "../components/util.js";
+import {useToast} from "@chakra-ui/react";
 
 export default function TopSongs() {
     const [data, setData] = useState([]);
     let loading = data.length < 1;
+    let toast = useToast();
     useEffect(() => {
         (async () => {
             const res = await fetch("http://localhost:3000/song/top");
@@ -31,6 +33,13 @@ export default function TopSongs() {
                             artist={music.artist}
                             _id={music._id}
                             onClick={() => {
+                                toast({
+                                    title: music.title,
+                                    description: 'Playing now!',
+                                    duration: 3000,
+                                    status: 'success',
+                                    position: 'top-right',
+                                });
                                 getMusic().setSrc(music.url, music).play()
                             }}
                         ></MusicCard>
