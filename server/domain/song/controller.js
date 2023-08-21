@@ -19,7 +19,7 @@ export async function getSongInfo(query) {
 }
 
 export async function getUserHomeInfo(token) {
-    const genre = await Song.find().distinct("genere");
+    const genre = await Song.find().distinct("genre");
     const artist = await Song.find().distinct("artist");
     const songs = await Song.find().limit(7);
     return {genre: genre, artist, songs};
@@ -34,5 +34,5 @@ export async function getUserArtist(token) {
 }
 
 export async function getUserGenre(token) {
-    return Song.find().distinct("genere");
+    return Song.find().distinct("genre");
 }

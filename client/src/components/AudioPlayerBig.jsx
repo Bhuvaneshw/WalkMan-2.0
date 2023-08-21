@@ -2,19 +2,19 @@ import {Box, Slider, SliderFilledTrack, SliderThumb, SliderTrack, useToast,} fro
 import Card from "./Card.jsx";
 import Title from "./Title.jsx";
 import HStack from "./HStack.jsx";
-import Icon from "./Icon.jsx";
+import ClickableIcon from "./ClickableIcon.jsx";
 import Gap from "./Gap.jsx";
 import Stack from "./Stack.jsx";
 import Text from "./Text.jsx";
 import Fab from "./Fab.jsx";
-import {useState} from "react";
-import {downloadSong, getMusic, setRandAudio, toMinutesText} from "./util.js";
+import {useEffect, useState} from "react";
+import {downloadSong, getMusic, toMinutesText} from "./util.js";
+import Icon from "./Icon.jsx";
+import {useNavigate} from "react-router-dom";
 
 function ProgressBar({audio}) {
     const [currentTime, setCurrentTime] = useState(Math.round(audio.currentTime));
-    const [totalTime, setTotalTime] = useState(
-        Math.round(!isNaN(audio.duration) ? audio.duration : 0)
-    );
+    const [totalTime, setTotalTime] = useState(Math.round(!isNaN(audio.duration) ? audio.duration : 0));
 
     audio.onUpdateTime = (currentTime) => {
         setCurrentTime(currentTime);
@@ -28,31 +28,29 @@ function ProgressBar({audio}) {
         audio.currentTime = s;
     }
 
-    return (
-        <Stack mar={"auto"} className="audioSeekWidth">
-            <Slider
-                defaultValue={currentTime}
-                value={currentTime}
-                max={totalTime}
-                onChange={(e) => {
-                    setAudioTime(e);
-                }}
-                colorScheme="primary"
-                focusThumbOnChange={false}
-                onChangeEnd={() => {
-                }}
-            >
-                <SliderTrack>
-                    <SliderFilledTrack/>
-                </SliderTrack>
-                <SliderThumb/>
-            </Slider>
-            <HStack justifyContent="space-between" width="100%">
-                <Text>{toMinutesText(currentTime)}</Text>
-                <Text>{toMinutesText(totalTime)}</Text>
-            </HStack>
-        </Stack>
-    );
+    return (<Stack mar={"auto"} className="audioSeekWidth">
+        <Slider
+            defaultValue={currentTime}
+            value={currentTime}
+            max={totalTime}
+            onChange={(e) => {
+                setAudioTime(e);
+            }}
+            colorScheme="primary"
+            focusThumbOnChange={false}
+            onChangeEnd={() => {
+            }}
+        >
+            <SliderTrack>
+                <SliderFilledTrack/>
+            </SliderTrack>
+            <SliderThumb/>
+        </Slider>
+        <HStack justifyContent="space-between" width="100%">
+            <Text>{toMinutesText(currentTime)}</Text>
+            <Text>{toMinutesText(totalTime)}</Text>
+        </HStack>
+    </Stack>);
 }
 
 export default function AudioPlayerBig() {
@@ -60,7 +58,7 @@ export default function AudioPlayerBig() {
     window.audio = audio;
     const toaster = useToast();
     const [isPlaying, setIsPlaying] = useState(!audio.paused);
-    const [name, setName] = useState(audio.name);
+    const [data, setData] = useState(audio.data);
     const [repeat, setRepeat] = useState(false);
 
     audio.onEnd = () => {
@@ -86,6 +84,11 @@ export default function AudioPlayerBig() {
                 return toast(error);
             });
     };
+
+    let navigate = useNavigate()
+    useEffect(() => {
+        if (audio.data === '') navigate('/')
+    }, [])
 
     function toast(msg, status = "error") {
         return toaster({
@@ -115,88 +118,83 @@ export default function AudioPlayerBig() {
     }
 
     function moveBack() {
-        setName(setRandAudio(audio))
+        // setName(setRandAudio(audio))
     }
 
     function moveNext() {
-        setName(setRandAudio(audio))
+        // setName(setRandAudio(audio))
     }
 
-    return (
-        <Card
-            flex="1"
-            className="flex player"
-            pad="10px"
-            width={"min(100vw,80vh)"}
-            mar={"auto"}
-        >
-            <Icon src="/music.png" className="fill" radius="18px"/>
-            <Gap height="10px"/>
-            <Stack justifyContent="center" alignItems="center">
-                <Title>{name}</Title>
-                <Text>Top #1</Text>
-                <Box style={{padding: "10px 30px", width: "100%"}}>
-                    <ProgressBar audio={audio}/>
-                    <Gap height="20px"/>
+    return (<Card
+        flex="1"
+        className="flex player"
+        pad="10px"
+        height={"80vh"}
+        mar={"auto"}
+        style={{minWidth: '420px'}}
+    >
+        <Stack className="fill">
+            <Icon src={data.icon} radius="18px" width={'60vw'} height='55vh' fit='cover'
+                  style={{maxWidth: '600px', minWidth: '100%'}}/>
+        </Stack>
+        <Gap height="10px"/>
+        <Stack justifyContent="center" alignItems="center">
+            <Title>{data.name}</Title>
+            <Text>Top #1</Text>
+            <Box style={{padding: "10px 30px", width: "100%"}}>
+                <ProgressBar audio={audio}/>
+                <Gap height="20px"/>
+                <HStack
+                    justifyContent="space-between"
+                    alignItems='center'
+                >
+                    <ClickableIcon
+                        src="/like.svg"
+                        size='30px'
+                    />
                     <HStack
                         justifyContent="space-between"
-                        alignItems='center'
+                        mar="auto"
+                        className="audioBtnWidth"
                     >
-                        <Icon
-                            src="/like.svg"
-                            className="moveTopOnHover lightOnHover"
-                            size='30px'
+                        <ClickableIcon
+                            src="/previous.svg"
+                            onClick={moveBack}
                         />
-                        <HStack
-                            justifyContent="space-between"
-                            mar="auto"
-                            className="audioBtnWidth"
-                        >
-                            <Icon
-                                src="/previous.svg"
-                                className="moveTopOnHover lightOnHover"
-                                onClick={moveBack}
-                            />
-                            <Icon
-                                src="/seek-back.svg"
-                                className="moveTopOnHover lightOnHover"
-                                onClick={seekBack}
-                            />
-                            <Fab
-                                className="playBtn"
-                                size="50px"
-                                onClick={playOrPause}
-                                src={isPlaying ? "/pause.svg" : "/play.svg"}
-                            />
-                            <Icon
-                                src="/seek-forward.svg"
-                                className="moveTopOnHover lightOnHover"
-                                onClick={seekForward}
-                            />
-                            <Icon
-                                src="/next.svg"
-                                className="moveTopOnHover lightOnHover"
-                                onClick={moveNext}
-                            />
-                        </HStack>
-                        <Icon
-                            src={repeat ? "/repeat.svg" : "/no-repeat.svg"}
-                            className="moveTopOnHover lightOnHover"
-                            size='30px'
-                            onClick={() => setRepeat(!repeat)}
+                        <ClickableIcon
+                            src="/seek-back.svg"
+                            onClick={seekBack}
                         />
-                        <Gap width={'20px'}/>
-                        <Icon
-                            src="/download.svg"
-                            className="moveTopOnHover lightOnHover"
-                            size='30px'
-                            onClick={() => {
-                                downloadSong(audio.src)
-                            }}
+                        <Fab
+                            className="playBtn"
+                            size="50px"
+                            onClick={playOrPause}
+                            src={isPlaying ? "/pause.svg" : "/play.svg"}
+                        />
+                        <ClickableIcon
+                            src="/seek-forward.svg"
+                            onClick={seekForward}
+                        />
+                        <ClickableIcon
+                            src="/next.svg"
+                            onClick={moveNext}
                         />
                     </HStack>
-                </Box>
-            </Stack>
-        </Card>
-    );
+                    <ClickableIcon
+                        src={repeat ? "/repeat.svg" : "/no-repeat.svg"}
+                        size='30px'
+                        onClick={() => setRepeat(!repeat)}
+                    />
+                    <Gap width={'20px'}/>
+                    <ClickableIcon
+                        src="/download.svg"
+                        size='30px'
+                        onClick={() => {
+                            downloadSong(audio.src)
+                        }}
+                    />
+                </HStack>
+            </Box>
+        </Stack>
+    </Card>);
 }

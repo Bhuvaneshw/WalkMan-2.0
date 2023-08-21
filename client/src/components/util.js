@@ -88,14 +88,9 @@ function downloadSong(url) {
         console.error(e);
     }
     link.setAttribute('download', fileName);
+    link.setAttribute('_target', 'blank');
     document.getElementsByTagName("body")[0].appendChild(link);
-    if (document.createEvent) {
-        const event = document.createEvent("MouseEvents");
-        event.initEvent("click", true, true);
-        link.dispatchEvent(event);
-    } else if (link.click) {
-        link.click();
-    }
+    link.click();
     link.parentNode.removeChild(link);
 }
 
@@ -104,9 +99,9 @@ function downloadSong(url) {
 // }
 
 class Music extends Audio {
-    constructor(src, name) {
+    constructor(src = '', data = '') {
         super(src);
-        this.name = name;
+        this.data = data;
         this.addEventListener("durationchange", () => {
             this.onLoad(Math.round(this.currentTime), Math.round(this.duration));
         });
@@ -126,15 +121,22 @@ class Music extends Audio {
         this.addEventListener("pause", () => {
             this.onPause();
         });
+
+        this.addEventListener("canplay", () => {
+            this.canPlay();
+        })
+
+        // this.addEventListener("loadeddata", () => console.log("loadeddata"))
     }
 
-    setSrc(src, name) {
-        this.name = name;
+    setSrc(src, data) {
+        this.data = data;
         let isPlaying = !this.paused;
         this.pause();
         this.src = src;
         this.load();
         if (isPlaying) this.intimatePlay();
+        this.onSetSrc()
         return this;
     }
 
@@ -150,14 +152,17 @@ class Music extends Audio {
     };
     intimatePlay = () => {
     };
+    onSetSrc = () => {
+    };
+    canPlay = () => {
+    }
 }
 
 let music;
 
 function getMusic() {
     if (music == null) {
-        let number = Math.ceil(Math.random() * 3);
-        music = new Music(`temp${number}.mp3`, 'Song ' + number);
+        music = new Music();
     }
     return music;
 }

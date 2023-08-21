@@ -1,16 +1,17 @@
-import {Box, Slider, SliderFilledTrack, SliderThumb, SliderTrack, useToast,} from "@chakra-ui/react";
+import {Box, Skeleton, Slider, SliderFilledTrack, SliderThumb, SliderTrack, useToast,} from "@chakra-ui/react";
 import Card from "./Card.jsx";
 import Title from "./Title.jsx";
 import HStack from "./HStack.jsx";
-import Icon from "./Icon.jsx";
+import ClickableIcon from "./ClickableIcon.jsx";
 import Gap from "./Gap.jsx";
 import Stack from "./Stack.jsx";
 import Text from "./Text.jsx";
 import Fab from "./Fab.jsx";
 import {useState} from "react";
-import {getMusic, setRandAudio, toMinutesText} from "./util.js";
+import {getMusic, toMinutesText} from "./util.js";
 import {useNavigate} from "react-router-dom";
 import {motion} from "framer-motion";
+import Icon from "./Icon.jsx";
 
 function ProgressBar({audio}) {
     const [currentTime, setCurrentTime] = useState(Math.round(audio.currentTime))
@@ -52,12 +53,12 @@ function ProgressBar({audio}) {
     </Stack>;
 }
 
-export default function AudioPlayerSmall() {
+export default function AudioPlayerSmall({songs}) {
     let audio = getMusic();
     window.audio = audio;
     const toaster = useToast()
     const [isPlaying, setIsPlaying] = useState(!audio.paused)
-    const [name, setName] = useState(audio.name);
+    const [loading, setLoading] = useState(audio.paused && audio.data === '');
 
     audio.onEnd = () => {
         setIsPlaying(false)
@@ -80,6 +81,18 @@ export default function AudioPlayerSmall() {
                 audio.onPause();
                 return toast(error);
             })
+    }
+
+    audio.onSetSrc = () => {
+        setLoading(true)
+    }
+
+    audio.canPlay = () => {
+        setLoading(false)
+    }
+
+    if (songs.length > 0 && audio.data === '') {
+        audio.setSrc(songs[0].url, songs[0])
     }
 
     function toast(msg, status = 'error') {
@@ -110,44 +123,62 @@ export default function AudioPlayerSmall() {
     }
 
     function moveBack() {
-        setName(setRandAudio(audio))
+        // setName(setRandAudio(audio))
     }
 
     function moveNext() {
-        setName(setRandAudio(audio))
+        // setName(setRandAudio(audio))
     }
 
     const navigate = useNavigate();
     return (
-        <Card flex="1" className="flex player" pad="10px">
+        <Card flex="1" className="flex player-small" pad="10px">
             <motion.div
                 className="fill"
                 whileHover={{scale: 1.05}}
                 whileTap={{scale: 0.9}}>
-                <Icon src="/music.png" radius="18px" onClick={() => navigate('/player')} width={'100%'}/>
+                <Skeleton isLoaded={!loading} style={{borderRadius: '18px'}}>
+                    <Icon src={audio.data.icon} radius="18px" fit='cover' onClick={() => navigate('/player')}
+                          className={'small-player-icon'}/></Skeleton>
             </motion.div>
             <Gap height="10px"/>
             <Stack justifyContent="center" alignItems="center">
-                <Title>{name}</Title>
-                <Text>Top #1</Text>
+                <Skeleton isLoaded={!loading}><Title>{audio.data.title}</Title></Skeleton>
                 <Box style={{padding: "10px 30px", width: "100%"}}>
-                    <ProgressBar audio={audio}/>
+                    <Skeleton isLoaded={!loading}><ProgressBar audio={audio}/></Skeleton>
                     <Gap height="20px"/>
-                    <HStack justifyContent="space-between" width="100%">
-                        <Icon src="/previous.svg" className="moveTopOnHover lightOnHover" onClick={moveBack}/>
-                        <Icon
-                            src="/seek-back.svg"
-                            className="moveTopOnHover lightOnHover"
-                            onClick={seekBack}
-                        />
-                        <Fab className="playBtn" size="50px" onClick={playOrPause}
-                             src={isPlaying ? '/pause.svg' : '/play.svg'}/>
-                        <Icon
-                            src="/seek-forward.svg"
-                            className="moveTopOnHover lightOnHover"
-                            onClick={seekForward}
-                        />
-                        <Icon src="/next.svg" className="moveTopOnHover lightOnHover" onClick={moveNext}/>
+                    <HStack justifyContent="space-between" alignItems={'center'} width="100%">
+                        <Skeleton isLoaded={!loading} style={{borderRadius: '50%'}}>
+                            <ClickableIcon src="/previous.svg"
+                                           className="moveTopOnHover lightOnHover"
+                                           onClick={moveBack}
+                                           size={'30px'}/>
+                        </Skeleton>
+                        <Skeleton isLoaded={!loading} style={{borderRadius: '50%'}}>
+                            <ClickableIcon
+                                src="/seek-back.svg"
+                                className="moveTopOnHover lightOnHover"
+                                onClick={seekBack} size={'30px'}
+                            />
+                        </Skeleton>
+                        <Skeleton isLoaded={!loading} style={{borderRadius: '50%'}}>
+                            <Fab className="playBtn" size="50px"
+                                 onClick={playOrPause}
+                                 src={isPlaying ? '/pause.svg' : '/play.svg'}/>
+                        </Skeleton>
+                        <Skeleton isLoaded={!loading} style={{borderRadius: '50%'}}>
+                            <ClickableIcon
+                                src="/seek-forward.svg"
+                                className="moveTopOnHover lightOnHover"
+                                onClick={seekForward} size={'30px'}
+                            />
+                        </Skeleton>
+                        <Skeleton isLoaded={!loading} style={{borderRadius: '50%'}}>
+                            <ClickableIcon src="/next.svg"
+                                           className="moveTopOnHover lightOnHover"
+                                           onClick={moveNext}
+                                           size={'30px'}/>
+                        </Skeleton>
                     </HStack>
                 </Box>
             </Stack>

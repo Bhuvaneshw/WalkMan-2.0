@@ -58,7 +58,6 @@ function Header() {
         <HStack height="70px" justifyContent="space-between" alignItems="center">
             <HStack alignItems="center" pad='0 20px 0 20px'>
                 <Icon onClick={onOpen} src='/menu.svg' size='30px' mar='10px' className='mobileOnly'/>
-                <AnimIcon/>
                 <Title>{getRouteName(useLocation())}</Title>
             </HStack>
             <Searchbar/>

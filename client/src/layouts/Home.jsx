@@ -17,14 +17,15 @@ export default function Home() {
         // console.log("hi");
     }, []);
     // console.log(data);
+
     return (
         <Content>
             <ResponsiveHStack width="100%">
-                <Genre data={data.genre}/>
-                <AudioPlayerSmall/>
+                <TopSongs data={data.songs}/>
+                <AudioPlayerSmall songs={data.songs}/>
             </ResponsiveHStack>
             <Stack width="100%">
-                <TopSongs data={data.songs}/>
+                <Genre data={data.genre}/>
                 <Artist data={data.artist}/>
             </Stack>
 

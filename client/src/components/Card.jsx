@@ -11,6 +11,7 @@ export default function Card({
                                  className,
                                  children,
                                  onClick,
+                                 style,
                              }) {
     return (
         <div
@@ -25,6 +26,7 @@ export default function Card({
                 boxShadow: shadow,
                 flexGrow: flex,
                 overflowY: overflow,
+                ...style
             }}
         >
             {children}

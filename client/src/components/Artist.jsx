@@ -21,7 +21,9 @@ export default function Artist({data}) {
                 <ArtistCardSkeleton loading={loading}/>
                 {data.map((value) => {
                     return (
-                        <BorderedCard className="flex" key={value}>
+                        <BorderedCard className="flex" key={value} onClick={() => {
+                            navigate('/search?q=' + value)
+                        }}>
                             <Icon src="/music.png" className="big-icon"/>
                             <Gap height="10px"/>
                             <HStack justifyContent="space-between" alignItems="center">
@@ -29,12 +31,6 @@ export default function Artist({data}) {
                                     <Title className='noWrap'>{value}</Title>
                                 </Stack>
                                 <Gap width="10px"/>
-                                <Fab
-                                    onClick={() => {
-                                        setRandAudio(getMusic())
-                                        getMusic().play();
-                                    }}
-                                />
                             </HStack>
                         </BorderedCard>
                     );

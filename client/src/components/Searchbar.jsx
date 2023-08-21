@@ -6,7 +6,7 @@ import searchContext from "../searchContext";
 import {searchSong} from "./util";
 
 function search(e, searchQuery, setSearchRes) {
-    console.log("hi");
+    // console.log("hi");
     searchSong(e, searchQuery, setSearchRes);
 }
 

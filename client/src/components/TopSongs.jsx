@@ -6,7 +6,7 @@ import Icon from "./Icon.jsx";
 import Gap from "./Gap.jsx";
 import Stack from "./Stack.jsx";
 import Text from "./Text.jsx";
-import {getMusic, setRandAudio} from "./util.js";
+import {getMusic} from "./util.js";
 import Fab from "./Fab.jsx";
 import SongCardSkeleton from "./skeleton/SongCardSkeleton.jsx";
 
@@ -14,17 +14,20 @@ export default function TopSongs({data}) {
     let loading = data.length < 1;
     // console.log('top song data', data, 'loading: ', loading);
     return (
-        <Card flex="1" height="350px" overflow="hidden">
+        <Card flex="2" overflow="hidden">
             <Title variant="black70 title-margin">Top Songs</Title>
-            <HStack height="100%" scrollable>
+            <HStack scrollable>
                 <SongCardSkeleton loading={loading}/>
                 <SongCardSkeleton loading={loading}/>
                 <SongCardSkeleton loading={loading}/>
                 <SongCardSkeleton loading={loading}/>
-                {data.map(({artist, title}) => {
+                {data.map((item) => {
+                    let {url, title, artist, icon} = item;
                     return (
                         <BorderedCard className="flex" key={title}>
-                            <Icon src="/music.png" className="big-icon"/>
+                            <Icon src={icon} className="big-icon" fit='cover' style={{
+                                aspectRatio: '1/1'
+                            }}/>
                             <Gap height="10px"/>
                             <HStack justifyContent="space-between" alignItems="center">
                                 <Stack>
@@ -34,8 +37,7 @@ export default function TopSongs({data}) {
                                 <Gap width="10px"/>
                                 <Fab
                                     onClick={() => {
-                                        setRandAudio(getMusic())
-                                        getMusic().play();
+                                        getMusic().setSrc(url, item).play()
                                     }}
                                 />
                             </HStack>

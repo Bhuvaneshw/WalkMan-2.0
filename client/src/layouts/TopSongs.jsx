@@ -3,7 +3,7 @@ import MusicCard from "../components/MusicCard";
 import HStack from "../components/HStack.jsx";
 import {useEffect, useState} from "react";
 import SongCardSkeleton from "../components/skeleton/SongCardSkeleton.jsx";
-import {getMusic, setRandAudio} from "../components/util.js";
+import {getMusic} from "../components/util.js";
 
 export default function TopSongs() {
     const [data, setData] = useState([]);
@@ -25,12 +25,13 @@ export default function TopSongs() {
                 {data.map((music) => {
                     return (music.title &&
                         <MusicCard
+                            icon={music.icon}
                             key={music._id}
                             title={music.title}
                             artist={music.artist}
+                            _id={music._id}
                             onClick={() => {
-                                setRandAudio(getMusic())
-                                getMusic().play()
+                                getMusic().setSrc(music.url, music).play()
                             }}
                         ></MusicCard>
                     );

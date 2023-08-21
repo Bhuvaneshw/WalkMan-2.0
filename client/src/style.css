@@ -59,6 +59,19 @@
     width: 15%;
 }
 
+.ResponsiveHStack .player-small {
+    width: 15%;
+}
+
+.player-small{
+    max-width: 350px;
+}
+
+.small-player-icon {
+    height: 200px;
+    width: 100%;
+}
+
 .playBtn {
     box-shadow: 0 0 50px #5F04A7a6;
 }
@@ -158,6 +171,17 @@
 
 @media only screen and (max-width: 850px) {
 
+    .small-player-icon {
+        height: 180px;
+        width: 100%;
+    }
+
+    .player-small {
+        min-width: min-content;
+        height: 400px;
+        max-width: 100%;
+    }
+
     .responseFill {
         width: calc(33% - 30px);
     }
@@ -178,8 +202,12 @@
         margin: 8px;
     }
 
-    .ResponsiveHStack, .content {
+    .ResponsiveHStack {
         flex-direction: column-reverse;
+    }
+
+    .content {
+        flex-direction: column;
     }
 
     .ResponsiveHStack .Card {
@@ -193,6 +221,16 @@
     .small-icon {
         max-width: 80px;
         min-height: 70px;
+    }
+
+    .small-player-icon {
+        height: 350px;
+        width: 100%;
+    }
+
+    .player-small {
+        min-width: min-content;
+        height: 550px;
     }
 
     .artist, .player {
