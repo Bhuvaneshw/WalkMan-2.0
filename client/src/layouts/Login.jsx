@@ -1,10 +1,23 @@
 "use client";
-import {Box, Button, Checkbox, Flex, FormControl, Input, Stack, Text,} from "@chakra-ui/react";
+import {
+    Box,
+    Button,
+    Checkbox,
+    Flex,
+    FormControl,
+    Input,
+    InputGroup,
+    InputLeftElement, InputRightElement,
+    Stack,
+    Text,
+} from "@chakra-ui/react";
 import {useState} from "react";
 import Title from "../components/Title.jsx";
 import HStack from "../components/HStack.jsx";
 import Gap from "../components/Gap.jsx";
-import Icon from "../components/Icon.jsx";
+import Icon from "../components/Icon.jsx"
+import Card from "../components/Card.jsx";
+import {motion} from "framer-motion";
 
 // <Lottie animationData={bg1} style={{width: "480px", flex: "1"}}/>
 //
@@ -177,96 +190,26 @@ export default function Login() {
     };
 
     return (
-        <Flex minH={"100vh"} align={"center"} background={"#f5f5f5"}>
-            <Stack
-                style={{
-                    display: "flex",
-                    flex: "3",
-                    height: "100vh",
-                    background: "url(/login-bg.svg)",
-                    backgroundRepeat: "no-repeat",
-                    backgroundSize: "contain",
-                }}
-                className="desktopOnly"
+        <Flex minH={"100vh"} justify={'center'} align={"center"} background={"#EEF2FD"}>
+            <Card
+                pad={'30px 50px'}
+                width={'60%'}
+                minWidth="fit-content"
+                maxWidth="500px"
             >
-                <Stack
-                    style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        justifyContent: "end",
-                        alignItems: "center",
-                        flex: "2",
-                        padding: "20px",
-                    }}
-                >
-                    <div
-                        style={{
-                            position: "relative",
-                            width: "100px",
-                            height: "100px",
-                            minWidth: "max-content",
-                            minHeight: "max-content",
-                        }}
-                    >
-                        <div className={"circleBlurBg absCenter"}></div>
-                        <h1
-                            style={{fontSize: "40px", fontWeight: "bold"}}
-                            className="absCenter noWrap"
-                        >
-                            Sign in to
-                            <br/> WalkMan 2.0
-                        </h1>
-                    </div>
-                </Stack>
-                <HStack justifyContent="space-between" pad="20px" flex="3">
-                    <Stack>
-                        <Icon src="/user.svg" size="100px"/>
-                    </Stack>
-                    <Stack>
-                        <Text>If you don't have an account</Text>
-                        <HStack>
-                            <Text>You can&nbsp;</Text>
-                            <a
-                                href="/signup"
-                                style={{
-                                    color: "#5F04A7",
-                                    fontWeight: "bold",
-                                }}
-                            >
-                                Create an account
-                            </a>
-                        </HStack>
-                    </Stack>
-                    <Stack>
-                        <Icon src="/user.svg" size="100px"/>
-                    </Stack>
-                </HStack>
-            </Stack>
-            <Stack
-                spacing={8}
-                maxW={"lg"}
-                py={12}
-                px={6}
-                style={{
-                    flex: "2",
-                    minWidth: "max-content",
-                    height: "100%",
-                    maxWidth: "100vw",
-                }}
-            >
-                <Box
-                    rounded={"lg"}
-                    width="60%"
-                    margin="auto"
-                    p={8}
-                    minWidth="max-content !important"
-                >
-                    <Stack spacing={4}>
-                        <HStack justifyContent="center">
-                            <Title variant="primary">Login</Title>
-                        </HStack>
-                        <FormControl id="email">
-                            {/*<FormLabel>Email address</FormLabel>*/}
+                <Stack spacing={4}>
+                    <HStack justifyContent="center" mar={'0 0 25px 0'}>
+                        <Title variant="primary" size={'26px'}>Login</Title>
+                    </HStack>
+                    <FormControl id="email">
+                        <InputGroup>
+                            <InputLeftElement pointerEvents='none' style={{
+                                top: "50%",
+                                left: '10px',
+                                transform: "translateY(-50%)"
+                            }}>
+                                <Icon src={'/mail.svg'} size={'30px'} style={{padding: '3px'}}/>
+                            </InputLeftElement>
                             <Input
                                 type="email"
                                 value={email}
@@ -274,15 +217,24 @@ export default function Login() {
                                 onChange={(e) => setEmail(e.target.value)}
                                 focusBorderColor="#0000"
                                 borderColor="#0000"
+                                borderRadius={'50px'}
                                 style={{
                                     background: "#5F04A70a",
-                                    padding: "25px",
+                                    padding: "25px 25px 25px 50px",
                                 }}
                             />
-                        </FormControl>
-                        <Gap/>
-                        <FormControl id="password">
-                            {/*<FormLabel>Password</FormLabel>*/}
+                        </InputGroup>
+                    </FormControl>
+                    <Gap/>
+                    <FormControl id="password">
+                        <InputGroup>
+                            <InputLeftElement pointerEvents='none' style={{
+                                top: "50%",
+                                left: '10px',
+                                transform: "translateY(-50%)"
+                            }}>
+                                <Icon src={'/lock.svg'} size={'30px'}/>
+                            </InputLeftElement>
                             <Input
                                 // type="password"
                                 value={showPass ? pass : passMask}
@@ -290,27 +242,38 @@ export default function Login() {
                                 // onChange={(e) => setPassMask(e.target.value)}
                                 focusBorderColor="#0000"
                                 borderColor="#0000"
+                                borderRadius={'50px'}
                                 style={{
                                     background: "#5F04A70a",
-                                    padding: "25px",
+                                    padding: "25px 25px 25px 50px",
                                 }}
                                 onInput={handleInput}
                             />
-                        </FormControl>
-                        <Stack spacing={10}>
-                            <Checkbox colorScheme="primary" checked={showPass} onChange={() => setShowPass(!showPass)}>Show
-                                Password</Checkbox>
-                            <Stack
-                                direction={{base: "column", sm: "row"}}
-                                align={"start"}
-                                justify={"space-between"}
-                            >
-                                <Checkbox colorScheme="primary">Remember me</Checkbox>
-                                <Text color={"primary.400"}>Forgot password?</Text>
-                            </Stack>
-                            <p style={{textAlign: "center", color: "green", fontSize: 16}}>
-                                {status}
-                            </p>
+                        </InputGroup>
+                    </FormControl>
+                    <Stack spacing={10}>
+                        <Checkbox style={{
+                            marginLeft: '10px'
+                        }} colorScheme="primary" checked={showPass} onChange={() => setShowPass(!showPass)}>Show
+                            Password</Checkbox>
+                        <Stack
+                            direction={{base: "column", sm: "row"}}
+                            align={"start"}
+                            justify={"space-between"}
+                        >
+                            <Checkbox colorScheme="primary">Remember me</Checkbox>
+                            <Text color={"primary.400"}>Forgot password?</Text>
+                        </Stack>
+                        <p style={{textAlign: "center", color: "green", fontSize: 16}}>
+                            {status}
+                        </p>
+                        <motion.div
+                            whileHover={{scale: 1.1}}
+                            whileTap={{scale: 0.9}}
+                            style={{
+                                width: '100%',
+                                textAlign: 'center'
+                            }}>
                             <Button
                                 bg={"#7901d7"}
                                 color={"white"}
@@ -321,21 +284,21 @@ export default function Login() {
                                 style={{
                                     boxShadow: "0 0 50px 20px #5F04A740",
                                     padding: "25px",
+                                    width: '50%',
+                                    borderRadius: '50px'
                                 }}
-                            >
-                                Sign in
-                            </Button>
-                        </Stack>
-                        {/*<HStack justifyContent='center' alignItems='center'>*/}
-                        {/*    <Text>Don't have an account?</Text>*/}
-                        {/*    <a href='/signup' style={{*/}
-                        {/*        color: '#4c0383',*/}
-                        {/*        padding: '5px'*/}
-                        {/*    }}>Create Account</a>*/}
-                        {/*</HStack>*/}
+                            >Login </Button>
+                        </motion.div>
                     </Stack>
-                </Box>
-            </Stack>
+                    <Stack justifyContent='center' alignItems='center' style={{marginTop: '30px'}}>
+                        <Text>Don't have an account?</Text>
+                        <a href='/signup' style={{
+                            color: '#4c0383',
+                            padding: '5px'
+                        }}>Create Account</a>
+                    </Stack>
+                </Stack>
+            </Card>
         </Flex>
     );
 }

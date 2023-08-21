@@ -1,6 +1,7 @@
 export default function Card({
                                  width,
                                  height,
+                                 minWidth, maxWidth,
                                  pad = "10px 20px",
                                  mar = "20px",
                                  bg = "bg-color-white",
@@ -26,7 +27,9 @@ export default function Card({
                 boxShadow: shadow,
                 flexGrow: flex,
                 overflowY: overflow,
-                ...style
+                ...style,
+                minWidth: minWidth,
+                maxWidth: maxWidth,
             }}
         >
             {children}
