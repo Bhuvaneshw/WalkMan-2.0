@@ -167,24 +167,11 @@ function getMusic() {
     return music;
 }
 
-function getRandomArbitrary(min = 1, max = 5) {
-    return Math.trunc(Math.random() * (max - min) + min);
-}
-
-function setRandAudio(audio) {
-    let i = getRandomArbitrary();
-    let name = `Temp ${i}`;
-    audio.setSrc(`temp${i}.mp3`, name);
-    console.log(`Playing ${name}`);
-    return name;
-}
-
 export {
     toMinutesText,
     getRouteName,
     Navigation,
     searchSong,
     getMusic,
-    setRandAudio,
     downloadSong,
 };
