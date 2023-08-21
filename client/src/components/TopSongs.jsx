@@ -40,14 +40,24 @@ export default function TopSongs({data}) {
                                 <Gap width="10px"/>
                                 <Fab
                                     onClick={() => {
-                                        toast({
-                                            title: item.title,
-                                            description: 'Playing now!',
-                                            duration: 3000,
-                                            status: 'success',
-                                            position: 'top-right'
-                                        });
-                                        getMusic().setSrc(url, item).play();
+                                        getMusic().setSrc(url, item).play()
+                                            .then(() => {
+                                                toast({
+                                                    title: title,
+                                                    description: 'Playing now!',
+                                                    duration: 1000,
+                                                    status: 'success',
+                                                    position: 'top-right',
+                                                })
+                                            }).catch(error => {
+                                            toast({
+                                                title: "Error while trying to play",
+                                                description: error.message,
+                                                duration: 2000,
+                                                status: 'error',
+                                                position: "top-right",
+                                            });
+                                        })
                                     }}
                                 />
                             </HStack>
