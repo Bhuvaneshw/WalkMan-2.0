@@ -5,12 +5,12 @@ import BorderedCard from "./BorderedCard.jsx";
 import Icon from "./Icon.jsx";
 import Gap from "./Gap.jsx";
 import Stack from "./Stack.jsx";
-import Fab from "./Fab.jsx";
-import {getMusic, setRandAudio} from "./util.js";
 import ArtistCardSkeleton from "./skeleton/ArtistCardSkeleton.jsx";
+import {useNavigate} from "react-router-dom";
 
 export default function Artist({data}) {
     let loading = data.length < 1;
+    let navigate = useNavigate();
     return (
         <Card flex="1">
             <Title variant="black70 title-margin">Artist</Title>
