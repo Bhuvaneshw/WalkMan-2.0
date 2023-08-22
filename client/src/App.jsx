@@ -22,7 +22,7 @@ import {
     useToast
 } from '@chakra-ui/react'
 import Icon from "./components/Icon.jsx";
-import AnimIcon from "./components/AnimIcon.jsx";
+import Icons from "./components/Icons.js";
 
 function App() {
     const [searchQuery, setSearchQuery] = useState("");
@@ -61,8 +61,8 @@ function Header() {
                 <Title>{getRouteName(useLocation())}</Title>
             </HStack>
             <Searchbar/>
-            <HStack alignItems="center" pad='0 0 0 20px'>
-                <Icon onClick={() =>
+            <HStack alignItems="center" pad='0 20px 0 10px'>
+                <Icons.USER onClick={() =>
                     toast({
                         title: 'Not implemented yet',
                         status: 'warning',
@@ -70,7 +70,7 @@ function Header() {
                         isClosable: true,
                         position: 'top-right'
                     })
-                } src='/user.svg' size='30px' mar='10px' className='mobileOnly'/>
+                } className='mobileOnly'/>
                 <Profile name="Bhuvanesh" className='desktopOnly'/>
             </HStack>
             <Drawer

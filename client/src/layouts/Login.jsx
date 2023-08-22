@@ -7,154 +7,19 @@ import {
     FormControl,
     Input,
     InputGroup,
-    InputLeftElement, InputRightElement,
+    InputLeftElement,
     Stack,
     Text,
 } from "@chakra-ui/react";
-import {useState} from "react";
+import React, {useState} from "react";
 import Title from "../components/Title.jsx";
 import HStack from "../components/HStack.jsx";
 import Gap from "../components/Gap.jsx";
-import Icon from "../components/Icon.jsx"
 import Card from "../components/Card.jsx";
 import {motion} from "framer-motion";
-
-// <Lottie animationData={bg1} style={{width: "480px", flex: "1"}}/>
-//
-// function CircleDiv({top, left, right, bottom, size = '20vw', bg, children}) {
-//     return <div style={{
-//         position: "absolute",
-//         top: top,
-//         left: left,
-//         right: right,
-//         bottom: bottom,
-//         width: size,
-//         height: size,
-//         borderRadius: '50%',
-//         background: bg + 'e0',
-//         boxShadow: '0 0 80px 30px ' + bg + 'a0',
-//     }}>{children}</div>;
-// }
-//
-// export default function Login() {
-//     return (<MouseParallaxContainer containerStyle={{background: '#19282b'}}>
-//         <MouseParallaxChild
-//             factorX={0.05}
-//             factorY={0.05}
-//             style={{}}>
-//             <CircleDiv top='-15vw' left='-10vw' bg="#5425B8" size='40vw'></CircleDiv>
-//         </MouseParallaxChild>
-//         <MouseParallaxChild
-//             factorX={0.05}
-//             factorY={0.05}
-//             style={{}}>
-//             <CircleDiv top='-20vw' right='-20vw' bg="#CA3372" size='50vw'></CircleDiv>
-//         </MouseParallaxChild>
-//         <MouseParallaxChild
-//             factorX={0.21}
-//             factorY={0.22}
-//             style={{}}>
-//             <CircleDiv bottom='-85vw' right='-15vw' bg="#27A2A2" size='60vw'></CircleDiv>
-//         </MouseParallaxChild>
-//         <MouseParallaxChild
-//             factorX={0.21}
-//             factorY={0.22}
-//             style={{}}>
-//             <CircleDiv bottom='-85vw' left='-22vw' bg="#CE7001" size='65vw'></CircleDiv>
-//         </MouseParallaxChild>
-//         <LoginForm/>
-//     </MouseParallaxContainer>);
-// }
-//
-// function LoginForm() {
-//     const [email, setEmail] = useState("");
-//     const [pass, setPass] = useState("");
-//     const [status, setStatus] = useState("");
-//
-//     async function loginSubmit() {
-//         const res = await fetch("http://localhost:3000/user/login", {
-//             headers: {"Content-Type": "application/json"},
-//             method: "POST",
-//             body: JSON.stringify({email: email, pass: pass}),
-//         });
-//         const data = await res.json();
-//         setStatus(data.msg);
-//     }
-//
-//     return (
-//         <Flex
-//             minH={"100vh"}
-//             align={"center"}
-//             justify={"center"}
-//             style={{zIndex: '5'}}
-//         >
-//             <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}
-//                    style={{width: "70%", minWidth: 'max-content', height: '100%', zIndex: '5'}}>
-//                 <Box
-//                     rounded={"lg"}
-//                     bg={useColorModeValue("#fffffff0", "primary.700")}
-//                     boxShadow="0 0 30px #5F04A720"
-//                     p={8}
-//                 >
-//                     <Stack spacing={4}>
-//                         <HStack justifyContent='center'>
-//                             <Title variant='primary'>Login</Title>
-//                         </HStack>
-//                         <FormControl id="email">
-//                             <FormLabel>Email address</FormLabel>
-//                             <Input
-//                                 type="email"
-//                                 value={email}
-//                                 onChange={(e) => setEmail(e.target.value)}
-//                                 focusBorderColor='#5F04A770'
-//                             />
-//                         </FormControl>
-//                         <FormControl id="password">
-//                             <FormLabel>Password</FormLabel>
-//                             <Input
-//                                 type="password"
-//                                 value={pass}
-//                                 onChange={(e) => setPass(e.target.value)}
-//                                 focusBorderColor='#5F04A770'
-//                             />
-//                         </FormControl>
-//                         <Stack spacing={10}>
-//                             <Stack
-//                                 direction={{base: "column", sm: "row"}}
-//                                 align={"start"}
-//                                 justify={"space-between"}
-//                                 style={{flexWrap: 'wrap'}}
-//                             >
-//                                 <Checkbox colorScheme='primary'>Remember me</Checkbox>
-//                                 <Text color={"primary.400"}>Forgot password?</Text>
-//                             </Stack>
-//                             <p style={{textAlign: "center", color: "green", fontSize: 16}}>
-//                                 {status}
-//                             </p>
-//                             <Button
-//                                 bg={"primary.400"}
-//                                 color={"white"}
-//                                 _hover={{
-//                                     bg: "primary.500",
-//                                 }}
-//                                 onClick={loginSubmit}
-//                             >
-//                                 Sign in
-//                             </Button>
-//                         </Stack>
-//                         <HStack justifyContent='center' alignItems='center'>
-//                             <Text>Don't have an account?</Text>
-//                             <a href='/signup' style={{
-//                                 color: '#4c0383',
-//                                 padding: '5px'
-//                             }}>Create Account</a>
-//                         </HStack>
-//                     </Stack>
-//                 </Box>
-//             </Stack>
-//         </Flex>
-//     );
-// }
+import Spline from "@splinetool/react-spline";
+import {useNavigate} from "react-router-dom";
+import Icons from "../components/Icons.js";
 
 export default function Login() {
     const [email, setEmail] = useState("");
@@ -162,6 +27,7 @@ export default function Login() {
     const [status, setStatus] = useState("");
     const [passMask, setPassMask] = useState("");
     const [showPass, setShowPass] = useState(false);
+    let navigate = useNavigate();
 
     async function loginSubmit() {
         const res = await fetch("http://localhost:3000/user/login", {
@@ -191,13 +57,26 @@ export default function Login() {
 
     return (
         <Flex minH={"100vh"} justify={'center'} align={"center"} background={"#EEF2FD"}>
-            <Card
-                pad={'30px 50px'}
+            <Box style={{position: 'absolute'}}>
+                <Spline scene="https://prod.spline.design/fjsaLQFdcaxFF4lp/scene.splinecode"
+                        style={{width: '100vw', height: '100vh', objectFit: 'cover'}}/>
+            </Box>
+            <Box
                 width={'60%'}
                 minWidth="fit-content"
                 maxWidth="500px"
-            >
-                <Stack spacing={4}>
+                style={{zIndex: 5, position: 'relative'}}>
+                <Card pad={'30px 50px'}
+                      width={'100%'}
+                      height={'100%'}
+                      minWidth="fit-content"
+                      mar=''
+                      bg=''
+                      style={{left: 0, zIndex: -1, position: 'absolute', background: '#fffd', filter: 'blur(2px)'}}/>
+                <Stack spacing={4} style={{
+                    padding: '30px 50px',
+                    zIndex: 6,
+                }}>
                     <HStack justifyContent="center" mar={'0 0 25px 0'}>
                         <Title variant="primary" size={'26px'}>Login</Title>
                     </HStack>
@@ -208,7 +87,7 @@ export default function Login() {
                                 left: '10px',
                                 transform: "translateY(-50%)"
                             }}>
-                                <Icon src={'/mail.svg'} size={'30px'} style={{padding: '3px'}}/>
+                                <Icons.MAIL/>
                             </InputLeftElement>
                             <Input
                                 type="email"
@@ -233,7 +112,7 @@ export default function Login() {
                                 left: '10px',
                                 transform: "translateY(-50%)"
                             }}>
-                                <Icon src={'/lock.svg'} size={'30px'}/>
+                                <Icons.LOCK/>
                             </InputLeftElement>
                             <Input
                                 // type="password"
@@ -292,13 +171,13 @@ export default function Login() {
                     </Stack>
                     <Stack justifyContent='center' alignItems='center' style={{marginTop: '30px'}}>
                         <Text>Don't have an account?</Text>
-                        <a href='/signup' style={{
+                        <p style={{
                             color: '#4c0383',
                             padding: '5px'
-                        }}>Create Account</a>
+                        }} onClick={() => navigate('/signup')}>Create Account</p>
                     </Stack>
                 </Stack>
-            </Card>
+            </Box>
         </Flex>
     );
 }

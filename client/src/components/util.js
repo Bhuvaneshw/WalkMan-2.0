@@ -1,3 +1,5 @@
+import Icons from "./Icons.js";
+
 function toMinutesText(sec) {
     let m = Math.trunc(sec / 60);
     let s = sec - m * 60;
@@ -28,44 +30,37 @@ const Navigation = {
     HOME: {
         name: "Home",
         route: "/",
-        icon: "/home.svg",
-        iconPrimary: "/home-primary.svg",
+        icon: Icons.HOME,
     },
     SEARCH: {
         name: "Search",
         route: "/search",
-        icon: "/search.svg",
-        iconPrimary: "/search-primary.svg",
+        icon: Icons.SEARCH,
     },
     PLAYER: {
         name: "Player",
         route: "/player",
-        icon: "/play-black.svg",
-        iconPrimary: "/play-primary.svg",
+        icon: Icons.PLAY_SQUARE,
     },
     PLAYLIST: {
         name: "Playlist",
         route: "/playlist",
-        icon: "/playlist.svg",
-        iconPrimary: "/playlist-primary.svg",
+        icon: Icons.LIST_MUSIC,
     },
     TOP_SONGS: {
         name: "Top Songs",
         route: "/topsongs",
-        icon: "/top-songs.svg",
-        iconPrimary: "/top-songs-primary.svg",
+        icon: Icons.MUSIC_2,
     },
     ARTISTS: {
         name: "Artists",
         route: "/artists",
-        icon: "/artist.svg",
-        iconPrimary: "/artist-primary.svg",
+        icon: Icons.USER_CHECK,
     },
     GENRE: {
         name: "Genre",
         route: "/genre",
-        icon: "/genre.svg",
-        iconPrimary: "/genre-primary.svg",
+        icon: Icons.SPEAKER,
     },
 };
 
