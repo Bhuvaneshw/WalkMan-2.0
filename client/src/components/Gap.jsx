@@ -1,6 +1,11 @@
-export default function Gap({width, height}) {
-    return <div style={{
+export default function Gap({ width, height, margin }) {
+  return (
+    <div
+      style={{
         width: width,
         height: height,
-    }}></div>
+        margin: margin,
+      }}
+    ></div>
+  );
 }
