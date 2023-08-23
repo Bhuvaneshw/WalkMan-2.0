@@ -1,4 +1,5 @@
-import {ListMusic, Lock, Mail, Music2, PlaySquare, Search, Speaker, Tv2, User, UserCheck} from "lucide-react";
+import {ListMusic, Lock, Mail, Mic, Music2, PlaySquare, Search, Speaker, Tv2, User, UserCheck} from "lucide-react";
+
 
 const Icons = {
     MAIL: Mail,
@@ -11,6 +12,7 @@ const Icons = {
     MUSIC_2: Music2,
     USER_CHECK: UserCheck,
     SPEAKER: Speaker,
+    MIC: Mic
 }
 
 export default Icons;

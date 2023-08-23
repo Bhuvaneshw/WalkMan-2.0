@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@600&display=swap');
+h1,h2,h3,h4,h5,h6,p,input,textarea,label,button{
+    font-family: 'JetBrains Mono', monospace;
+/* font-weight: bold; */
+letter-spacing: -1px;
+}
 * {
     box-sizing: border-box !important;
 }
