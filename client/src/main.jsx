@@ -45,8 +45,8 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <ChakraProvider theme={AppTheme}>
       <Router>
-        {/* <Main /> */}
-        <VoiceSearch />
+        <Main />
+        {/* <VoiceSearch /> */}
       </Router>
     </ChakraProvider>
   </React.StrictMode>

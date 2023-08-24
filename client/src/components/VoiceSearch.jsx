@@ -16,24 +16,23 @@ import {
   AlertDialogCloseButton,
 } from "@chakra-ui/react";
 import { useDisclosure, Button, Text } from "@chakra-ui/react";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import HStack from "./HStack";
 
-export default function VoiceSearch() {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+export default function VoiceSearch({ isOpen, onClose, setSearchQuery }) {
   const cancelRef = useRef();
   const { transcript, browserSupportsSpeechRecognition } =
     useSpeechRecognition();
+  const [searchData, setSearchData] = useState("");
   return browserSupportsSpeechRecognition ? (
     <>
-      <Button colorScheme="red" onClick={onOpen}>
-        voice search
-      </Button>
-
       <AlertDialog
         isOpen={isOpen}
         leastDestructiveRef={cancelRef}
-        onClose={onClose}
+        onClose={() => {
+          onClose();
+          setSearchQuery(transcript);
+        }}
       >
         <AlertDialogOverlay>
           <AlertDialogContent>
@@ -48,7 +47,7 @@ export default function VoiceSearch() {
             <AlertDialogBody style={{ margin: "0 auto" }}>
               <Lottie animationData={Mic}></Lottie>
             </AlertDialogBody>
-
+            <Text align={"center"}>{transcript}</Text>
             <HStack justifyContent={" space-evenly"}>
               <Button
                 onClick={() => {
@@ -69,7 +68,6 @@ export default function VoiceSearch() {
           </AlertDialogContent>
         </AlertDialogOverlay>
       </AlertDialog>
-
       {console.log(transcript)}
     </>
   ) : (
