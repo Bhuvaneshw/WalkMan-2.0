@@ -5,5 +5,5 @@ import songRoute from "../domain/song/index.js";
 const router = express.Router();
 
 router.use("/user", userRoute);
-router.use("/song", songRoute);
+router.use("/songs", songRoute);
 export default router;

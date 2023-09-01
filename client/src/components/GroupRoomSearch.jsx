@@ -1,13 +1,20 @@
 import { useContext, useEffect } from "react";
-import Content from "../components/Content.jsx";
 import { searchContext } from "../searchContext";
-import MusicCard from "../components/MusicCard";
-import HStack from "../components/HStack.jsx";
-import { getMusic } from "../components/util.js";
-
-export default function Search() {
+import { useOutletContext } from "react-router-dom";
+import Content from "./Content";
+import HStack from "./HStack";
+import MusicCard from "./MusicCard";
+import { useNavigate } from "react-router-dom";
+import { getMusic, getSocket } from "./util";
+export default function GroupRoomSearch() {
+  const socket = getSocket();
+  const { roomId, setCurrentSong } = useOutletContext();
   const { searchRes } = useContext(searchContext);
-  useEffect(() => {}, []);
+  const navigate = useNavigate();
+
+  function handleOnClick(music) {
+    socket.notifySongSelection(music, setCurrentSong, navigate);
+  }
 
   return (
     <Content>
@@ -20,7 +27,7 @@ export default function Search() {
               artist={music.artist}
               icon={music.icon}
               onClick={() => {
-                getMusic().setSrc(music.url, music).play();
+                handleOnClick(music);
               }}
             ></MusicCard>
           );

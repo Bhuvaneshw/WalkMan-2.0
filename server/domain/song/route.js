@@ -1,9 +1,18 @@
 import express from "express";
-import {getSongInfo, getUserArtist, getUserGenre, getUserHomeInfo, getUserTopSongs} from "./controller.js";
+import {
+  getSongInfo,
+  getUserArtist,
+  getUserGenre,
+  getUserHomeInfo,
+  getUserTopSongs,
+  likeSong,
+  searchAutoComplete,
+  serverSong,
+} from "./controller.js";
 const router = express.Router();
 
 router.get("/home", async (req, res) => {
-  const userHomeInfo = await getUserHomeInfo();
+  const userHomeInfo = await getUserHomeInfo(req.headers.token);
   res.json(userHomeInfo);
 });
 
@@ -22,9 +31,21 @@ router.get("/genre", async (req, res) => {
   res.json(userHomeInfo);
 });
 
-router.get("/", async (req, res) => {
-  const songs = await getSongInfo(req.query.q);
+router.get("/search", async (req, res) => {
+  const songs = await getSongInfo(req.query.q, req.headers.token);
   res.json(songs);
 });
+
+router.get("/search-autocomplete", async (req, res) => {
+  const songs = await searchAutoComplete(req.query.q);
+  res.json(songs);
+});
+
+router.post("/likeSong", async (req, res) => {
+  await likeSong(req.body.token, req.body.songId);
+  res.send();
+});
+
+router.get("/:songId", serverSong);
 
 export default router;

@@ -10,6 +10,9 @@ const userSchema = new mongoose.Schema({
   pass: {
     type: String,
   },
+  likes: {
+    type: [mongoose.Schema.ObjectId],
+  },
 });
 
 const User = mongoose.model("User", userSchema);

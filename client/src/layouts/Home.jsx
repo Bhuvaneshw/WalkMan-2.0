@@ -29,19 +29,21 @@ export default function Home() {
   useEffect(() => {
     (async () => {
       let res;
-      await fetch("http://localhost:3000/song/home")
+      await fetch(import.meta.env.VITE_URL + "/songs/home", {
+        headers: { token: window.sessionStorage.getItem("token") },
+      })
         .then((r) => {
           res = r;
         })
         .catch((error) => {
-          // toast({
-          //     title: "Error",
-          //     description: error.message,
-          //     duration: 2000,
-          //     status: 'error',
-          //     position: "top-right",
-          // })
-          // onOpen()
+          toast({
+            title: "Error",
+            description: error.message,
+            duration: 2000,
+            status: "error",
+            position: "top-right",
+          });
+          onOpen();
         });
       setData(await res.json());
     })();

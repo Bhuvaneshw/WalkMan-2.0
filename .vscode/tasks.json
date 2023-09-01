@@ -1,0 +1,64 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "Start Client",
+        "type": "npm",
+        "script": "start",
+        "group": {
+          "kind": "build",
+          "isDefault": true
+        },
+        "presentation": {
+          "reveal": "always",
+          "panel": "dedicated"
+        },
+        "problemMatcher": {
+          "owner": "javascript",
+          "fileLocation": ["relative", "${workspaceFolder}/client"],
+          "pattern": {
+            "regexp": "^(.*):(\\d+):(\\d+)$",
+            "file": 1,
+            "line": 2,
+            "column": 3
+          }
+        },
+        "options": {
+          "cwd": "${workspaceFolder}/client"
+        }
+      },
+      {
+        "label": "Start Server",
+        "type": "npm",
+        "script": "start",
+        "group": {
+          "kind": "build",
+          "isDefault": true
+        },
+        "presentation": {
+          "reveal": "always",
+          "panel": "dedicated"
+        },
+        "problemMatcher": {
+          "owner": "javascript",
+          "fileLocation": ["relative", "${workspaceFolder}/server"],
+          "pattern": {
+            "regexp": "^(.*):(\\d+):(\\d+)$",
+            "file": 1,
+            "line": 2,
+            "column": 3
+          }
+        },
+        "options": {
+          "cwd": "${workspaceFolder}/server"
+        }
+      }
+    ],
+    "compounds": [
+      {
+        "name": "Run Client and Server",
+        "tasks": ["Start Client", "Start Server"]
+      }
+    ]
+  }
+  

@@ -25,31 +25,16 @@ import Icon from "./components/Icon.jsx";
 import Icons from "./components/Icons.js";
 
 function App() {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [searchRes, setSearchRes] = useState([]);
-  useEffect(() => {
-    console.log("mounted");
-    return () => console.log("unmounted");
-  }, []);
   return (
-    <searchContext.Provider
-      value={{
-        searchQuery: searchQuery,
-        setSearchQuery: setSearchQuery,
-        searchRes: searchRes,
-        setSearchRes: setSearchRes,
-      }}
-    >
-      <HStack width="100%" height="100%">
-        <Stack className="navpar">
-          <SideBar />
-        </Stack>
-        <Stack width="83%" className="fill">
-          <Header />
-          <Outlet></Outlet>
-        </Stack>
-      </HStack>
-    </searchContext.Provider>
+    <HStack width="100%" height="100%">
+      <Stack className="navpar">
+        <SideBar />
+      </Stack>
+      <Stack width="83%" className="fill">
+        <Header />
+        <Outlet></Outlet>
+      </Stack>
+    </HStack>
   );
 }
 

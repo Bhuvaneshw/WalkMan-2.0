@@ -19,36 +19,46 @@ import TopSongs from "./layouts/TopSongs.jsx";
 import Artist from "./layouts/Artist.jsx";
 import Genre from "./layouts/Genre.jsx";
 import VoiceSearch from "./components/VoiceSearch.jsx";
+import SearchContextProvider from "./searchContext.jsx";
+import GroupRoom from "./layouts/GroupRoom.jsx";
+import GroupRoomHome from "./components/GroupRoomHome.jsx";
+import GroupRoomPlayer from "./components/GroupRoomPlayer.jsx";
+import GroupRoomSearch from "./components/GroupRoomSearch.jsx";
 
 function Main() {
   const location = useLocation();
   return (
     <AnimatePresence>
-      <Routes location={location} key={location.pathname}>
-        <Route path="/" element={<App />}>
-          <Route path="/" element={<Home />} />
-          <Route path="/search" element={<Search />} />
-          <Route path="/player" element={<Player />} />
-          <Route path="/playlist" />
-          <Route path="/topsongs" element={<TopSongs />} />
-          <Route path="/artists" element={<Artist />} />
-          <Route path="/genre" element={<Genre />} />
-        </Route>
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-      </Routes>
+      <SearchContextProvider>
+        <Routes location={location}>
+          <Route path="/" element={<App />}>
+            <Route index element={<Home />} />
+            <Route path="search" element={<Search />} />
+            <Route path="player" element={<Player />} />
+            <Route path="groupRoom" element={<GroupRoom />}>
+              <Route index element={<GroupRoomHome />} />
+              <Route path="player" element={<GroupRoomPlayer />} />
+              <Route path="search" element={<GroupRoomSearch />} />
+            </Route>
+            <Route path="topsongs" element={<TopSongs />} />
+            <Route path="artists" element={<Artist />} />
+            <Route path="genre" element={<Genre />} />
+          </Route>
+
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+        </Routes>
+      </SearchContextProvider>
     </AnimatePresence>
   );
 }
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <ChakraProvider theme={AppTheme}>
-      <Router>
-        <Main />
-        {/* <VoiceSearch /> */}
-      </Router>
-    </ChakraProvider>
-  </React.StrictMode>
+  <ChakraProvider theme={AppTheme}>
+    <Router>
+      <Main />
+      {/* <VoiceSearch /> */}
+    </Router>
+  </ChakraProvider>
 );
 console.log("reloaded");
