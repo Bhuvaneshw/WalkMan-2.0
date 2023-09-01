@@ -19,7 +19,7 @@ app.get("/", (req, res) => res.send("Hello World!"));
 
 //binding to port and host and starting server
 const server = app.listen(port, () =>
-  console.log(`Example app listening on port ${port}!`)
+  console.log(`Walkman 2.0 Server listening on port ${port}!`)
 );
 
 const io = new Server(server, {

@@ -1,140 +1,123 @@
-import {
-  Box,
-  Input,
-  InputGroup,
-  InputRightElement,
-  List,
-  ListItem,
-  Image,
-  Text,
-  useDisclosure,
-} from "@chakra-ui/react";
+import {Box, Input, InputGroup, InputRightElement, List, ListItem, Text, useDisclosure,} from "@chakra-ui/react";
 import Icons from "./Icons";
-import { useLocation, useNavigate } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
-import { searchContext } from "../searchContext";
-import { searchSong } from "./util";
+import {useLocation, useNavigate} from "react-router-dom";
+import {useContext, useEffect, useState} from "react";
+import {searchContext} from "../searchContext";
+import {searchAutoComplete, searchSong} from "./util";
 import HStack from "./HStack";
 import Gap from "./Gap";
 import Icon from "./Icon";
 import VoiceSearch from "./VoiceSearch";
-import { searchAutoComplete } from "./util";
 
 function search(e, searchQuery, setSearchRes) {
-  // console.log("hi");
-  searchSong(e, searchQuery, setSearchRes);
+    // console.log("hi");
+    searchSong(e, searchQuery, setSearchRes);
 }
 
 const SearchBar = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const [autoCompleteRes, setAutoCompleteRes] = useState([]);
-  const [showAutoComplete, setShowAutoComplete] = useState(false);
-  const navigate = useNavigate();
-  const location = useLocation();
-  const { searchQuery, setSearchQuery, setSearchRes } =
-    useContext(searchContext);
-  useEffect(() => {
-    if (location.search.toString().includes("?q=")) {
-      let query = location.search.substring(location.search.indexOf("?q=") + 3);
-      search({ code: "Enter" }, query, setSearchRes);
-    }
-  }, []);
+    const {isOpen, onOpen, onClose} = useDisclosure();
+    const [autoCompleteRes, setAutoCompleteRes] = useState([]);
+    const [showAutoComplete, setShowAutoComplete] = useState(false);
+    const navigate = useNavigate();
+    const location = useLocation();
+    const {searchQuery, setSearchQuery, setSearchRes} =
+        useContext(searchContext);
+    useEffect(() => {
+        if (location.search.toString().includes("?q=")) {
+            let query = location.search.substring(location.search.indexOf("?q=") + 3);
+            search({code: "Enter"}, query, setSearchRes);
+        }
+    }, []);
 
-  return (
-    <HStack width={"40%"} alignItems={"center"}>
-      <Box h={35} display={"flex"} flexDirection={"column"} flexGrow={1}>
-        <InputGroup
-          borderRadius="300px"
-          style={{
-            flex: 1,
-            background: "#FBFCFE",
-            zIndex: 2,
-          }}
-          className="searchBar"
-          colorScheme="primary"
-        >
-          <InputRightElement pointerEvents="none">
-            <Icons.SEARCH />
-          </InputRightElement>
-          <Input
-            type="text"
-            placeholder="Search songs"
-            autoFocus
-            borderRadius="300px"
-            focusBorderColor="#5F04A770 "
-            onClick={() => {
-              console.log(location.pathname);
-              if (location.pathname.split("/")[1] != "groupRoom") {
-                navigate("/search");
-              } else if (location.pathname.split("/")[2] == "player") {
-                navigate("/groupRoom/search");
-              }
-              setShowAutoComplete((prev) => !prev);
-            }}
-            onKeyDown={(e) => {
-              search(e, searchQuery, setSearchRes);
-            }}
-            value={searchQuery}
-            onChange={(e) => {
-              setSearchQuery(e.target.value);
-              searchAutoComplete(e.target.value, setAutoCompleteRes);
-            }}
-          />
-        </InputGroup>
-        <List
-          backgroundColor={"white"}
-          transform={"translate(0px,-20px)"}
-          borderBottomRadius={"30px"}
-          display={showAutoComplete ? "block" : "none"}
-        >
-          <Gap height={"20px"} />
-          {autoCompleteRes.map(({ field, value, icon }, index) => {
-            console.log(index);
-            return (
-              <ListItem key={index} gap={"10px"} _hover={{ cursor: "pointer" }}>
-                <Box
-                  display={"flex"}
-                  p={"10px"}
-                  alignItems={"center"}
-                  gap={3}
-                  onClick={() => {
-                    setShowAutoComplete(false);
-                    setSearchQuery(value);
-                    search({ code: "Enter" }, value, setSearchRes);
-                  }}
+    return (
+        <HStack width={"40%"} alignItems={"center"}>
+            <Box h={35} display={"flex"} flexDirection={"column"} flexGrow={1}>
+                <InputGroup
+                    borderRadius="300px"
+                    style={{
+                        flex: 1,
+                        background: "#FBFCFE",
+                        zIndex: 2,
+                    }}
+                    className="searchBar"
+                    colorScheme="primary"
                 >
-                  <Icon
-                    src={"http://localhost:3000/assets" + icon}
-                    radius="25px"
-                    width={"50px"}
-                    height="50px"
-                    fit="cover"
-                  />
-                  <Text>{field}:</Text>
-                  <Text>{value}</Text>
-                </Box>
-              </ListItem>
-            );
-          })}
-        </List>
-      </Box>
-      <Gap width={"10px"} />
-      {/* <Icons.MIC /> */}
-      <button
-        onClick={() => {
-          onOpen();
-        }}
-      >
-        voice search
-      </button>
-      {/* the above button is yet to be updated */}
-      <VoiceSearch
-        isOpen={isOpen}
-        onClose={onClose}
-        setSearchQuery={setSearchQuery}
-      ></VoiceSearch>
-    </HStack>
-  );
+                    <InputRightElement pointerEvents="none">
+                        <Icons.SEARCH/>
+                    </InputRightElement>
+                    <Input
+                        type="text"
+                        placeholder="Search songs"
+                        autoFocus
+                        borderRadius="300px"
+                        focusBorderColor="#5F04A770 "
+                        onClick={() => {
+                            console.log(location.pathname);
+                            if (location.pathname.split("/")[1] !== "groupRoom") {
+                                navigate("/search");
+                            } else if (location.pathname.split("/")[2] === "player") {
+                                navigate("/groupRoom/search");
+                            }
+                            setShowAutoComplete((prev) => !prev);
+                        }}
+                        onKeyDown={(e) => {
+                            search(e, searchQuery, setSearchRes);
+                        }}
+                        value={searchQuery}
+                        onChange={(e) => {
+                            setSearchQuery(e.target.value);
+                            searchAutoComplete(e.target.value, setAutoCompleteRes);
+                        }}
+                    />
+                </InputGroup>
+                <List
+                    backgroundColor={"white"}
+                    transform={"translate(0px,-20px)"}
+                    borderBottomRadius={"30px"}
+                    display={showAutoComplete ? "block" : "none"}
+                >
+                    <Gap height={"20px"}/>
+                    {autoCompleteRes.map(({field, value, icon}, index) => {
+                        // console.log(index);
+                        return (
+                            <ListItem key={index} gap={"10px"} _hover={{cursor: "pointer"}}>
+                                <Box
+                                    display={"flex"}
+                                    p={"10px"}
+                                    alignItems={"center"}
+                                    gap={3}
+                                    onClick={() => {
+                                        setShowAutoComplete(false);
+                                        setSearchQuery(value);
+                                        search({code: "Enter"}, value, setSearchRes);
+                                    }}
+                                >
+                                    <Icon
+                                        src={"http://localhost:3000/assets" + icon}
+                                        radius="25px"
+                                        width={"50px"}
+                                        height="50px"
+                                        fit="cover"
+                                    />
+                                    <Text>{field}:</Text>
+                                    <Text>{value}</Text>
+                                </Box>
+                            </ListItem>
+                        );
+                    })}
+                </List>
+            </Box>
+            <Gap width={"10px"}/>
+             <Icons.MIC onClick={() => {
+                 onOpen();
+             }}/>
+            <VoiceSearch
+                isOpen={isOpen}
+                onClose={onClose}
+                setSearchQuery={setSearchQuery}
+            ></VoiceSearch>
+        </HStack>
+    );
 };
 
 export default SearchBar;

@@ -29,7 +29,7 @@ export default function TopSongs({ data }) {
           return (
             <BorderedCard className="flex" key={title}>
               <Icon
-                src={"http://localhost:3000/assets" + icon}
+                src={import.meta.env.VITE_URL+'/assets' + icon}
                 className="big-icon"
                 fit="cover"
                 style={{

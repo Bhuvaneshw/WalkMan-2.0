@@ -10,7 +10,8 @@ export default function HStack({
                                    flex,
                                    mar,
                                    children,
-                                   onClick
+                                   onClick,
+                                   style
                                }) {
     let overFlow = scrollable ? 'auto' : 'none';
     return <div className={className} style={{
@@ -24,5 +25,6 @@ export default function HStack({
         overflowX: overFlow,
         margin: mar,
         flex: flex,
+        ...style
     }} onClick={onClick}>{children}</div>
 }
