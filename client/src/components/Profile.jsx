@@ -11,7 +11,7 @@ export default function Profile({name, className, onClick}) {
         <Gap width='10px'/>
         <Stack>
             <Title size='16px'>{name}</Title>
-            <Text style={{fontSize: '12px'}}>User</Text>
+            {/*<Text style={{fontSize: '12px'}}>User</Text>*/}
         </Stack>
         <Gap width='10px'/>
         <Icon src='/arrow-down.svg' radius='10px' size='10px'/>

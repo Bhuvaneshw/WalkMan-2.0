@@ -24,6 +24,7 @@ import GroupRoom from "./layouts/GroupRoom.jsx";
 import GroupRoomHome from "./components/GroupRoomHome.jsx";
 import GroupRoomPlayer from "./components/GroupRoomPlayer.jsx";
 import GroupRoomSearch from "./components/GroupRoomSearch.jsx";
+import Profile from "./layouts/Profile.jsx";
 
 function Main() {
   const location = useLocation();
@@ -43,6 +44,7 @@ function Main() {
             <Route path="topsongs" element={<TopSongs />} />
             <Route path="artists" element={<Artist />} />
             <Route path="genre" element={<Genre />} />
+            <Route path="profile" element={<Profile />} />
           </Route>
 
           <Route path="/login" element={<Login />} />
@@ -57,7 +59,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <ChakraProvider theme={AppTheme}>
     <Router>
       <Main />
-      {/* <VoiceSearch /> */}
     </Router>
   </ChakraProvider>
 );

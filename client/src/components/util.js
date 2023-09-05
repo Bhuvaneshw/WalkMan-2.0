@@ -63,6 +63,11 @@ const Navigation = {
         route: "/genre",
         icon: Icons.SPEAKER,
     },
+    PROFILE: {
+        name: "Profile",
+        route: "/profile",
+        icon: Icons.USER_CIRCLE,
+    },
 };
 
 function searchSong(e, searchQuery, setSearchRes) {

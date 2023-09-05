@@ -13,7 +13,6 @@ export default function SideBar({width,onClick}) {
                 <Icon src="/icon.svg" size="45px"/>
                 <Title variant="primary" mar='20px'>Walkman</Title>
             </HStack>
-            <Gap height="40px"/>
             <Title mar="0 0 0 10px">Menu</Title>
             <Gap height="10px"/>
             {

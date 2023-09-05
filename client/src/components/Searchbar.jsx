@@ -30,7 +30,7 @@ const SearchBar = () => {
     }, []);
 
     return (
-        <HStack width={"40%"} alignItems={"center"}>
+        <HStack flex={'1'} style={{maxWidth: '450px'}} alignItems={"center"}>
             <Box h={35} display={"flex"} flexDirection={"column"} flexGrow={1}>
                 <InputGroup
                     borderRadius="300px"
@@ -108,9 +108,11 @@ const SearchBar = () => {
                 </List>
             </Box>
             <Gap width={"10px"}/>
-             <Icons.MIC onClick={() => {
-                 onOpen();
-             }}/>
+            <div>
+                <Icons.MIC size={'20px'} onClick={() => {
+                    onOpen();
+                }}/>
+            </div>
             <VoiceSearch
                 isOpen={isOpen}
                 onClose={onClose}
