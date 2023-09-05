@@ -123,6 +123,7 @@ export default function Login() {
                                 focusBorderColor="#0000"
                                 borderColor="#0000"
                                 borderRadius={"50px"}
+                                autoComplete={'off'}
                                 style={{
                                     background: "#5F04A70a",
                                     padding: "25px 25px 25px 50px",
@@ -144,10 +145,8 @@ export default function Login() {
                                 <Icons.LOCK/>
                             </InputLeftElement>
                             <Input
-                                // type="password"
                                 value={showPass ? pass : passMask}
                                 placeholder="Password"
-                                // onChange={(e) => setPassMask(e.target.value)}
                                 focusBorderColor="#0000"
                                 borderColor="#0000"
                                 borderRadius={"50px"}
@@ -156,6 +155,7 @@ export default function Login() {
                                     padding: "25px 25px 25px 50px",
                                 }}
                                 onInput={handleInput}
+                                autoComplete={'off'}
                             />
                         </InputGroup>
                     </FormControl>

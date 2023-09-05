@@ -25,6 +25,7 @@ export default function BorderedCard({
         margin: mar,
         borderRadius: radius,
         boxShadow: shadow,
-        opacity: opacity
+        opacity: opacity,
+        cursor: onClick ? 'pointer' : null,
     }} onClick={onClick}>{children}</motion.div>;
 }

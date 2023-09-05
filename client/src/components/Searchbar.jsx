@@ -109,7 +109,7 @@ const SearchBar = () => {
             </Box>
             <Gap width={"10px"}/>
             <div>
-                <Icons.MIC size={'20px'} onClick={() => {
+                <Icons.MIC size={'20px'} style={{cursor: 'pointer'}} onClick={() => {
                     onOpen();
                 }}/>
             </div>

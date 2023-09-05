@@ -3,10 +3,9 @@ import Title from "./Title.jsx";
 import HStack from "./HStack.jsx";
 import Gap from "./Gap.jsx";
 import Icon from "./Icon.jsx";
-import Text from "./Text.jsx";
 
 export default function Profile({name, className, onClick}) {
-    return <HStack alignItems='center' className={className} onClick={onClick}>
+    return <HStack alignItems='center' className={className} onClick={onClick} style={{cursor: 'pointer'}}>
         <Icon src='/music.png' radius='10px' size='50px'/>
         <Gap width='10px'/>
         <Stack>

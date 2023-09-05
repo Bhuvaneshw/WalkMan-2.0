@@ -49,7 +49,7 @@ function Header() {
                     mar="10px"
                     className="mobileOnly"
                 />
-                <Title>{getRouteName(useLocation())}</Title>
+                <Title className={'desktopOnly'}>{getRouteName(useLocation())}</Title>
             </HStack>
             <Searchbar/>
             <HStack alignItems="center" pad="0 20px 0 10px">

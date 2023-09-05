@@ -14,6 +14,7 @@ export default function Fab({size = '40px', src = "/play.svg", className, onClic
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
+        cursor: onClick ? 'pointer' : null,
     }} onClick={onClick}>
         <Img src={src} style={{
             width: "35%", height: "35%", marginLeft: '4%'

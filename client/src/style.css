@@ -159,7 +159,7 @@ h1, h2, h3, h4, h5, h6, p, input, textarea, label, button {
 }
 
 .audioBtnWidth {
-    width: 50%;
+    width: 60%;
 }
 
 @media only screen and (max-width: 1024px) {

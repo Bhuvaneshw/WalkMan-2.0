@@ -30,18 +30,23 @@ export default function Player() {
                 {/*<Lottie animationData={wave} style={{position: 'absolute', transform: 'translateY(40%)'}}/>*/}
             </div>
             <div className={'bigPlayer'}
-                style={{
-                    position: "absolute",
-                    left: "50%",
-                    top: "50%",
-                    transform: "translate(-50%, -50%)",
-                }}
+                 style={{
+                     position: "absolute",
+                     left: "50%",
+                     top: "50%",
+                     transform: "translate(-50%, -50%)",
+                     width: '100%',
+                 }}
             >
                 <motion.main
                     initial={{scale: 0.5, x: "50%", y: "50%"}}
                     animate={{scale: 1, x: 0, y: 0}}
                     exit={{scale: 0.5, x: "50%", y: "50%"}}
                     transition={{duration: 0.3}}
+                    style={{
+                        height: '90vh',
+                        width: '100%',
+                    }}
                 >
                     <AudioPlayerBig lottieRef={lottieRef}/>
                 </motion.main>

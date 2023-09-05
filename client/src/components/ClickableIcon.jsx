@@ -12,6 +12,7 @@ export default function ClickableIcon({src, radius = "10px", size, mar, width, o
                 borderRadius: radius,
                 width: size ? size : width,
                 height: size,
+                cursor: onClick ? 'pointer' : null,
                 ...style,
             }}>
             <Image
