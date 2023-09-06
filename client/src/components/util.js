@@ -272,27 +272,31 @@ function parseSeconds(t) {
     return out;
 }
 
-function parseLyrics() {
-    return new Promise((resolve, reject) => {
-        try {
-            const data = [];
-            const raw = lyrics();
-            for (const line of raw.split('\n')) {
-                const split = line.split(']');
-                const rawTime = split[0].substring(1);
-                const time = parseSeconds(rawTime);
-                const lyric = split[1];
-                data.push({
-                    rawTime: rawTime,
-                    time: time,
-                    lyric: lyric
-                });
-            }
-            resolve(data)
-        } catch (e) {
-            reject(e)
-        }
-    });
+function parseLyrics(url) {
+    return fetch(url, {
+        headers: {token: window.sessionStorage.getItem("token")},
+    })
+        .then(data => data.text())
+        .then(raw => {
+            return new Promise((resolve, reject) => {
+                try {
+                    const data = [];
+                    for (const line of raw.split('\n')) {
+                        const split = line.split(']');
+                        const rawTime = split[0].substring(1);
+                        const time = parseSeconds(rawTime);
+                        const lyric = split[1];
+                        data.push({
+                            time: time,
+                            lyric: lyric
+                        });
+                    }
+                    resolve(data)
+                } catch (e) {
+                    reject(e)
+                }
+            });
+        });
 }
 
 function lyrics() {

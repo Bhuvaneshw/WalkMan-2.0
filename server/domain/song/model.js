@@ -34,6 +34,9 @@ const songSchema = new mongoose.Schema({
   movie: {
     type: String,
   },
+  lyrics: {
+    type: String,
+  },
 });
 
 songSchema.index({ artist: "text", title: "text", genre: "text" });

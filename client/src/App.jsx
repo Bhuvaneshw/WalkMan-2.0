@@ -8,15 +8,7 @@ import SideBar from "./components/Sidebar";
 import {Outlet, useLocation, useNavigate} from "react-router-dom";
 import React from "react";
 import {getRouteName} from "./components/util.js";
-import {
-    Drawer,
-    DrawerBody,
-    DrawerCloseButton,
-    DrawerContent,
-    DrawerHeader,
-    DrawerOverlay,
-    useDisclosure,
-} from "@chakra-ui/react";
+import {Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerOverlay, useDisclosure,} from "@chakra-ui/react";
 import Icon from "./components/Icon.jsx";
 import Icons from "./components/Icons.js";
 
@@ -40,7 +32,7 @@ function Header() {
     const navigate = useNavigate();
 
     return (
-        <HStack height="70px" justifyContent="space-between" alignItems="center">
+        <HStack height="70px" justifyContent="space-between" alignItems="center" style={{position: 'sticky', top: '0', zIndex:'100', background:'#EEF2FD'}}>
             <HStack alignItems="center" pad="0 0 0 20px">
                 <Icon
                     onClick={onOpen}

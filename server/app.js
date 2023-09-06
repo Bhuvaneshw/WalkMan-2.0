@@ -11,8 +11,8 @@ const port = 3000;
 
 //adding middleware
 app.use(express.json());
-app.use("/assets", express.static("static"));
 app.use(cors({ origin: "*", methods: ["GET", "POST"] }));
+app.use("/assets", express.static("static"));
 app.use(router);
 //routes declaration
 app.get("/", (req, res) => res.send("Hello World!"));

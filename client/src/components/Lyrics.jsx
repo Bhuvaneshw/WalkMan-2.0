@@ -7,7 +7,9 @@ import Text from "./Text.jsx";
 export default function Lyrics() {
     const [data, setData] = useState([])
     useEffect(() => {
-        parseLyrics().then(d => setData(d)).catch(e => console.log("Error: " + e))
+        parseLyrics(import.meta.env.VITE_URL + '/assets' + getMusic().data.lyrics)
+            .then(d => setData(d))
+            .catch(e => console.log("Error: " + e))
     }, []);
 
     function LyricsItem() {
@@ -24,15 +26,17 @@ export default function Lyrics() {
         return data.map((line, index) => {
             const below = curSec >= getNextLineInfo(index).time;
             const selected = curSec >= line.time && curSec < getNextLineInfo(index).time;
-            return <LyricText selected={selected} below={below} line={line} key={line.rawTime}/>
+            return <LyricText selected={selected} below={below} line={line} key={index}/>
         });
     }
 
     return <Card flex="1"
                  className="flex player"
-                 pad="25px"
-                 mar={"50px auto auto auto"}
-                 style={{minWidth: "420px"}}>
+                 pad="20px"
+                 mar={"40px auto"}
+                 width={'100%'}
+                 minWidth={"420px"}
+                 maxWidth={"620px"}>
         <Title mar={'10px'}>Lyrics</Title>
         <LyricsItem/>
     </Card>;

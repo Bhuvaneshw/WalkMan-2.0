@@ -161,7 +161,7 @@ export default function AudioPlayerBig({lottieRef}) {
                 pad="10px"
                 height={"80vh"}
                 mar={"auto"}
-                style={{minWidth: "420px"}}
+                minWidth={"420px"}
             >
                 <Stack className="fill">
                     <Icon
@@ -225,7 +225,7 @@ export default function AudioPlayerBig({lottieRef}) {
                     </Box>
                 </Stack>
             </Card>
-            <Lyrics/>
+            {data.lyrics !== 'null' && <Lyrics/>}
         </Stack>
     );
 }
