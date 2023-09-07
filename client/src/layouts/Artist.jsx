@@ -28,7 +28,7 @@ export default function Artist() {
     useEffect(() => {
         (async () => {
             let res;
-            await fetch(import.meta.env.VITE_URL + "/songs/artist")
+            await fetch(import.meta.env.VITE_URL + "/artists")
                 .then((r) => {
                     res = r;
                 })
@@ -54,13 +54,14 @@ export default function Artist() {
                 <ArtistCardSkeleton loading={loading}/>
                 <ArtistCardSkeleton loading={loading}/>
                 <ArtistCardSkeleton loading={loading}/>
-                {data.map((music) => {
+                {data.map((artist) => {
                     return (
                         <ArtistCard
-                            key={music}
-                            artist={music}
+                            key={artist._id}
+                            artist={artist.name}
+                            icon={import.meta.env.VITE_URL + '/assets' + artist.url}
                             onClick={() => {
-                                navigate("/search?q=" + music);
+                                navigate("/search?q=" + artist.name);
                             }}
                         ></ArtistCard>
                     );
