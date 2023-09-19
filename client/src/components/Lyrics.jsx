@@ -4,7 +4,7 @@ import {getMusic, parseLyrics} from "./util.js";
 import {useEffect, useState} from "react";
 import Text from "./Text.jsx";
 
-export default function Lyrics() {
+export default function Lyrics({socket}) {
     const [data, setData] = useState([])
     useEffect(() => {
         parseLyrics(import.meta.env.VITE_URL + '/assets' + getMusic().data.lyrics)
@@ -26,7 +26,7 @@ export default function Lyrics() {
         return data.map((line, index) => {
             const below = curSec >= getNextLineInfo(index).time;
             const selected = curSec >= line.time && curSec < getNextLineInfo(index).time;
-            return <LyricText selected={selected} below={below} line={line} key={index}/>
+            return <LyricText selected={selected} below={below} line={line} key={index} socket={socket}/>
         });
     }
 
@@ -42,7 +42,7 @@ export default function Lyrics() {
     </Card>;
 }
 
-function LyricText({selected, line, below}) {
+function LyricText({selected, line, below, socket}) {
     let color = selected ? '#5F04A7' : null;
     let opacity = below ? 0.3 : 1;
     let id = selected ? 'current' : null;
@@ -51,5 +51,6 @@ function LyricText({selected, line, below}) {
         opacity: opacity,
     }} onClick={() => {
         getMusic().currentTime = line.time
+        if (socket) socket.emit("audioSeeked", {curTime: line.time});
     }}>{line.lyric}</Text>;
 }

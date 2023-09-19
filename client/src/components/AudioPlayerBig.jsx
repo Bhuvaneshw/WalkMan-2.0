@@ -122,14 +122,21 @@ export default function AudioPlayerBig({lottieRef}) {
         }
     }
 
+    document.addEventListener('keypress', event => {
+        if (event.code === 'Space') {
+            event.preventDefault();
+            playOrPause();
+        }
+    });
+
     function seekBack() {
         audio.currentTime -= 10;
-        if (socket) socket.emit("seekBack");
+        if (socket) socket.emit("audioSeeked", {curTime: audio.currentTime});
     }
 
     function seekForward() {
         audio.currentTime += 10;
-        if (socket) socket.emit("seekForward");
+        if (socket) socket.emit("audioSeeked", {curTime: audio.currentTime});
     }
 
     function moveBack() {
@@ -225,7 +232,7 @@ export default function AudioPlayerBig({lottieRef}) {
                     </Box>
                 </Stack>
             </Card>
-            {data.lyrics !== 'null' && <Lyrics/>}
+            {data.lyrics !== 'null' && <Lyrics socket={socket}/>}
         </Stack>
     );
 }
