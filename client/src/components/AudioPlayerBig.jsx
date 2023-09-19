@@ -122,12 +122,9 @@ export default function AudioPlayerBig({lottieRef}) {
         }
     }
 
-    document.addEventListener('keypress', event => {
-        if (event.code === 'Space') {
-            event.preventDefault();
-            playOrPause();
-        }
-    });
+    audio.onKeyboardSpacePressed = () => {
+        playOrPause();
+    }
 
     function seekBack() {
         audio.currentTime -= 10;

@@ -118,12 +118,9 @@ export default function AudioPlayerSmall({songs}) {
         }
     }
 
-    document.addEventListener('keypress', event => {
-        if (event.code === 'Space') {
-            event.preventDefault();
-            playOrPause();
-        }
-    });
+    audio.onKeyboardSpacePressed = () => {
+        playOrPause();
+    }
 
     function seekBack() {
         audio.currentTime -= 10;

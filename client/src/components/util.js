@@ -143,6 +143,13 @@ class Music extends Audio {
             this.canPlay();
         });
 
+        document.addEventListener("keypress", event => {
+            if (event.code === 'Space') {
+                this.onKeyboardSpacePressed();
+                event.preventDefault();
+            }
+        });
+
         // this.addEventListener("loadeddata", () => console.log("loadeddata"))
     }
 
@@ -173,6 +180,8 @@ class Music extends Audio {
     };
     canPlay = () => {
     };
+    onKeyboardSpacePressed = () => {
+    }
 }
 
 let music;
