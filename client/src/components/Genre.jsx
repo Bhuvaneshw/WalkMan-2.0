@@ -1,12 +1,10 @@
 import Card from "./Card.jsx";
 import Title from "./Title.jsx";
 import HStack from "./HStack.jsx";
-import BorderedCard from "./BorderedCard.jsx";
-import Icon from "./Icon.jsx";
-import Gap from "./Gap.jsx";
-import Stack from "./Stack.jsx";
 import ArtistCardSkeleton from "./skeleton/ArtistCardSkeleton.jsx";
 import {useNavigate} from "react-router-dom";
+import Text from "./Text.jsx";
+import {getGenreColors} from "./util.js";
 
 export default function Genre({data = []}) {
     let loading = data.length < 1;
@@ -19,20 +17,23 @@ export default function Genre({data = []}) {
                 <ArtistCardSkeleton loading={loading}/>
                 <ArtistCardSkeleton loading={loading}/>
                 <ArtistCardSkeleton loading={loading}/>
-                {data.map((value) => {
+                {data.map((value, index) => {
                     return (
-                        <BorderedCard className="flex" key={value} onClick={() => {
-                            navigate('/search?q=' + value)
+                        <div key={value} onClick={() => {
+                            navigate('/home/search?q=' + value)
+                        }} style={{
+                            minWidth: '140px',
+                            height: '150px',
+                            background: `linear-gradient(135deg, ${getGenreColors()[index % getGenreColors().length]})`,
+                            margin: '10px',
+                            display: "flex",
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                            justifyContent: "center",
+                            borderRadius: '10px'
                         }}>
-                            <Icon src="/music.png" className="big-icon"/>
-                            <Gap height="10px"/>
-                            <HStack justifyContent="space-between" alignItems="center">
-                                <Stack>
-                                    <Title className='noWrap'>{value}</Title>
-                                </Stack>
-                                <Gap width="10px"/>
-                            </HStack>
-                        </BorderedCard>
+                            <Text style={{textAlign: 'center', fontSize: "20px"}} variant={'white'}>{value}</Text>
+                        </div>
                     );
                 })}
             </HStack>

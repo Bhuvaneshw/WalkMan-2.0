@@ -11,7 +11,7 @@ import {
     Stack,
     Text,
 } from "@chakra-ui/react";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import Title from "../components/Title.jsx";
 import HStack from "../components/HStack.jsx";
 import Gap from "../components/Gap.jsx";
@@ -29,7 +29,10 @@ export default function Login() {
     const [passMask, setPassMask] = useState("");
     const [showPass, setShowPass] = useState(false);
     let navigate = useNavigate();
-    console.log(import.meta.env);
+    useEffect(() => {
+        if (sessionStorage.token !== undefined && sessionStorage.token !== 'undefined')
+            navigate('/home');
+    }, []);
 
     async function loginSubmit() {
         const res = await fetch(import.meta.env.VITE_URL + "/user/login", {
@@ -40,7 +43,7 @@ export default function Login() {
         const data = await res.json();
         window.sessionStorage.setItem("token", data.token);
         setStatus(data.msg);
-        navigate("/");
+        navigate("/home");
     }
 
     const handleInput = (event) => {

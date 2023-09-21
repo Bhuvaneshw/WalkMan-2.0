@@ -151,7 +151,7 @@ export default function AudioPlayerSmall({songs}) {
                         src={import.meta.env.VITE_URL + "/assets" + audio.data.icon}
                         radius="18px"
                         fit="cover"
-                        onClick={() => navigate("/player")}
+                        onClick={() => navigate("/home/player")}
                         className={"small-player-icon"}
                     />
                 </Skeleton>

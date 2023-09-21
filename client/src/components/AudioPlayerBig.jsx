@@ -146,7 +146,7 @@ export default function AudioPlayerBig({lottieRef}) {
 
     async function postLike() {
         setLiked((prev) => !prev);
-        const res = await fetch("http://localhost:3000/song/likeSong", {
+        const res = await fetch(import.meta.env.VITE_URL +"/song/likeSong", {
             method: "POST",
             headers: {"Content-Type": "Application/json"},
             body: JSON.stringify({

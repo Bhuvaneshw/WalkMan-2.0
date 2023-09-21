@@ -48,7 +48,7 @@ export default function TopSongs() {
 
     return (
         <Content>
-            <HStack wrap="wrap" alignItems="stretch">
+            <HStack wrap="wrap" alignItems="stretch" className={"centerOnMobile"}>
                 <SongCardSkeleton loading={loading}/>
                 <SongCardSkeleton loading={loading}/>
                 <SongCardSkeleton loading={loading}/>

@@ -14,7 +14,7 @@ export default function MusicCard({title, artist, icon, onClick}) {
                 src={import.meta.env.VITE_URL + "/assets" + icon}
                 className="big-icon"
                 fit={'cover'}
-                style={{aspectRatio: "1/1"}}
+                style={{width:'100%',aspectRatio: "1/1"}}
             />
             <Gap height="10px"/>
             <HStack

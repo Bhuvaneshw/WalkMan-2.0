@@ -46,10 +46,10 @@ function Header() {
             <Searchbar/>
             <HStack alignItems="center" pad="0 20px 0 10px">
                 <Icons.USER
-                    onClick={() => navigate('/profile')}
+                    onClick={() => navigate('/home/profile')}
                     className="mobileOnly"
                 />
-                <Profile name="Bhuvanesh" className="desktopOnly" onClick={() => navigate('/profile')}/>
+                <Profile name="Bhuvanesh" className="desktopOnly" onClick={() => navigate('/home/profile')}/>
             </HStack>
             <Drawer
                 isOpen={isOpen}

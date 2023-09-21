@@ -1,20 +1,24 @@
-import {useContext, useEffect} from "react";
+import {useContext} from "react";
 import Content from "../components/Content.jsx";
 import {searchContext} from "../searchContext";
 import MusicCard from "../components/MusicCard";
 import HStack from "../components/HStack.jsx";
 import {getMusic} from "../components/util.js";
 import {useToast} from "@chakra-ui/react";
+import SongCardSkeleton from "../components/skeleton/SongCardSkeleton.jsx";
 
 export default function Search() {
     const {searchRes} = useContext(searchContext);
-    useEffect(() => {
-    }, []);
+    const isLoading = searchRes.length < 1;
     const toast = useToast();
 
     return (
         <Content>
             <HStack wrap="wrap" alignItems="stretch">
+                <SongCardSkeleton loading={isLoading}/>
+                <SongCardSkeleton loading={isLoading}/>
+                <SongCardSkeleton loading={isLoading}/>
+                <SongCardSkeleton loading={isLoading}/>
                 {searchRes.map((music) => {
                     return (
                         <MusicCard

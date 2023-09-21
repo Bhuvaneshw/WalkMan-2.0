@@ -19,6 +19,7 @@ import GroupRoomHome from "./components/GroupRoomHome.jsx";
 import GroupRoomPlayer from "./components/GroupRoomPlayer.jsx";
 import GroupRoomSearch from "./components/GroupRoomSearch.jsx";
 import Profile from "./layouts/Profile.jsx";
+import LandingPage from "./layouts/LandingPage.jsx";
 
 function Main() {
     const location = useLocation();
@@ -26,7 +27,7 @@ function Main() {
         <AnimatePresence>
             <SearchContextProvider>
                 <Routes location={location}>
-                    <Route path="/" element={<App/>}>
+                    <Route path="/home" element={<App/>}>
                         <Route index element={<Home/>}/>
                         <Route path="search" element={<Search/>}/>
                         <Route path="player" element={<Player/>}/>
@@ -43,6 +44,7 @@ function Main() {
 
                     <Route path="/login" element={<Login/>}/>
                     <Route path="/signup" element={<Signup/>}/>
+                    <Route path="/" element={<LandingPage/>}/>
                 </Routes>
             </SearchContextProvider>
         </AnimatePresence>

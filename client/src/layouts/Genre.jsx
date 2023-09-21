@@ -1,7 +1,6 @@
 import Content from "../components/Content.jsx";
 import HStack from "../components/HStack.jsx";
 import React, {useEffect, useState} from "react";
-import ArtistCard from "../components/ArtistCard.jsx";
 import {useNavigate} from "react-router-dom";
 import ArtistCardSkeleton from "../components/skeleton/ArtistCardSkeleton.jsx";
 import {
@@ -16,6 +15,7 @@ import {
     useDisclosure,
     useToast,
 } from "@chakra-ui/react";
+import GenreCard from "../components/GenreCard.jsx";
 
 export default function Genre() {
     const {isOpen, onOpen, onClose} = useDisclosure();
@@ -49,20 +49,21 @@ export default function Genre() {
 
     return (
         <Content>
-            <HStack wrap="wrap" alignItems="stretch">
+            <HStack wrap="wrap" alignItems="stretch" className={'centerOnMobile'}>
                 <ArtistCardSkeleton loading={loading}/>
                 <ArtistCardSkeleton loading={loading}/>
                 <ArtistCardSkeleton loading={loading}/>
                 <ArtistCardSkeleton loading={loading}/>
-                {data.map((music) => {
+                {data.map((music, index) => {
                     return (
-                        <ArtistCard
+                        <GenreCard
                             key={music}
-                            artist={music}
+                            title={music}
+                            index={index}
                             onClick={() => {
-                                navigate("/search?q=" + music);
+                                navigate("/home/search?q=" + music);
                             }}
-                        ></ArtistCard>
+                        ></GenreCard>
                     );
                 })}
             </HStack>

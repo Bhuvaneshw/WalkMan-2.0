@@ -32,42 +32,42 @@ function getRouteName(location) {
 const Navigation = {
     HOME: {
         name: "Home",
-        route: "/",
+        route: "/home/",
         icon: Icons.HOME,
     },
     SEARCH: {
         name: "Search",
-        route: "/search",
+        route: "/home/search",
         icon: Icons.SEARCH,
     },
     PLAYER: {
         name: "Player",
-        route: "/player",
+        route: "/home/player",
         icon: Icons.PLAY_SQUARE,
     },
     GROUP_ROOM: {
         name: "Group Room",
-        route: "/groupRoom",
+        route: "/home/groupRoom",
         icon: Icons.LIST_MUSIC,
     },
     TOP_SONGS: {
         name: "Top Songs",
-        route: "/topsongs",
+        route: "/home/topsongs",
         icon: Icons.MUSIC_2,
     },
     ARTISTS: {
         name: "Artists",
-        route: "/artists",
+        route: "/home/artists",
         icon: Icons.USER_CHECK,
     },
     GENRE: {
         name: "Genre",
-        route: "/genre",
+        route: "/home/genre",
         icon: Icons.SPEAKER,
     },
     PROFILE: {
         name: "Profile",
-        route: "/profile",
+        route: "/home/profile",
         icon: Icons.USER_CIRCLE,
     },
 };
@@ -75,6 +75,7 @@ const Navigation = {
 function searchSong(e, searchQuery, setSearchRes) {
     if (e.code === "Enter") {
         // console.log("search? " + searchQuery)
+        setSearchRes([])
         fetch(import.meta.env.VITE_URL + "/songs/search?q=" + searchQuery, {
             headers: {token: window.sessionStorage.getItem("token")},
         })
@@ -247,14 +248,14 @@ function getSocket() {
 
         socket.joinRoom = function (navigate) {
             this.emit("joinRoom");
-            navigate("/groupRoom/search");
+            navigate("/home/groupRoom/search");
         };
 
         socket.notifySongSelection = function (music, setCurrentSong, navigate) {
             this.emit("songSelected", {music});
             getMusic().setSrc(music.url, music);
             setCurrentSong(music);
-            navigate("/groupRoom/player");
+            navigate("/home/groupRoom/player");
         };
     }
     return socket;
@@ -308,6 +309,15 @@ function parseLyrics(url) {
         });
 }
 
+function getGenreColors() {
+    return [
+        "#0476a7, #f40084",
+        "#04A793, #A009C5",
+        "#42A704, #7E09C5",
+        "#E70303, #6709C5",
+    ];
+}
+
 export {
     toMinutesText,
     getRouteName,
@@ -320,4 +330,5 @@ export {
     destroySocket,
     isNotMobileDevice,
     parseLyrics,
+    getGenreColors,
 };

@@ -49,7 +49,7 @@ export default function Artist() {
     const navigate = useNavigate();
     return (
         <Content>
-            <HStack wrap="wrap" alignItems="stretch">
+            <HStack wrap="wrap" alignItems="stretch" className={'centerOnMobile'}>
                 <ArtistCardSkeleton loading={loading}/>
                 <ArtistCardSkeleton loading={loading}/>
                 <ArtistCardSkeleton loading={loading}/>
@@ -61,7 +61,7 @@ export default function Artist() {
                             artist={artist.name}
                             icon={import.meta.env.VITE_URL + '/assets' + artist.url}
                             onClick={() => {
-                                navigate("/search?q=" + artist.name);
+                                navigate("/home/search?q=" + artist.name);
                             }}
                         ></ArtistCard>
                     );

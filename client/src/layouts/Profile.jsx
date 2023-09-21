@@ -4,11 +4,14 @@ import Icon from "../components/Icon.jsx";
 import Title from "../components/Title.jsx";
 import Text from "../components/Text.jsx";
 import {Button} from "@chakra-ui/react";
+import {useNavigate} from "react-router-dom";
 
 export default function Profile() {
+    let navigate = useNavigate();
 
     function logout() {
-        //TODO: Not implemented yet
+        window.sessionStorage.removeItem('token')
+        navigate('/login')
     }
 
     return (

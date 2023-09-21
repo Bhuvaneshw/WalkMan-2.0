@@ -41,7 +41,7 @@ export default function Artist({data}) {
 
         return (
             <BorderedCard className="flex" onClick={() => {
-                navigate('/search?q=' + value)
+                navigate('/home/search?q=' + value)
             }}>
                 <Icon src={import.meta.env.VITE_URL + '/assets' + data?.url} className="big-icon"/>
                 <Gap height="10px"/>

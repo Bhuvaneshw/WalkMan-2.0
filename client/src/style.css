@@ -51,6 +51,7 @@ h1, h2, h3, h4, h5, h6, p, input, textarea, label, button {
 }
 
 .big-icon {
+    min-width: 200px;
     min-height: 100px;
 }
 
@@ -260,5 +261,10 @@ h1, h2, h3, h4, h5, h6, p, input, textarea, label, button {
 
     .responseFill {
         width: calc(100% - 30px);
+    }
+
+    .centerOnMobile {
+        align-items: center;
+        justify-content: center;
     }
 }

@@ -25,9 +25,10 @@ const SearchBar = () => {
     useEffect(() => {
         if (location.search.toString().includes("?q=")) {
             let query = location.search.substring(location.search.indexOf("?q=") + 3);
+            console.log('manual log', query)
             search({code: "Enter"}, query, setSearchRes);
         }
-    }, []);
+    }, [location.search]);
 
     return (
         <HStack flex={'1'} style={{maxWidth: '450px'}} alignItems={"center"}>
@@ -53,10 +54,10 @@ const SearchBar = () => {
                         focusBorderColor="#5F04A770 "
                         onClick={() => {
                             console.log(location.pathname);
-                            if (location.pathname.split("/")[1] !== "groupRoom") {
-                                navigate("/search");
-                            } else if (location.pathname.split("/")[2] === "player") {
-                                navigate("/groupRoom/search");
+                            if (location.pathname.split("/")[2] !== "groupRoom") {
+                                navigate("/home/search");
+                            } else if (location.pathname.split("/")[3] === "player") {
+                                navigate("/home/groupRoom/search");
                             }
                             setShowAutoComplete((prev) => !prev);
                         }}
@@ -99,7 +100,7 @@ const SearchBar = () => {
                                         height="50px"
                                         fit="cover"
                                     />
-                                    <Text>{field}:</Text>
+                                    <Text>{field.substring(0, 1).toUpperCase()+field.substring(1)}:</Text>
                                     <Text>{value}</Text>
                                 </Box>
                             </ListItem>

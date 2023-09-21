@@ -19,7 +19,7 @@ export default function GroupRoom() {
   socket.onRoomCreated = (roomId) => {
     console.log("roomId", roomId);
     setRoomId(roomId);
-    navigate("/groupRoom/search");
+    navigate("/home/groupRoom/search");
   };
 
   socket.AcceptConnection = (userId) => {
@@ -34,7 +34,7 @@ export default function GroupRoom() {
   socket.onSongSelected = (music) => {
     setCurrentSong(music);
     getMusic().setSrc(music.url, music);
-    navigate("/groupRoom/player");
+    navigate("/home/groupRoom/player");
   };
 
   return (
