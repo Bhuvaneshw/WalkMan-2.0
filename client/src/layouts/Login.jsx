@@ -28,8 +28,11 @@ export default function Login() {
     const [status, setStatus] = useState("");
     const [passMask, setPassMask] = useState("");
     const [showPass, setShowPass] = useState(false);
+    const [rememberPassword, setRememberPassword] = useState(false);
     let navigate = useNavigate();
     useEffect(() => {
+        if (localStorage.getItem("token") != null)
+            sessionStorage.token = localStorage.getItem("token");
         if (sessionStorage.token !== undefined && sessionStorage.token !== 'undefined')
             navigate('/home');
     }, []);
@@ -42,6 +45,8 @@ export default function Login() {
         });
         const data = await res.json();
         window.sessionStorage.setItem("token", data.token);
+        if (rememberPassword)
+            localStorage.setItem("token", data.token);
         setStatus(data.msg);
         navigate("/home");
     }
@@ -178,7 +183,9 @@ export default function Login() {
                             align={"start"}
                             justify={"space-between"}
                         >
-                            <Checkbox colorScheme="primary">Remember me</Checkbox>
+                            <Checkbox colorScheme="primary" checked={rememberPassword}
+                                      onChange={() => setRememberPassword(!rememberPassword)}>Remember
+                                me</Checkbox>
                             <Text color={"primary.400"}>Forgot password?</Text>
                         </Stack>
                         <p style={{textAlign: "center", color: "green", fontSize: 16}}>

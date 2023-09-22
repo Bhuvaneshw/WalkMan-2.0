@@ -11,6 +11,7 @@ export default function Profile() {
 
     function logout() {
         window.sessionStorage.removeItem('token')
+        localStorage.removeItem("token");
         navigate('/login')
     }
 
