@@ -2,6 +2,7 @@ import {
     ListMusic,
     Lock,
     Mail,
+    MessagesSquare,
     Mic,
     Music2,
     PlaySquare,
@@ -10,9 +11,10 @@ import {
     Tv2,
     User,
     UserCheck,
-    UserCircle
+    UserCircle,
+    UserCircle2,
+    X
 } from "lucide-react";
-
 
 const Icons = {
     MAIL: Mail,
@@ -27,6 +29,9 @@ const Icons = {
     SPEAKER: Speaker,
     MIC: Mic,
     USER_CIRCLE: UserCircle,
+    USER_CIRCLE_2: UserCircle2,
+    CLOSE: X,
+    CHAT: MessagesSquare
 }
 
 export default Icons;

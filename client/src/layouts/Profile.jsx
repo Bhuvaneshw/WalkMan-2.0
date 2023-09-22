@@ -1,10 +1,11 @@
 import Content from "../components/Content.jsx";
 import Card from "../components/Card.jsx";
-import Icon from "../components/Icon.jsx";
 import Title from "../components/Title.jsx";
 import Text from "../components/Text.jsx";
 import {Button} from "@chakra-ui/react";
 import {useNavigate} from "react-router-dom";
+import Icons from "../components/Icons.js";
+import {getGenreColors} from "../components/util.js";
 
 export default function Profile() {
     let navigate = useNavigate();
@@ -29,8 +30,14 @@ export default function Profile() {
             <Card pad={'25px'} minWidth={'200px'} maxWidth={'400px'} width={'100%'}
                   style={{display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px'}}>
                 <Title size={'20px'} minW={'100%'}>Profile</Title>
-                <Icon size={'220px'} src={'/music.png'}/>
-                <Text>Bhuvanesh</Text>
+                <Icons.USER_CIRCLE_2 size={'180px'} style={{
+                    color: 'white',
+                    borderRadius: '50%',
+                    padding: '30px',
+                    background: `linear-gradient(135deg, ${getGenreColors()[0]})`
+                }}/>
+                <Text>{localStorage.getItem('name')}</Text>
+                <Text>{localStorage.getItem('email')}</Text>
                 <Button colorScheme={'primary'} onClick={logout}>Logout</Button>
             </Card>
         </Content>

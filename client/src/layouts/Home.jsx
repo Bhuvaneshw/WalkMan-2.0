@@ -19,6 +19,7 @@ import {
     useToast,
 } from "@chakra-ui/react";
 import {useNavigate} from "react-router-dom";
+import ChatBox from "../components/ChatBox.jsx";
 
 export default function Home() {
     const {isOpen, onOpen, onClose} = useDisclosure();

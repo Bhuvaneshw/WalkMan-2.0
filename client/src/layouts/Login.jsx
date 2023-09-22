@@ -47,6 +47,9 @@ export default function Login() {
         window.sessionStorage.setItem("token", data.token);
         if (rememberPassword)
             localStorage.setItem("token", data.token);
+        console.log(data)
+        localStorage.setItem("name", data.name);
+        localStorage.setItem("email", data.email);
         setStatus(data.msg);
         navigate("/home");
     }

@@ -49,7 +49,7 @@ function Header() {
                     onClick={() => navigate('/home/profile')}
                     className="mobileOnly"
                 />
-                <Profile name="Bhuvanesh" className="desktopOnly" onClick={() => navigate('/home/profile')}/>
+                <Profile name={localStorage.getItem('name')} className="desktopOnly" onClick={() => navigate('/home/profile')}/>
             </HStack>
             <Drawer
                 isOpen={isOpen}
