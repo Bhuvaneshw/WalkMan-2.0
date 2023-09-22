@@ -146,7 +146,7 @@ export default function AudioPlayerBig({lottieRef}) {
 
     async function postLike() {
         setLiked((prev) => !prev);
-        const res = await fetch(import.meta.env.VITE_URL +"/song/likeSong", {
+        const res = await fetch(import.meta.env.VITE_URL + "/song/likeSong", {
             method: "POST",
             headers: {"Content-Type": "Application/json"},
             body: JSON.stringify({
@@ -182,8 +182,12 @@ export default function AudioPlayerBig({lottieRef}) {
                     <HStack style={{width: '100%'}} justifyContent={'space-between'} alignItems={'center'}>
                         <Box/>
                         <Stack alignItems={'center'}>
-                            <Title>{audio.data.title + isPlaying}</Title>
-                            <Text>{audio.data.artist}</Text>
+                            <marquee style={{
+                                width: '100%'
+                            }}>
+                                <Title>{`${audio.data.title} • ${audio.data.year} • ${audio.data.artist} • ${audio.data.genre} • ${audio.data.language}`}</Title>
+                            </marquee>
+                            <Text>{audio.data.movie}</Text>
                         </Stack>
                         <HStack>
                             <ClickableIcon

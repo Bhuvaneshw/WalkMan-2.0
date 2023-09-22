@@ -32,7 +32,7 @@ export default function Signup() {
     let navigate = useNavigate();
 
     async function SignupSubmit() {
-        const res = await fetch(import.meta.env.VITE_URL + ":3000/user/Signup", {
+        const res = await fetch(import.meta.env.VITE_URL + "/user/Signup", {
             headers: {"Content-Type": "application/json"},
             method: "POST",
             body: JSON.stringify({email: email, pass: pass, name: name}),
@@ -234,6 +234,7 @@ export default function Signup() {
                             style={{
                                 color: "#4c0383",
                                 padding: "5px",
+                                cursor: 'pointer'
                             }}
                             onClick={() => navigate("/login")}
                         >

@@ -227,6 +227,7 @@ export default function Login() {
                             style={{
                                 color: "#4c0383",
                                 padding: "5px",
+                                cursor: 'pointer'
                             }}
                             onClick={() => navigate("/signup")}
                         >
