@@ -1,50 +1,29 @@
 import express from "express";
 import {
-  getSongInfo,
-  getUserArtist,
-  getUserGenre,
+  getAllGenre,
+  getTopSongs,
+  getAllArtist,
   getUserHomeInfo,
-  getUserTopSongs,
   likeSong,
   searchAutoComplete,
+  searchSong,
   serverSong,
 } from "./controller.js";
 const router = express.Router();
 
-router.get("/home", async (req, res) => {
-  const userHomeInfo = await getUserHomeInfo(req.headers.token);
-  res.json(userHomeInfo);
-});
+router.get("/", getUserHomeInfo);
 
-router.get("/top", async (req, res) => {
-  const userHomeInfo = await getUserTopSongs();
-  res.json(userHomeInfo);
-});
+router.get("/top", getTopSongs);
 
-router.get("/artist", async (req, res) => {
-  const userHomeInfo = await getUserArtist();
-  res.json(userHomeInfo);
-});
+router.get("/artist", getAllArtist);
 
-router.get("/genre", async (req, res) => {
-  const userHomeInfo = await getUserGenre();
-  res.json(userHomeInfo);
-});
+router.get("/genre", getAllGenre);
 
-router.get("/search", async (req, res) => {
-  const songs = await getSongInfo(req.query.q, req.headers.token);
-  res.json(songs);
-});
+router.get("/search", searchSong);
 
-router.get("/search-autocomplete", async (req, res) => {
-  const songs = await searchAutoComplete(req.query.q);
-  res.json(songs);
-});
+router.get("/search-autocomplete", searchAutoComplete);
 
-router.post("/likeSong", async (req, res) => {
-  await likeSong(req.body.token, req.body.songId);
-  res.send();
-});
+router.post("/like", likeSong);
 
 router.get("/:songId", serverSong);
 

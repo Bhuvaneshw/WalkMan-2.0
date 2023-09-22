@@ -18,6 +18,7 @@ import {
   useDisclosure,
   useToast,
 } from "@chakra-ui/react";
+import { fetchGet } from "../components/util.js";
 
 export default function Home() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -28,24 +29,19 @@ export default function Home() {
 
   useEffect(() => {
     (async () => {
-      let res;
-      await fetch(import.meta.env.VITE_URL + "/songs/home", {
-        headers: { token: window.sessionStorage.getItem("token") },
-      })
-        .then((r) => {
-          res = r;
-        })
-        .catch((error) => {
-          toast({
-            title: "Error",
-            description: error.message,
-            duration: 2000,
-            status: "error",
-            position: "top-right",
-          });
-          onOpen();
+      try {
+        const resData = await fetchGet(import.meta.env.VITE_URL + "/songs/");
+        setData(resData);
+      } catch (error) {
+        toast({
+          title: "Error",
+          description: error.message,
+          duration: 2000,
+          status: "error",
+          position: "top-right",
         });
-      setData(await res.json());
+        onOpen();
+      }
     })();
   }, [retry]);
 

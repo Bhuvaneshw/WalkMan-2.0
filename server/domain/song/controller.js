@@ -1,28 +1,29 @@
 import Song from "./model.js";
-import User from "../user/model.js";
-import decryptToken from "../../utils/dercyptToken.js";
+import User from "../auth/model.js";
 import mongoose from "mongoose";
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 
-export async function likeSong(token, songId) {
-  const userId = decryptToken(token);
-  const user = await User.findById(userId);
-  console.log(user);
-  songId = new mongoose.Types.ObjectId(songId);
+export async function likeSong(req, res) {
+  console.log(req.body);
+  const songId = new mongoose.Types.ObjectId(req.body.songId);
+  const user = await User.findById(req.userId);
+  //dislike
   if (user.likes.includes(songId)) {
     user.likes = user.likes.filter(function (item) {
       return item !== songId;
     });
-    await user.save();
-    return;
+  } else {
+    //like
+    user.likes.push(songId);
   }
-  user.likes.push(songId);
   await user.save();
+  res.send("change success");
 }
 
-export async function searchAutoComplete(query) {
+export async function searchAutoComplete(req, res) {
+  const query = req.query.q;
   let result = [];
   if (!query) return result;
   try {
@@ -48,7 +49,7 @@ export async function searchAutoComplete(query) {
           },
         },
         {
-          $limit: 5, // Limit the number of results per field
+          $limit: 1, // Limit the number of results per field
         },
         {
           $project: {
@@ -68,15 +69,15 @@ export async function searchAutoComplete(query) {
         }
       }
     }
-    return result;
+    res.json(result);
   } catch (e) {
-    console.log(e.messages);
+    console.log(e.message);
   }
 }
 
-export async function getSongInfo(query, token) {
-  const userId = decryptToken(token);
-  const user = await User.findById(userId);
+export async function searchSong(req, res) {
+  const query = req.query.q;
+  const user = await User.findById(req.userId);
   let songData = await Song.aggregate([
     {
       $search: {
@@ -91,7 +92,6 @@ export async function getSongInfo(query, token) {
     },
     { $limit: 5 },
   ]);
-  console.log(songData);
   songData = songData.map((song) => {
     if (user.likes.includes(song._id)) {
       song.liked = true;
@@ -100,13 +100,12 @@ export async function getSongInfo(query, token) {
     song.liked = false;
     return song;
   });
-  // console.log(songData);
-  return songData;
+  res.json(songData);
 }
 
-export async function getUserHomeInfo(token) {
-  const userId = decryptToken(token);
-  const user = await User.findById(userId);
+export async function getUserHomeInfo(req, res) {
+  console.log("came here");
+  const user = await User.findById(req.userId);
   const genre = await Song.find().distinct("genre");
   const artist = await Song.find().distinct("artist");
   let songs = await Song.aggregate([
@@ -121,22 +120,25 @@ export async function getUserHomeInfo(token) {
     song.liked = false;
     return song;
   });
-  return { genre: genre, artist, songs };
+  res.json({ genre, artist, songs });
 }
 
-export async function getUserTopSongs(token) {
-  return Song.find();
+export async function getTopSongs(req, res) {
+  const topSongs = await Song.find();
+  res.json(topSongs);
 }
 
-export async function getUserArtist(token) {
-  return Song.find().distinct("artist");
+export async function getAllArtist(req, res) {
+  const artist = await Song.find().distinct("artist");
+  res.json(artist);
 }
 
-export async function getUserGenre(token) {
-  return Song.find().distinct("genre");
+export async function getAllGenre(req, res) {
+  const genere = await Song.find().distinct("genre");
+  res.json(genere);
 }
 
-export function serverSong(req, res, next) {
+export function serverSong(req, res) {
   const songId = req.params.songId;
   const __filename = fileURLToPath(import.meta.url);
 

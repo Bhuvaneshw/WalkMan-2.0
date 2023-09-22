@@ -13,6 +13,9 @@ const userSchema = new mongoose.Schema({
   likes: {
     type: [mongoose.Schema.ObjectId],
   },
+  playlist: {
+    type: [mongoose.Schema.ObjectId],
+  },
 });
 
 const User = mongoose.model("User", userSchema);

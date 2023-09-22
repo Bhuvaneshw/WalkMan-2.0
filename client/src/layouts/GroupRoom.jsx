@@ -2,13 +2,18 @@ import { Box } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
-import { destroySocket, getMusic, getSocket } from "../components/util";
+import {
+  createSocket,
+  destroySocket,
+  getMusic,
+  getSocket,
+} from "../components/util";
 
 export default function GroupRoom() {
   const [roomId, setRoomId] = useState("");
   const [userCount, setUserCount] = useState(1);
   const [currentSong, setCurrentSong] = useState({ title: "" });
-  const socket = getSocket();
+  const socket = createSocket();
   // window.socket = socket;
   const navigate = useNavigate();
 
