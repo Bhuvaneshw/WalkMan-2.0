@@ -196,6 +196,7 @@ class Music extends Audio {
     };
     onKeyboardSpacePressed = () => {
     }
+    onUpdateForce=()=>{}
 }
 
 let music;

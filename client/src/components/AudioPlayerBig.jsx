@@ -106,6 +106,10 @@ export default function AudioPlayerBig({lottieRef}) {
         return false;
     }
 
+    audio.onUpdateForce = () => {
+
+    }
+
     let navigate = useNavigate();
     useEffect(() => {
         if (audio.data === "") navigate("/home");
@@ -201,7 +205,9 @@ export default function AudioPlayerBig({lottieRef}) {
                     >
                         {/*<Box/>*/}
                         <Stack alignItems={"center"}>
-                            <marquee><Title>{`${audio.data.title} • ${audio.data.artist} • ${audio.data.year} • ${audio.data.genre} • ${audio.data.language}`}</Title></marquee>
+                            <marquee>
+                                <Title>{`${audio.data.title} • ${audio.data.artist} • ${audio.data.year} • ${audio.data.genre} • ${audio.data.language}`}</Title>
+                            </marquee>
                             <Text>{audio.data.movie}</Text>
                         </Stack>
                         {/*<HStack alignItems={'center'}>

@@ -29,9 +29,9 @@ export default function GroupRoomHome() {
           color={"white"}
           onClick={createRoom}
         >
-          New room
+          Enter room
         </Button>
-        <p>OR</p>
+        {/*<p>OR</p>
         <InputGroup
           style={{
             flex: 1,
@@ -45,7 +45,7 @@ export default function GroupRoomHome() {
             onClick={joinRoom}
             focusBorderColor="#5F04A770 "
           ></Input>
-        </InputGroup>
+        </InputGroup>*/}
       </Box>
     </Box>
   );

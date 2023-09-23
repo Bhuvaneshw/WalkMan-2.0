@@ -17,7 +17,7 @@ export default function GroupRoom() {
   }, []);
 
   socket.onRoomCreated = (roomId) => {
-    console.log("roomId", roomId);
+    // console.log("roomId", roomId);
     setRoomId(roomId);
     navigate("/home/groupRoom/search");
   };
@@ -34,13 +34,14 @@ export default function GroupRoom() {
   socket.onSongSelected = (music) => {
     setCurrentSong(music);
     getMusic().setSrc(music.url, music);
+    getMusic().onUpdateForce();
     navigate("/home/groupRoom/player");
   };
 
   return (
     <Box h={"calc(100vh - 70px)"}>
-      {userCount}
-      {currentSong.title}
+      {/*{userCount}*/}
+      {/*{currentSong.title}*/}
       <Outlet context={{ roomId, setRoomId, setCurrentSong }} />
     </Box>
   );
