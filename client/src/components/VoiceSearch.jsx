@@ -16,13 +16,15 @@ import {
 } from "@chakra-ui/react";
 import {useRef, useState} from "react";
 import HStack from "./HStack";
+import {useNavigate} from "react-router-dom";
 
 export default function VoiceSearch({isOpen, onClose, setSearchQuery}) {
     const cancelRef = useRef();
-    const {transcript, listening, browserSupportsSpeechRecognition} =
+    let {transcript, resetTranscript, listening, browserSupportsSpeechRecognition} =
         useSpeechRecognition();
     const [searchData, setSearchData] = useState("");
     let lottieRef = useRef();
+    const navigate = useNavigate();
 
     return browserSupportsSpeechRecognition ? (
         <>
@@ -31,6 +33,10 @@ export default function VoiceSearch({isOpen, onClose, setSearchQuery}) {
                 leastDestructiveRef={cancelRef}
                 onClose={() => {
                     onClose();
+                    try {
+                        SpeechRecognition.stopListening();
+                    } catch (e) {
+                    }
                     setSearchQuery(transcript);
                 }}
             >
@@ -61,9 +67,12 @@ export default function VoiceSearch({isOpen, onClose, setSearchQuery}) {
                                 onClick={() => {
                                     lottieRef.current.pause()
                                     SpeechRecognition.stopListening();
+                                    navigate('/home/search?q=' + transcript);
+                                    resetTranscript()
+                                    onClose()
                                 }}
                             >
-                                Stop
+                                Search
                             </Button>}
                         </HStack>
                         <Gap height={"10px"}/>
