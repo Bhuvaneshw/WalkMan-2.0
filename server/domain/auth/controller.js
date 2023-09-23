@@ -4,17 +4,20 @@ import User from "./model.js";
 export async function verifyUser(req, res) {
     const email = req.body.email;
     const pass = req.body.pass;
-    const user = await User.findOne({email});
+    const user = await User.findOne({ email });
     console.log(email, user);
-    if (user.length === 0) {
-        throw new Error("email not registered signup");
+    if (user == null) {
+        // throw new Error("email not registered signup");
+        console.log("email not registered signup", user);
+        res.status(403).json({ msg: "User not found" });
+        return;
     }
     const passMatch = user.pass === pass;
     if (passMatch) {
         const token = generateToken(user.id);
-        res.json({msg: "login success", token, name: user.name, email: email});
+        res.json({ msg: "login success", token, name: user.name, email: email });
     } else {
-        res.status(403).json({msg: "wrong credential"});
+        res.status(403).json({ msg: "Wrong credential" });
     }
 }
 
@@ -30,7 +33,7 @@ export async function registerUser(req, res) {
         res.status(403).json("not a valid username");
         return;
     }
-    const user = await User.find({email});
+    const user = await User.find({ email });
     if (user.length > 0) {
         res.status(403).json("email already taken login");
         return;
@@ -42,7 +45,7 @@ export async function registerUser(req, res) {
     });
     await tempUser.save();
     let token = generateToken(tempUser.id);
-    res.json({msg: "signup successful", token: token});
+    res.json({ msg: "signup successful", token: token });
 }
 
 function validEmail(email) {
