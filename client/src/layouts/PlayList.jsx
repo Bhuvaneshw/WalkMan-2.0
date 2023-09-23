@@ -1,6 +1,6 @@
 import Content from "../components/Content.jsx";
 import HStack from "../components/HStack.jsx";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import SongCardSkeleton from "../components/skeleton/SongCardSkeleton.jsx";
 import {
     AlertDialog,
@@ -14,6 +14,8 @@ import {
     useDisclosure,
     useToast,
 } from "@chakra-ui/react";
+import MusicCard from "../components/MusicCard.jsx";
+import {getMusic} from "../components/util.js";
 
 export default function PlayList() {
     const {isOpen, onOpen, onClose} = useDisclosure();
@@ -22,6 +24,30 @@ export default function PlayList() {
     const [data, setData] = useState([]);
     let loading = data.length < 1;
     let toast = useToast();
+    useEffect(() => {
+        if (sessionStorage.token !== undefined && sessionStorage.token !== 'undefined') {
+            (async () => {
+                let res;
+                await fetch(import.meta.env.VITE_URL + "/playlist/", {
+                    headers: {token: window.sessionStorage.getItem("token")},
+                })
+                    .then((r) => {
+                        res = r;
+                    })
+                    .catch((error) => {
+                        toast({
+                            title: "Error",
+                            description: error.message,
+                            duration: 2000,
+                            status: "error",
+                            position: "top-right",
+                        });
+                        onOpen();
+                    });
+                setData(await res.json());
+            })();
+        }
+    }, [retry]);
 
     return (
         <Content>
@@ -30,7 +56,7 @@ export default function PlayList() {
                 <SongCardSkeleton loading={loading}/>
                 <SongCardSkeleton loading={loading}/>
                 <SongCardSkeleton loading={loading}/>
-                {/*{data.map((music) => {
+                {data.map((music) => {
                     return (
                         music.title && (
                             <MusicCard
@@ -65,7 +91,7 @@ export default function PlayList() {
                             ></MusicCard>
                         )
                     );
-                })}*/}
+                })}
             </HStack>
             <AlertDialog
                 motionPreset="slideInBottom"

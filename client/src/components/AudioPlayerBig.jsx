@@ -12,6 +12,7 @@ import {downloadSong, fetchPost, getMusic, getSocket, toMinutesText,} from "./ut
 import Icon from "./Icon.jsx";
 import {useNavigate} from "react-router-dom";
 import Lyrics from "./Lyrics.jsx";
+import Icons from "./Icons.js";
 
 function ProgressBar({audio}) {
     const [currentTime, setCurrentTime] = useState(Math.round(audio.currentTime));
@@ -116,10 +117,16 @@ export default function AudioPlayerBig({lottieRef}) {
         console.log("playlist");
         const res = await fetch(import.meta.env.VITE_URL + "/playlist", {
             method: "POST",
-            headers: {"Content-Type": "Application/json"},
+            headers: {"Content-Type": "Application/json", token: sessionStorage.token},
             body: JSON.stringify({songId: audio.data._id}),
         });
         const data = await res.json();
+        toaster({
+            title: data,
+            duration: 2000,
+            status: 'success',
+            position: "top-right",
+        });
         console.log(data);
     }
 
@@ -181,15 +188,15 @@ export default function AudioPlayerBig({lottieRef}) {
                 <Stack justifyContent="center" alignItems="center">
                     <HStack
                         style={{width: "100%"}}
-                        justifyContent={"space-between"}
+                        justifyContent={"space-around"}
                         alignItems={"center"}
                     >
-                        <Box/>
+                        {/*<Box/>*/}
                         <Stack alignItems={"center"}>
-                            <Title>{audio.data.title}</Title>
-                            <Text>{audio.data.artist}</Text>
+                            <marquee className={'audioBtnWidth'}><Title>{`${audio.data.title} • ${audio.data.artist} • ${audio.data.year} • ${audio.data.genre} • ${audio.data.language}`}</Title></marquee>
+                            <Text>{audio.data.movie}</Text>
                         </Stack>
-                        <HStack>
+                        {/*<HStack alignItems={'center'}>
                             <ClickableIcon
                                 src="/download.svg"
                                 size="18px"
@@ -197,12 +204,15 @@ export default function AudioPlayerBig({lottieRef}) {
                                     downloadSong(audio.src);
                                 }}
                             />
-                            <ClickableIcon
-                                src="/download.svg"
-                                size="18px"
+                            <Gap width={'10px'}/>
+                            <Icons.PLAY_LIST_ADD
+                                size="28px"
                                 onClick={addToPlaylist}
+                                style={{
+                                    cursor: 'pointer'
+                                }}
                             />
-                        </HStack>
+                        </HStack>*/}
                     </HStack>
                     <Box style={{padding: "10px 30px", width: "100%"}}>
                         <ProgressBar audio={audio}/>
@@ -216,9 +226,17 @@ export default function AudioPlayerBig({lottieRef}) {
                             <HStack
                                 justifyContent="space-between"
                                 mar="auto"
+                                alignItems={'center'}
                                 className="audioBtnWidth"
                             >
-                                <ClickableIcon src="/previous.svg" onClick={moveBack}/>
+                                <Icons.PLAY_LIST_ADD
+                                    size="28px"
+                                    onClick={addToPlaylist}
+                                    style={{
+                                        cursor: 'pointer'
+                                    }}
+                                />
+                                {/*<ClickableIcon src="/previous.svg" onClick={moveBack}/>*/}
                                 <ClickableIcon src="/seek-back.svg" onClick={seekBack}/>
                                 <Fab
                                     className="playBtn"
@@ -227,7 +245,14 @@ export default function AudioPlayerBig({lottieRef}) {
                                     src={isPlaying ? "/pause.svg" : "/play.svg"}
                                 />
                                 <ClickableIcon src="/seek-forward.svg" onClick={seekForward}/>
-                                <ClickableIcon src="/next.svg" onClick={moveNext}/>
+                                <ClickableIcon
+                                    src="/download.svg"
+                                    size="18px"
+                                    onClick={() => {
+                                        downloadSong(audio.src);
+                                    }}
+                                />
+                                {/*<ClickableIcon src="/next.svg" onClick={moveNext}/>*/}
                             </HStack>
                             <ClickableIcon
                                 src={repeat ? "/repeat.svg" : "/no-repeat.svg"}

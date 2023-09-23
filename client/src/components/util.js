@@ -72,7 +72,7 @@ const Navigation = {
     PLAYLIST: {
         name: "Playlist",
         route: "/home/playlist",
-        icon: Icons.SPEAKER,
+        icon: Icons.PLAY_LIST,
     },
     PROFILE: {
         name: "Profile",
@@ -167,7 +167,7 @@ class Music extends Audio {
         this.data = data;
         let isPlaying = !this.paused;
         this.pause();
-        this.src = import.meta.env.VITE_URL + src;
+        this.src = import.meta.env.VITE_URL + src + "?token="+sessionStorage.token;
         this.load();
         if (isPlaying) this.intimatePlay();
         this.onSetSrc();

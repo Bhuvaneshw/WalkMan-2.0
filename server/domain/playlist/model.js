@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const playlistSchema = new mongoose.Schema({
   userId: {
-    type: [mongoose.Schema.ObjectId],
+    type: mongoose.Schema.ObjectId,
     ref: "User",
   },
   songs: {

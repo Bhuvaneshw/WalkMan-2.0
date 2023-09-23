@@ -171,14 +171,14 @@ export default function AudioPlayerSmall({songs}) {
                         alignItems={"center"}
                         width="100%"
                     >
-                        <Skeleton isLoaded={!loading} style={{borderRadius: "50%"}}>
-                            <ClickableIcon
-                                src="/previous.svg"
-                                className="moveTopOnHover lightOnHover"
-                                onClick={moveBack}
-                                size={"30px"}
-                            />
-                        </Skeleton>
+                        {/*<Skeleton isLoaded={!loading} style={{borderRadius: "50%"}}>*/}
+                        {/*    <ClickableIcon*/}
+                        {/*        src="/previous.svg"*/}
+                        {/*        className="moveTopOnHover lightOnHover"*/}
+                        {/*        onClick={moveBack}*/}
+                        {/*        size={"30px"}*/}
+                        {/*    />*/}
+                        {/*</Skeleton>*/}
                         <Skeleton isLoaded={!loading} style={{borderRadius: "50%"}}>
                             <ClickableIcon
                                 src="/seek-back.svg"
@@ -203,14 +203,14 @@ export default function AudioPlayerSmall({songs}) {
                                 size={"30px"}
                             />
                         </Skeleton>
-                        <Skeleton isLoaded={!loading} style={{borderRadius: "50%"}}>
-                            <ClickableIcon
-                                src="/next.svg"
-                                className="moveTopOnHover lightOnHover"
-                                onClick={moveNext}
-                                size={"30px"}
-                            />
-                        </Skeleton>
+                        {/*<Skeleton isLoaded={!loading} style={{borderRadius: "50%"}}>*/}
+                        {/*    <ClickableIcon*/}
+                        {/*        src="/next.svg"*/}
+                        {/*        className="moveTopOnHover lightOnHover"*/}
+                        {/*        onClick={moveNext}*/}
+                        {/*        size={"30px"}*/}
+                        {/*    />*/}
+                        {/*</Skeleton>*/}
                     </HStack>
                 </Box>
             </Stack>

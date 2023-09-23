@@ -28,7 +28,9 @@ export default function TopSongs() {
     useEffect(() => {
         (async () => {
             let res;
-            await fetch(import.meta.env.VITE_URL + "/songs/top")
+            await fetch(import.meta.env.VITE_URL + "/songs/top", {
+                headers: {token: sessionStorage.token}
+            })
                 .then((r) => {
                     res = r;
                 })

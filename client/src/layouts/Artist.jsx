@@ -28,7 +28,9 @@ export default function Artist() {
     useEffect(() => {
         (async () => {
             let res;
-            await fetch(import.meta.env.VITE_URL + "/artists")
+            await fetch(import.meta.env.VITE_URL + "/artists", {
+                headers: {token: sessionStorage.token}
+            })
                 .then((r) => {
                     res = r;
                 })

@@ -28,7 +28,9 @@ export default function Genre() {
     useEffect(() => {
         (async () => {
             let res;
-            await fetch(import.meta.env.VITE_URL + "/songs/genre")
+            await fetch(import.meta.env.VITE_URL + "/songs/genre", {
+                headers: {token: sessionStorage.token}
+            })
                 .then((r) => {
                     res = r;
                 })
