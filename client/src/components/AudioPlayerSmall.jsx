@@ -122,6 +122,10 @@ export default function AudioPlayerSmall({songs}) {
         playOrPause();
     }
 
+    audio.isChatBoxOpened = () => {
+        return false;
+    }
+
     function seekBack() {
         audio.currentTime -= 10;
     }

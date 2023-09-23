@@ -12,6 +12,10 @@ export default function Search() {
     const isLoading = searchRes.length < 1;
     const toast = useToast();
 
+    getMusic().isChatBoxOpened = () => {
+        return true;
+    }
+
     return (
         <Content>
             <HStack wrap="wrap" alignItems="stretch">

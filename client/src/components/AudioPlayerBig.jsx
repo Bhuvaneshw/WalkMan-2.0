@@ -98,6 +98,14 @@ export default function AudioPlayerBig({lottieRef}) {
             });
     };
 
+    audio.onKeyboardSpacePressed = () => {
+        playOrPause();
+    }
+
+    audio.isChatBoxOpened = () => {
+        return false;
+    }
+
     let navigate = useNavigate();
     useEffect(() => {
         if (audio.data === "") navigate("/home");
@@ -193,7 +201,7 @@ export default function AudioPlayerBig({lottieRef}) {
                     >
                         {/*<Box/>*/}
                         <Stack alignItems={"center"}>
-                            <marquee className={'audioBtnWidth'}><Title>{`${audio.data.title} • ${audio.data.artist} • ${audio.data.year} • ${audio.data.genre} • ${audio.data.language}`}</Title></marquee>
+                            <marquee><Title>{`${audio.data.title} • ${audio.data.artist} • ${audio.data.year} • ${audio.data.genre} • ${audio.data.language}`}</Title></marquee>
                             <Text>{audio.data.movie}</Text>
                         </Stack>
                         {/*<HStack alignItems={'center'}>

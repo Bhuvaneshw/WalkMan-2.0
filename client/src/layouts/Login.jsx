@@ -201,7 +201,7 @@ export default function Login() {
                             >
                                 Remember me
                             </Checkbox>
-                            <Text color={"primary.400"}>Forgot password?</Text>
+                            {/*<Text color={"primary.400"}>Forgot password?</Text>*/}
                         </Stack>
                         <p style={{textAlign: "center", color: "green", fontSize: 16}}>
                             {status}
