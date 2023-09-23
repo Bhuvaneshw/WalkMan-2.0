@@ -14,6 +14,8 @@ function getRouteName(location) {
             return Navigation.SEARCH.name;
         case Navigation.PLAYER.route:
             return Navigation.PLAYER.name;
+        case '/home/groupRoom/search':
+        case '/home/groupRoom/player':
         case Navigation.GROUP_ROOM.route:
             return Navigation.GROUP_ROOM.name;
         case Navigation.TOP_SONGS.route:
