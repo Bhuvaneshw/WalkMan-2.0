@@ -16,12 +16,15 @@ export default function LandingPage() {
     return (
         <Flex
             minH={"100vh"}
-            align={"center"}
-            background={"#EEF2FD"}>
+            align={"center"}>
             <Box style={{position: "absolute"}}>
                 {isNotMobileDevice() && <Spline
+
                     scene="https://prod.spline.design/c34Qj9Va910fK4uP/scene.splinecode"
-                    style={{width: "100vw", height: "100vh", objectFit: "cover"}}
+                    style={{
+                        width: "100vw", height: "100vh",
+                        objectFit: "cover"
+                    }}
                 />}
             </Box>
             <Box
@@ -29,7 +32,13 @@ export default function LandingPage() {
                 margin={"20px"}
                 minWidth="280px"
                 maxWidth="700px"
-                style={{zIndex: 5, position: "relative"}}>
+                style={{
+                    zIndex: 5,
+                    position: "relative",
+                    borderRadius: '25px',
+                    boxShadow: ' 92px 82px 300px 200px rgba(121,1,215,0.22)',
+                    background: '#5f04a75c'
+                }}>
                 <Card
                     pad={"30px 50px"}
                     width={"100%"}
@@ -41,8 +50,9 @@ export default function LandingPage() {
                         left: 0,
                         zIndex: -1,
                         position: "absolute",
-                        background: "#fffa",
-                        filter: "blur(2px)",
+                        boxShadow:'none',
+                        background: "#fffb",
+                        // filter: "blur(2px)",
                     }}/>
                 <Stack
                     spacing={0}
@@ -58,21 +68,26 @@ export default function LandingPage() {
                         width: '80px',
                         height: '80px'
                     }}/>
-                    <Stack spacing={0}>
-                        <Title size={"35px"}>
-                            Welcome to
-                        </Title>
-                        <Title variant={"primary"} size={"50px"} style={{
-                            transform: 'translateY(-10px)',
-                            textAlign: 'center'
-                        }}>
-                            Walkman 2.0
-                        </Title>
-                    </Stack>
+                    <Title size={"35px"} className={'poppins'}
+                           style={{
+                               textAlign: "center",
+                               letterSpacing: '0',
+                               color: "black"
+                           }}>
+                        Stream the Beat, Fuel Your Soul: Welcome to a
+                        World of Musical Wonders!
+                    </Title>
+
+                    <Title variant={"primary poppins"} size={"50px"} style={{
+                        transform: 'translateY(-10px)',
+                        textAlign: 'center',
+                        letterSpacing: '0'
+                    }}>
+                        Walkman 2.0
+                    </Title>
                     <Gap height={'50px'}/>
-                    <Text variant={'black40'}>yegfcyag ewuyf gweyfgysdfeyey y ygfygdsyf eyd ey feyf eygfeyf efyegfef
-                        eyfg eyfehfg ygf
-                        dhfvey </Text>
+                    <Text variant={'black40'}> "Where words fail, music speaks"
+                    </Text>
                     <Gap height={'50px'}/>
                     <HStack>
                         <Button

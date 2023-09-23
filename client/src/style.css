@@ -1,9 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
 
 h1, h2, h3, h4, h5, h6, p, input, textarea, label, button {
     font-family: 'JetBrains Mono', monospace;
     /* font-weight: bold; */
     letter-spacing: -1px;
+}
+
+.poppins {
+    font-family: 'Poppins', sans-serif;
 }
 
 * {
@@ -155,12 +160,77 @@ h1, h2, h3, h4, h5, h6, p, input, textarea, label, button {
     width: 150px;
 }
 
+.carousel {
+    position: relative;
+}
+
+.carousel .item {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.carousel .left {
+    animation: animateLeft ease-out 0.5s;
+}
+
+.carousel .right {
+    animation: animateRight ease-out 0.5s;
+}
+
+.carousel .hidden {
+    position: absolute;
+    top: 0;
+    left: -150%;
+}
+
+@keyframes animateLeft {
+    0% {
+        opacity: 0.1;
+        left: -100%;
+    }
+    100% {
+        opacity: 1;
+        left: 0;
+    }
+}
+
+@keyframes animateRight {
+    0% {
+        opacity: 0.1;
+        left: 100%;
+    }
+    100% {
+        opacity: 1;
+        left: 0;
+    }
+}
+
+.carousel .fixed {
+    opacity: 0;
+}
+
+.nonSelectable {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
 .audioSeekWidth {
     width: 70%;
 }
 
 .audioBtnWidth {
     width: 60%;
+}
+
+@media only screen and (max-width: 1250px) {
+    .big-icon {
+        min-width: 150px;
+    }
 }
 
 @media only screen and (max-width: 1024px) {
@@ -172,7 +242,7 @@ h1, h2, h3, h4, h5, h6, p, input, textarea, label, button {
         display: block;
     }
 
-    .big-icon{
+    .big-icon {
         min-width: 150px;
     }
 

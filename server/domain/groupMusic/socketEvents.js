@@ -24,5 +24,9 @@ export default function initSocketEvent(io) {
     socket.on("audioSeeked", ({ curTime }) => {
       socket.broadcast.to("test").emit("audioSeeked", { curTime });
     });
+    socket.on("sendMsg", (data) => {
+      console.log(data)
+      io.to("test").emit("handleMsg", data);
+    });
   });
 }

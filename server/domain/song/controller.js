@@ -67,7 +67,6 @@ export async function searchAutoComplete(req, res) {
             icon: eachRes["icon"],
           });
         }
-        return result;
       }
       res.json(result);
     }
@@ -101,6 +100,7 @@ export async function searchSong(req, res) {
     song.liked = false;
     return song;
   });
+  console.log(songData)
   res.json(songData);
 }
 
@@ -145,6 +145,7 @@ export function serverSong(req, res) {
 
   const __dirname = path.dirname(__filename).replace("\\domain\\song", "");
   const songFilePath = path.join(__dirname, `/static/songs/${songId}`);
+  console.log(songFilePath);
 
   let start = 0;
   if (req.headers.range) {
